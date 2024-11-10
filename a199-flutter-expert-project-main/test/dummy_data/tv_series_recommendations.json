@@ -1,0 +1,30 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "backdrop_path": "/foGkPxpw9h8zln81j63mix5B7m8.jpg",
+      "id": 71912,
+      "name": "The Witcher",
+      "original_name": "The Witcher",
+      "overview": "Geralt of Rivia, a mutated monster-hunter for hire, journeys toward his destiny in a turbulent world where people often prove more wicked than beasts.",
+      "poster_path": "/cZ0d3rtvXPVvuiX22sP79K3Hmjz.jpg",
+      "media_type": "tv",
+      "adult": false,
+      "original_language": "en",
+      "genre_ids": [
+        10765,
+        18,
+        10759
+      ],
+      "popularity": 178.233,
+      "first_air_date": "2019-12-20",
+      "vote_average": 8.058,
+      "vote_count": 5822,
+      "origin_country": [
+        "US"
+      ]
+    }
+  ],
+  "total_pages": 2,
+  "total_results": 40
+}

@@ -1,0 +1,177 @@
+{
+  "adult": false,
+  "backdrop_path": "/aizbHLcKVWvJ7jxkflJzTu5Z8GE.jpg",
+  "created_by": [],
+  "episode_run_time": [
+    26
+  ],
+  "first_air_date": "2018-08-27",
+  "genres": [
+    {
+      "id": 10766,
+      "name": "Soap"
+    }
+  ],
+  "homepage": "https://www.france.tv/france-2/un-si-grand-soleil/",
+  "id": 81329,
+  "in_production": true,
+  "languages": [
+    "fr"
+  ],
+  "last_air_date": "2024-11-08",
+  "last_episode_to_air": {
+    "id": 5715263,
+    "name": "Episode 218",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2024-11-08",
+    "episode_number": 218,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 6,
+    "show_id": 81329,
+    "still_path": "/wkGVGVbWYIdufi5bWbyMwMnhGw1.jpg"
+  },
+  "name": "Chronicles of the Sun",
+  "next_episode_to_air": {
+    "id": 5715281,
+    "name": "Episode 219",
+    "overview": "",
+    "vote_average": 0,
+    "vote_count": 0,
+    "air_date": "2024-11-11",
+    "episode_number": 219,
+    "episode_type": "standard",
+    "production_code": "",
+    "runtime": null,
+    "season_number": 6,
+    "show_id": 81329,
+    "still_path": "/mdsJgrSnqell0tfVNHRJyHKvZS7.jpg"
+  },
+  "networks": [
+    {
+      "id": 249,
+      "logo_path": "/1ePfTUHHvBlVQxa0Fltx5kWhIs5.png",
+      "name": "France 3",
+      "origin_country": "FR"
+    },
+    {
+      "id": 361,
+      "logo_path": "/b1cFa5FcHHnpejKiPybXSPcqKjT.png",
+      "name": "France 2",
+      "origin_country": "FR"
+    }
+  ],
+  "number_of_episodes": 1518,
+  "number_of_seasons": 6,
+  "origin_country": [
+    "FR"
+  ],
+  "original_language": "fr",
+  "original_name": "Un si grand soleil",
+  "overview": "Claire is surprised when she gets arrested for the murder of her childhood friend after she returns to Montpellier.",
+  "popularity": 1289.683,
+  "poster_path": "/t6jVlbPMtZOJoAOfeoR4yQmnjXM.jpg",
+  "production_companies": [
+    {
+      "id": 7131,
+      "logo_path": "/qpFsGoa96SytbWkhtkkpllu5Cch.png",
+      "name": "France Télévisions",
+      "origin_country": "FR"
+    },
+    {
+      "id": 73809,
+      "logo_path": null,
+      "name": "Epeios Productions",
+      "origin_country": ""
+    },
+    {
+      "id": 118346,
+      "logo_path": "/rwBUYPwdQUC9PqWAQAxLK8Fx1p0.png",
+      "name": "France.tv Studio",
+      "origin_country": "FR"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "FR",
+      "name": "France"
+    }
+  ],
+  "seasons": [
+    {
+      "air_date": "2018-08-27",
+      "episode_count": 260,
+      "id": 107210,
+      "name": "Season 1",
+      "overview": "",
+      "poster_path": "/sHmHhDZgxwj8x63T1p8s9x7Uo2t.jpg",
+      "season_number": 1,
+      "vote_average": 5
+    },
+    {
+      "air_date": "2019-08-26",
+      "episode_count": 210,
+      "id": 134469,
+      "name": "Season 2",
+      "overview": "",
+      "poster_path": "/2VH89jvgAKgVYat5zOXN5c5wZWP.jpg",
+      "season_number": 2,
+      "vote_average": 0
+    },
+    {
+      "air_date": "2020-08-31",
+      "episode_count": 309,
+      "id": 163647,
+      "name": "Season 3",
+      "overview": "",
+      "poster_path": "/gEwwZ1HDERQhuYnWTXMRtD2PCLd.jpg",
+      "season_number": 3,
+      "vote_average": 0
+    },
+    {
+      "air_date": "2021-11-24",
+      "episode_count": 240,
+      "id": 221036,
+      "name": "Season 4",
+      "overview": "",
+      "poster_path": "/kWyfRKXIbt11xto6f0xlGE375vk.jpg",
+      "season_number": 4,
+      "vote_average": 0
+    },
+    {
+      "air_date": "2022-11-21",
+      "episode_count": 271,
+      "id": 317450,
+      "name": "Season 5",
+      "overview": "",
+      "poster_path": "/7UTBGWcEYczraBuPWSBK06Zv6ek.jpg",
+      "season_number": 5,
+      "vote_average": 0
+    },
+    {
+      "air_date": "2023-12-07",
+      "episode_count": 228,
+      "id": 368725,
+      "name": "Season 6",
+      "overview": "",
+      "poster_path": "/4Qdj5L704SoNOT5LaFpZPE0IdhY.jpg",
+      "season_number": 6,
+      "vote_average": 0
+    }
+  ],
+  "spoken_languages": [
+    {
+      "english_name": "French",
+      "iso_639_1": "fr",
+      "name": "Français"
+    }
+  ],
+  "status": "Returning Series",
+  "tagline": "",
+  "type": "Scripted",
+  "vote_average": 7,
+  "vote_count": 107
+}
