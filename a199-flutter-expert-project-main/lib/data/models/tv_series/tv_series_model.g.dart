@@ -28,6 +28,7 @@ _$TvSeriesModelImpl _$$TvSeriesModelImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       voteAverage: json['vote_average'] as num?,
       voteCount: (json['vote_count'] as num?)?.toInt(),
+      mediaType: json['media_type'] as String?,
     );
 
 Map<String, dynamic> _$$TvSeriesModelImplToJson(_$TvSeriesModelImpl instance) =>
@@ -46,4 +47,5 @@ Map<String, dynamic> _$$TvSeriesModelImplToJson(_$TvSeriesModelImpl instance) =>
       'name': instance.name,
       'vote_average': instance.voteAverage,
       'vote_count': instance.voteCount,
+      'media_type': instance.mediaType,
     };

@@ -43,6 +43,8 @@ mixin _$TvSeriesModel {
   num? get voteAverage => throw _privateConstructorUsedError;
   @JsonKey(name: "vote_count")
   int? get voteCount => throw _privateConstructorUsedError;
+  @JsonKey(name: "media_type")
+  String? get mediaType => throw _privateConstructorUsedError;
 
   /// Serializes this TvSeriesModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -74,7 +76,8 @@ abstract class $TvSeriesModelCopyWith<$Res> {
       @JsonKey(name: "first_air_date") DateTime? firstAirDate,
       String? name,
       @JsonKey(name: "vote_average") num? voteAverage,
-      @JsonKey(name: "vote_count") int? voteCount});
+      @JsonKey(name: "vote_count") int? voteCount,
+      @JsonKey(name: "media_type") String? mediaType});
 }
 
 /// @nodoc
@@ -106,6 +109,7 @@ class _$TvSeriesModelCopyWithImpl<$Res, $Val extends TvSeriesModel>
     Object? name = freezed,
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
+    Object? mediaType = freezed,
   }) {
     return _then(_value.copyWith(
       adult: freezed == adult
@@ -164,6 +168,10 @@ class _$TvSeriesModelCopyWithImpl<$Res, $Val extends TvSeriesModel>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      mediaType: freezed == mediaType
+          ? _value.mediaType
+          : mediaType // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -190,7 +198,8 @@ abstract class _$$TvSeriesModelImplCopyWith<$Res>
       @JsonKey(name: "first_air_date") DateTime? firstAirDate,
       String? name,
       @JsonKey(name: "vote_average") num? voteAverage,
-      @JsonKey(name: "vote_count") int? voteCount});
+      @JsonKey(name: "vote_count") int? voteCount,
+      @JsonKey(name: "media_type") String? mediaType});
 }
 
 /// @nodoc
@@ -220,6 +229,7 @@ class __$$TvSeriesModelImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
+    Object? mediaType = freezed,
   }) {
     return _then(_$TvSeriesModelImpl(
       adult: freezed == adult
@@ -278,6 +288,10 @@ class __$$TvSeriesModelImplCopyWithImpl<$Res>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      mediaType: freezed == mediaType
+          ? _value.mediaType
+          : mediaType // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -300,7 +314,8 @@ class _$TvSeriesModelImpl extends _TvSeriesModel {
       @JsonKey(name: "first_air_date") required this.firstAirDate,
       required this.name,
       @JsonKey(name: "vote_average") required this.voteAverage,
-      @JsonKey(name: "vote_count") required this.voteCount})
+      @JsonKey(name: "vote_count") required this.voteCount,
+      @JsonKey(name: "media_type") required this.mediaType})
       : _genreIds = genreIds,
         _originCountry = originCountry,
         super._();
@@ -361,10 +376,13 @@ class _$TvSeriesModelImpl extends _TvSeriesModel {
   @override
   @JsonKey(name: "vote_count")
   final int? voteCount;
+  @override
+  @JsonKey(name: "media_type")
+  final String? mediaType;
 
   @override
   String toString() {
-    return 'TvSeriesModel(adult: $adult, backdropPath: $backdropPath, genreIds: $genreIds, id: $id, originCountry: $originCountry, originalLanguage: $originalLanguage, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, firstAirDate: $firstAirDate, name: $name, voteAverage: $voteAverage, voteCount: $voteCount)';
+    return 'TvSeriesModel(adult: $adult, backdropPath: $backdropPath, genreIds: $genreIds, id: $id, originCountry: $originCountry, originalLanguage: $originalLanguage, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, firstAirDate: $firstAirDate, name: $name, voteAverage: $voteAverage, voteCount: $voteCount, mediaType: $mediaType)';
   }
 
   @override
@@ -395,7 +413,9 @@ class _$TvSeriesModelImpl extends _TvSeriesModel {
             (identical(other.voteAverage, voteAverage) ||
                 other.voteAverage == voteAverage) &&
             (identical(other.voteCount, voteCount) ||
-                other.voteCount == voteCount));
+                other.voteCount == voteCount) &&
+            (identical(other.mediaType, mediaType) ||
+                other.mediaType == mediaType));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -415,7 +435,8 @@ class _$TvSeriesModelImpl extends _TvSeriesModel {
       firstAirDate,
       name,
       voteAverage,
-      voteCount);
+      voteCount,
+      mediaType);
 
   /// Create a copy of TvSeriesModel
   /// with the given fields replaced by the non-null parameter values.
@@ -450,8 +471,9 @@ abstract class _TvSeriesModel extends TvSeriesModel {
       @JsonKey(name: "first_air_date") required final DateTime? firstAirDate,
       required final String? name,
       @JsonKey(name: "vote_average") required final num? voteAverage,
-      @JsonKey(name: "vote_count")
-      required final int? voteCount}) = _$TvSeriesModelImpl;
+      @JsonKey(name: "vote_count") required final int? voteCount,
+      @JsonKey(name: "media_type")
+      required final String? mediaType}) = _$TvSeriesModelImpl;
   const _TvSeriesModel._() : super._();
 
   factory _TvSeriesModel.fromJson(Map<String, dynamic> json) =
@@ -494,6 +516,9 @@ abstract class _TvSeriesModel extends TvSeriesModel {
   @override
   @JsonKey(name: "vote_count")
   int? get voteCount;
+  @override
+  @JsonKey(name: "media_type")
+  String? get mediaType;
 
   /// Create a copy of TvSeriesModel
   /// with the given fields replaced by the non-null parameter values.

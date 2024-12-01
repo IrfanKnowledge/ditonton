@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'tv_series_detail.dart';
+part of 'tv_series_detail_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,103 +14,98 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-/// @nodoc
-mixin _$TvSeriesDetail {
-  bool? get adult => throw _privateConstructorUsedError;
-  set adult(bool? value) => throw _privateConstructorUsedError;
-  String? get backdropPath => throw _privateConstructorUsedError;
-  set backdropPath(String? value) => throw _privateConstructorUsedError;
-  DateTime? get firstAirDate => throw _privateConstructorUsedError;
-  set firstAirDate(DateTime? value) => throw _privateConstructorUsedError;
-  List<Genre>? get genres => throw _privateConstructorUsedError;
-  set genres(List<Genre>? value) => throw _privateConstructorUsedError;
-  String? get homepage => throw _privateConstructorUsedError;
-  set homepage(String? value) => throw _privateConstructorUsedError;
-  int? get id => throw _privateConstructorUsedError;
-  set id(int? value) => throw _privateConstructorUsedError;
-  bool? get inProduction => throw _privateConstructorUsedError;
-  set inProduction(bool? value) => throw _privateConstructorUsedError;
-  DateTime? get lastAirDate => throw _privateConstructorUsedError;
-  set lastAirDate(DateTime? value) => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  set name(String? value) => throw _privateConstructorUsedError;
-  int? get numberOfEpisodes => throw _privateConstructorUsedError;
-  set numberOfEpisodes(int? value) => throw _privateConstructorUsedError;
-  int? get numberOfSeasons => throw _privateConstructorUsedError;
-  set numberOfSeasons(int? value) => throw _privateConstructorUsedError;
-  String? get originalLanguage => throw _privateConstructorUsedError;
-  set originalLanguage(String? value) => throw _privateConstructorUsedError;
-  String? get originalName => throw _privateConstructorUsedError;
-  set originalName(String? value) => throw _privateConstructorUsedError;
-  String? get overview => throw _privateConstructorUsedError;
-  set overview(String? value) => throw _privateConstructorUsedError;
-  double? get popularity => throw _privateConstructorUsedError;
-  set popularity(double? value) => throw _privateConstructorUsedError;
-  String? get posterPath => throw _privateConstructorUsedError;
-  set posterPath(String? value) => throw _privateConstructorUsedError;
-  List<TvSeriesSeason>? get seasons => throw _privateConstructorUsedError;
-  set seasons(List<TvSeriesSeason>? value) =>
-      throw _privateConstructorUsedError;
-  String? get status => throw _privateConstructorUsedError;
-  set status(String? value) => throw _privateConstructorUsedError;
-  String? get tagline => throw _privateConstructorUsedError;
-  set tagline(String? value) => throw _privateConstructorUsedError;
-  String? get type => throw _privateConstructorUsedError;
-  set type(String? value) => throw _privateConstructorUsedError;
-  int? get voteAverage => throw _privateConstructorUsedError;
-  set voteAverage(int? value) => throw _privateConstructorUsedError;
-  int? get voteCount => throw _privateConstructorUsedError;
-  set voteCount(int? value) => throw _privateConstructorUsedError;
+TvSeriesDetailModel _$TvSeriesDetailModelFromJson(Map<String, dynamic> json) {
+  return _TvSeriesDetailModel.fromJson(json);
+}
 
-  /// Create a copy of TvSeriesDetail
+/// @nodoc
+mixin _$TvSeriesDetailModel {
+  bool? get adult => throw _privateConstructorUsedError;
+  @JsonKey(name: 'backdrop_path')
+  String? get backdropPath => throw _privateConstructorUsedError;
+  @JsonKey(name: 'first_air_date')
+  DateTime? get firstAirDate => throw _privateConstructorUsedError;
+  List<GenreModel>? get genres => throw _privateConstructorUsedError;
+  String? get homepage => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'in_production')
+  bool? get inProduction => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_air_date')
+  DateTime? get lastAirDate => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'number_of_episodes')
+  int? get numberOfEpisodes => throw _privateConstructorUsedError;
+  @JsonKey(name: 'number_of_seasons')
+  int? get numberOfSeasons => throw _privateConstructorUsedError;
+  @JsonKey(name: 'original_language')
+  String? get originalLanguage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'original_name')
+  String? get originalName => throw _privateConstructorUsedError;
+  String? get overview => throw _privateConstructorUsedError;
+  double? get popularity => throw _privateConstructorUsedError;
+  @JsonKey(name: 'poster_path')
+  String? get posterPath => throw _privateConstructorUsedError;
+  List<TvSeriesSeasonModel>? get seasons => throw _privateConstructorUsedError;
+  String? get status => throw _privateConstructorUsedError;
+  String? get tagline => throw _privateConstructorUsedError;
+  String? get type => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vote_average')
+  int? get voteAverage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'vote_count')
+  int? get voteCount => throw _privateConstructorUsedError;
+
+  /// Serializes this TvSeriesDetailModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of TvSeriesDetailModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $TvSeriesDetailCopyWith<TvSeriesDetail> get copyWith =>
+  $TvSeriesDetailModelCopyWith<TvSeriesDetailModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TvSeriesDetailCopyWith<$Res> {
-  factory $TvSeriesDetailCopyWith(
-          TvSeriesDetail value, $Res Function(TvSeriesDetail) then) =
-      _$TvSeriesDetailCopyWithImpl<$Res, TvSeriesDetail>;
+abstract class $TvSeriesDetailModelCopyWith<$Res> {
+  factory $TvSeriesDetailModelCopyWith(
+          TvSeriesDetailModel value, $Res Function(TvSeriesDetailModel) then) =
+      _$TvSeriesDetailModelCopyWithImpl<$Res, TvSeriesDetailModel>;
   @useResult
   $Res call(
       {bool? adult,
-      String? backdropPath,
-      DateTime? firstAirDate,
-      List<Genre>? genres,
+      @JsonKey(name: 'backdrop_path') String? backdropPath,
+      @JsonKey(name: 'first_air_date') DateTime? firstAirDate,
+      List<GenreModel>? genres,
       String? homepage,
       int? id,
-      bool? inProduction,
-      DateTime? lastAirDate,
+      @JsonKey(name: 'in_production') bool? inProduction,
+      @JsonKey(name: 'last_air_date') DateTime? lastAirDate,
       String? name,
-      int? numberOfEpisodes,
-      int? numberOfSeasons,
-      String? originalLanguage,
-      String? originalName,
+      @JsonKey(name: 'number_of_episodes') int? numberOfEpisodes,
+      @JsonKey(name: 'number_of_seasons') int? numberOfSeasons,
+      @JsonKey(name: 'original_language') String? originalLanguage,
+      @JsonKey(name: 'original_name') String? originalName,
       String? overview,
       double? popularity,
-      String? posterPath,
-      List<TvSeriesSeason>? seasons,
+      @JsonKey(name: 'poster_path') String? posterPath,
+      List<TvSeriesSeasonModel>? seasons,
       String? status,
       String? tagline,
       String? type,
-      int? voteAverage,
-      int? voteCount});
+      @JsonKey(name: 'vote_average') int? voteAverage,
+      @JsonKey(name: 'vote_count') int? voteCount});
 }
 
 /// @nodoc
-class _$TvSeriesDetailCopyWithImpl<$Res, $Val extends TvSeriesDetail>
-    implements $TvSeriesDetailCopyWith<$Res> {
-  _$TvSeriesDetailCopyWithImpl(this._value, this._then);
+class _$TvSeriesDetailModelCopyWithImpl<$Res, $Val extends TvSeriesDetailModel>
+    implements $TvSeriesDetailModelCopyWith<$Res> {
+  _$TvSeriesDetailModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of TvSeriesDetail
+  /// Create a copy of TvSeriesDetailModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -154,7 +149,7 @@ class _$TvSeriesDetailCopyWithImpl<$Res, $Val extends TvSeriesDetail>
       genres: freezed == genres
           ? _value.genres
           : genres // ignore: cast_nullable_to_non_nullable
-              as List<Genre>?,
+              as List<GenreModel>?,
       homepage: freezed == homepage
           ? _value.homepage
           : homepage // ignore: cast_nullable_to_non_nullable
@@ -206,7 +201,7 @@ class _$TvSeriesDetailCopyWithImpl<$Res, $Val extends TvSeriesDetail>
       seasons: freezed == seasons
           ? _value.seasons
           : seasons // ignore: cast_nullable_to_non_nullable
-              as List<TvSeriesSeason>?,
+              as List<TvSeriesSeasonModel>?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -232,47 +227,47 @@ class _$TvSeriesDetailCopyWithImpl<$Res, $Val extends TvSeriesDetail>
 }
 
 /// @nodoc
-abstract class _$$TvSeriesDetailImplCopyWith<$Res>
-    implements $TvSeriesDetailCopyWith<$Res> {
-  factory _$$TvSeriesDetailImplCopyWith(_$TvSeriesDetailImpl value,
-          $Res Function(_$TvSeriesDetailImpl) then) =
-      __$$TvSeriesDetailImplCopyWithImpl<$Res>;
+abstract class _$$TvSeriesDetailModelImplCopyWith<$Res>
+    implements $TvSeriesDetailModelCopyWith<$Res> {
+  factory _$$TvSeriesDetailModelImplCopyWith(_$TvSeriesDetailModelImpl value,
+          $Res Function(_$TvSeriesDetailModelImpl) then) =
+      __$$TvSeriesDetailModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {bool? adult,
-      String? backdropPath,
-      DateTime? firstAirDate,
-      List<Genre>? genres,
+      @JsonKey(name: 'backdrop_path') String? backdropPath,
+      @JsonKey(name: 'first_air_date') DateTime? firstAirDate,
+      List<GenreModel>? genres,
       String? homepage,
       int? id,
-      bool? inProduction,
-      DateTime? lastAirDate,
+      @JsonKey(name: 'in_production') bool? inProduction,
+      @JsonKey(name: 'last_air_date') DateTime? lastAirDate,
       String? name,
-      int? numberOfEpisodes,
-      int? numberOfSeasons,
-      String? originalLanguage,
-      String? originalName,
+      @JsonKey(name: 'number_of_episodes') int? numberOfEpisodes,
+      @JsonKey(name: 'number_of_seasons') int? numberOfSeasons,
+      @JsonKey(name: 'original_language') String? originalLanguage,
+      @JsonKey(name: 'original_name') String? originalName,
       String? overview,
       double? popularity,
-      String? posterPath,
-      List<TvSeriesSeason>? seasons,
+      @JsonKey(name: 'poster_path') String? posterPath,
+      List<TvSeriesSeasonModel>? seasons,
       String? status,
       String? tagline,
       String? type,
-      int? voteAverage,
-      int? voteCount});
+      @JsonKey(name: 'vote_average') int? voteAverage,
+      @JsonKey(name: 'vote_count') int? voteCount});
 }
 
 /// @nodoc
-class __$$TvSeriesDetailImplCopyWithImpl<$Res>
-    extends _$TvSeriesDetailCopyWithImpl<$Res, _$TvSeriesDetailImpl>
-    implements _$$TvSeriesDetailImplCopyWith<$Res> {
-  __$$TvSeriesDetailImplCopyWithImpl(
-      _$TvSeriesDetailImpl _value, $Res Function(_$TvSeriesDetailImpl) _then)
+class __$$TvSeriesDetailModelImplCopyWithImpl<$Res>
+    extends _$TvSeriesDetailModelCopyWithImpl<$Res, _$TvSeriesDetailModelImpl>
+    implements _$$TvSeriesDetailModelImplCopyWith<$Res> {
+  __$$TvSeriesDetailModelImplCopyWithImpl(_$TvSeriesDetailModelImpl _value,
+      $Res Function(_$TvSeriesDetailModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of TvSeriesDetail
+  /// Create a copy of TvSeriesDetailModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -300,7 +295,7 @@ class __$$TvSeriesDetailImplCopyWithImpl<$Res>
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
   }) {
-    return _then(_$TvSeriesDetailImpl(
+    return _then(_$TvSeriesDetailModelImpl(
       adult: freezed == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
@@ -314,9 +309,9 @@ class __$$TvSeriesDetailImplCopyWithImpl<$Res>
           : firstAirDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       genres: freezed == genres
-          ? _value.genres
+          ? _value._genres
           : genres // ignore: cast_nullable_to_non_nullable
-              as List<Genre>?,
+              as List<GenreModel>?,
       homepage: freezed == homepage
           ? _value.homepage
           : homepage // ignore: cast_nullable_to_non_nullable
@@ -366,9 +361,9 @@ class __$$TvSeriesDetailImplCopyWithImpl<$Res>
           : posterPath // ignore: cast_nullable_to_non_nullable
               as String?,
       seasons: freezed == seasons
-          ? _value.seasons
+          ? _value._seasons
           : seasons // ignore: cast_nullable_to_non_nullable
-              as List<TvSeriesSeason>?,
+              as List<TvSeriesSeasonModel>?,
       status: freezed == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -394,185 +389,218 @@ class __$$TvSeriesDetailImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
+@JsonSerializable()
+class _$TvSeriesDetailModelImpl extends _TvSeriesDetailModel {
+  const _$TvSeriesDetailModelImpl(
+      {required this.adult,
+      @JsonKey(name: 'backdrop_path') required this.backdropPath,
+      @JsonKey(name: 'first_air_date') required this.firstAirDate,
+      required final List<GenreModel>? genres,
+      required this.homepage,
+      required this.id,
+      @JsonKey(name: 'in_production') required this.inProduction,
+      @JsonKey(name: 'last_air_date') required this.lastAirDate,
+      required this.name,
+      @JsonKey(name: 'number_of_episodes') required this.numberOfEpisodes,
+      @JsonKey(name: 'number_of_seasons') required this.numberOfSeasons,
+      @JsonKey(name: 'original_language') required this.originalLanguage,
+      @JsonKey(name: 'original_name') required this.originalName,
+      required this.overview,
+      required this.popularity,
+      @JsonKey(name: 'poster_path') required this.posterPath,
+      required final List<TvSeriesSeasonModel>? seasons,
+      required this.status,
+      required this.tagline,
+      required this.type,
+      @JsonKey(name: 'vote_average') required this.voteAverage,
+      @JsonKey(name: 'vote_count') required this.voteCount})
+      : _genres = genres,
+        _seasons = seasons,
+        super._();
 
-class _$TvSeriesDetailImpl extends _TvSeriesDetail {
-  _$TvSeriesDetailImpl(
-      {this.adult,
-      this.backdropPath,
-      this.firstAirDate,
-      this.genres,
-      this.homepage,
-      this.id,
-      this.inProduction,
-      this.lastAirDate,
-      this.name,
-      this.numberOfEpisodes,
-      this.numberOfSeasons,
-      this.originalLanguage,
-      this.originalName,
-      this.overview,
-      this.popularity,
-      this.posterPath,
-      this.seasons,
-      this.status,
-      this.tagline,
-      this.type,
-      this.voteAverage,
-      this.voteCount})
-      : super._();
+  factory _$TvSeriesDetailModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TvSeriesDetailModelImplFromJson(json);
 
   @override
-  bool? adult;
+  final bool? adult;
   @override
-  String? backdropPath;
+  @JsonKey(name: 'backdrop_path')
+  final String? backdropPath;
   @override
-  DateTime? firstAirDate;
+  @JsonKey(name: 'first_air_date')
+  final DateTime? firstAirDate;
+  final List<GenreModel>? _genres;
   @override
-  List<Genre>? genres;
-  @override
-  String? homepage;
-  @override
-  int? id;
-  @override
-  bool? inProduction;
-  @override
-  DateTime? lastAirDate;
-  @override
-  String? name;
-  @override
-  int? numberOfEpisodes;
-  @override
-  int? numberOfSeasons;
-  @override
-  String? originalLanguage;
-  @override
-  String? originalName;
-  @override
-  String? overview;
-  @override
-  double? popularity;
-  @override
-  String? posterPath;
-  @override
-  List<TvSeriesSeason>? seasons;
-  @override
-  String? status;
-  @override
-  String? tagline;
-  @override
-  String? type;
-  @override
-  int? voteAverage;
-  @override
-  int? voteCount;
+  List<GenreModel>? get genres {
+    final value = _genres;
+    if (value == null) return null;
+    if (_genres is EqualUnmodifiableListView) return _genres;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
-  /// Create a copy of TvSeriesDetail
+  @override
+  final String? homepage;
+  @override
+  final int? id;
+  @override
+  @JsonKey(name: 'in_production')
+  final bool? inProduction;
+  @override
+  @JsonKey(name: 'last_air_date')
+  final DateTime? lastAirDate;
+  @override
+  final String? name;
+  @override
+  @JsonKey(name: 'number_of_episodes')
+  final int? numberOfEpisodes;
+  @override
+  @JsonKey(name: 'number_of_seasons')
+  final int? numberOfSeasons;
+  @override
+  @JsonKey(name: 'original_language')
+  final String? originalLanguage;
+  @override
+  @JsonKey(name: 'original_name')
+  final String? originalName;
+  @override
+  final String? overview;
+  @override
+  final double? popularity;
+  @override
+  @JsonKey(name: 'poster_path')
+  final String? posterPath;
+  final List<TvSeriesSeasonModel>? _seasons;
+  @override
+  List<TvSeriesSeasonModel>? get seasons {
+    final value = _seasons;
+    if (value == null) return null;
+    if (_seasons is EqualUnmodifiableListView) return _seasons;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final String? status;
+  @override
+  final String? tagline;
+  @override
+  final String? type;
+  @override
+  @JsonKey(name: 'vote_average')
+  final int? voteAverage;
+  @override
+  @JsonKey(name: 'vote_count')
+  final int? voteCount;
+
+  /// Create a copy of TvSeriesDetailModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$TvSeriesDetailImplCopyWith<_$TvSeriesDetailImpl> get copyWith =>
-      __$$TvSeriesDetailImplCopyWithImpl<_$TvSeriesDetailImpl>(
+  _$$TvSeriesDetailModelImplCopyWith<_$TvSeriesDetailModelImpl> get copyWith =>
+      __$$TvSeriesDetailModelImplCopyWithImpl<_$TvSeriesDetailModelImpl>(
           this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TvSeriesDetailModelImplToJson(
+      this,
+    );
+  }
 }
 
-abstract class _TvSeriesDetail extends TvSeriesDetail {
-  factory _TvSeriesDetail(
-      {bool? adult,
-      String? backdropPath,
-      DateTime? firstAirDate,
-      List<Genre>? genres,
-      String? homepage,
-      int? id,
-      bool? inProduction,
-      DateTime? lastAirDate,
-      String? name,
-      int? numberOfEpisodes,
-      int? numberOfSeasons,
-      String? originalLanguage,
-      String? originalName,
-      String? overview,
-      double? popularity,
-      String? posterPath,
-      List<TvSeriesSeason>? seasons,
-      String? status,
-      String? tagline,
-      String? type,
-      int? voteAverage,
-      int? voteCount}) = _$TvSeriesDetailImpl;
-  _TvSeriesDetail._() : super._();
+abstract class _TvSeriesDetailModel extends TvSeriesDetailModel {
+  const factory _TvSeriesDetailModel(
+      {required final bool? adult,
+      @JsonKey(name: 'backdrop_path') required final String? backdropPath,
+      @JsonKey(name: 'first_air_date') required final DateTime? firstAirDate,
+      required final List<GenreModel>? genres,
+      required final String? homepage,
+      required final int? id,
+      @JsonKey(name: 'in_production') required final bool? inProduction,
+      @JsonKey(name: 'last_air_date') required final DateTime? lastAirDate,
+      required final String? name,
+      @JsonKey(name: 'number_of_episodes') required final int? numberOfEpisodes,
+      @JsonKey(name: 'number_of_seasons') required final int? numberOfSeasons,
+      @JsonKey(name: 'original_language')
+      required final String? originalLanguage,
+      @JsonKey(name: 'original_name') required final String? originalName,
+      required final String? overview,
+      required final double? popularity,
+      @JsonKey(name: 'poster_path') required final String? posterPath,
+      required final List<TvSeriesSeasonModel>? seasons,
+      required final String? status,
+      required final String? tagline,
+      required final String? type,
+      @JsonKey(name: 'vote_average') required final int? voteAverage,
+      @JsonKey(name: 'vote_count')
+      required final int? voteCount}) = _$TvSeriesDetailModelImpl;
+  const _TvSeriesDetailModel._() : super._();
+
+  factory _TvSeriesDetailModel.fromJson(Map<String, dynamic> json) =
+      _$TvSeriesDetailModelImpl.fromJson;
 
   @override
   bool? get adult;
-  set adult(bool? value);
   @override
+  @JsonKey(name: 'backdrop_path')
   String? get backdropPath;
-  set backdropPath(String? value);
   @override
+  @JsonKey(name: 'first_air_date')
   DateTime? get firstAirDate;
-  set firstAirDate(DateTime? value);
   @override
-  List<Genre>? get genres;
-  set genres(List<Genre>? value);
+  List<GenreModel>? get genres;
   @override
   String? get homepage;
-  set homepage(String? value);
   @override
   int? get id;
-  set id(int? value);
   @override
+  @JsonKey(name: 'in_production')
   bool? get inProduction;
-  set inProduction(bool? value);
   @override
+  @JsonKey(name: 'last_air_date')
   DateTime? get lastAirDate;
-  set lastAirDate(DateTime? value);
   @override
   String? get name;
-  set name(String? value);
   @override
+  @JsonKey(name: 'number_of_episodes')
   int? get numberOfEpisodes;
-  set numberOfEpisodes(int? value);
   @override
+  @JsonKey(name: 'number_of_seasons')
   int? get numberOfSeasons;
-  set numberOfSeasons(int? value);
   @override
+  @JsonKey(name: 'original_language')
   String? get originalLanguage;
-  set originalLanguage(String? value);
   @override
+  @JsonKey(name: 'original_name')
   String? get originalName;
-  set originalName(String? value);
   @override
   String? get overview;
-  set overview(String? value);
   @override
   double? get popularity;
-  set popularity(double? value);
   @override
+  @JsonKey(name: 'poster_path')
   String? get posterPath;
-  set posterPath(String? value);
   @override
-  List<TvSeriesSeason>? get seasons;
-  set seasons(List<TvSeriesSeason>? value);
+  List<TvSeriesSeasonModel>? get seasons;
   @override
   String? get status;
-  set status(String? value);
   @override
   String? get tagline;
-  set tagline(String? value);
   @override
   String? get type;
-  set type(String? value);
   @override
+  @JsonKey(name: 'vote_average')
   int? get voteAverage;
-  set voteAverage(int? value);
   @override
+  @JsonKey(name: 'vote_count')
   int? get voteCount;
-  set voteCount(int? value);
 
-  /// Create a copy of TvSeriesDetail
+  /// Create a copy of TvSeriesDetailModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$TvSeriesDetailImplCopyWith<_$TvSeriesDetailImpl> get copyWith =>
+  _$$TvSeriesDetailModelImplCopyWith<_$TvSeriesDetailModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -11,6 +11,31 @@ class TvSeriesDetail extends Equatable with _$TvSeriesDetail {
   TvSeriesDetail._();
 
   factory TvSeriesDetail({
+    bool? adult,
+    String? backdropPath,
+    DateTime? firstAirDate,
+    List<Genre>? genres,
+    String? homepage,
+    int? id,
+    bool? inProduction,
+    DateTime? lastAirDate,
+    String? name,
+    int? numberOfEpisodes,
+    int? numberOfSeasons,
+    String? originalLanguage,
+    String? originalName,
+    String? overview,
+    double? popularity,
+    String? posterPath,
+    List<TvSeriesSeason>? seasons,
+    String? status,
+    String? tagline,
+    String? type,
+    int? voteAverage,
+    int? voteCount,
+  }) = _TvSeriesDetail;
+
+  factory TvSeriesDetail.required({
     required bool? adult,
     required String? backdropPath,
     required DateTime? firstAirDate,
@@ -33,7 +58,32 @@ class TvSeriesDetail extends Equatable with _$TvSeriesDetail {
     required String? type,
     required int? voteAverage,
     required int? voteCount,
-  }) = _TvSeriesDetail;
+  }) {
+    return TvSeriesDetail(
+      adult: adult,
+      backdropPath: backdropPath,
+      firstAirDate: firstAirDate,
+      genres: genres,
+      homepage: homepage,
+      id: id,
+      inProduction: inProduction,
+      lastAirDate: lastAirDate,
+      name: name,
+      numberOfEpisodes: numberOfEpisodes,
+      numberOfSeasons: numberOfSeasons,
+      originalLanguage: originalLanguage,
+      originalName: originalName,
+      overview: overview,
+      popularity: popularity,
+      posterPath: posterPath,
+      seasons: seasons,
+      status: status,
+      tagline: tagline,
+      type: type,
+      voteAverage: voteAverage,
+      voteCount: voteCount,
+    );
+  }
 
   @override
   List<Object?> get props {

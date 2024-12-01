@@ -44,6 +44,8 @@ mixin _$TvSeries {
   set voteAverage(num? value) => throw _privateConstructorUsedError;
   int? get voteCount => throw _privateConstructorUsedError;
   set voteCount(int? value) => throw _privateConstructorUsedError;
+  String? get mediaType => throw _privateConstructorUsedError;
+  set mediaType(String? value) => throw _privateConstructorUsedError;
 
   /// Create a copy of TvSeries
   /// with the given fields replaced by the non-null parameter values.
@@ -71,7 +73,8 @@ abstract class $TvSeriesCopyWith<$Res> {
       DateTime? firstAirDate,
       String? name,
       num? voteAverage,
-      int? voteCount});
+      int? voteCount,
+      String? mediaType});
 }
 
 /// @nodoc
@@ -103,6 +106,7 @@ class _$TvSeriesCopyWithImpl<$Res, $Val extends TvSeries>
     Object? name = freezed,
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
+    Object? mediaType = freezed,
   }) {
     return _then(_value.copyWith(
       adult: freezed == adult
@@ -161,6 +165,10 @@ class _$TvSeriesCopyWithImpl<$Res, $Val extends TvSeries>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      mediaType: freezed == mediaType
+          ? _value.mediaType
+          : mediaType // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -187,7 +195,8 @@ abstract class _$$TvSeriesImplCopyWith<$Res>
       DateTime? firstAirDate,
       String? name,
       num? voteAverage,
-      int? voteCount});
+      int? voteCount,
+      String? mediaType});
 }
 
 /// @nodoc
@@ -217,6 +226,7 @@ class __$$TvSeriesImplCopyWithImpl<$Res>
     Object? name = freezed,
     Object? voteAverage = freezed,
     Object? voteCount = freezed,
+    Object? mediaType = freezed,
   }) {
     return _then(_$TvSeriesImpl(
       adult: freezed == adult
@@ -275,6 +285,10 @@ class __$$TvSeriesImplCopyWithImpl<$Res>
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
               as int?,
+      mediaType: freezed == mediaType
+          ? _value.mediaType
+          : mediaType // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -283,20 +297,21 @@ class __$$TvSeriesImplCopyWithImpl<$Res>
 
 class _$TvSeriesImpl extends _TvSeries {
   _$TvSeriesImpl(
-      {required this.adult,
-      required this.backdropPath,
-      required this.genreIds,
-      required this.id,
-      required this.originCountry,
-      required this.originalLanguage,
-      required this.originalName,
-      required this.overview,
-      required this.popularity,
-      required this.posterPath,
-      required this.firstAirDate,
-      required this.name,
-      required this.voteAverage,
-      required this.voteCount})
+      {this.adult,
+      this.backdropPath,
+      this.genreIds,
+      this.id,
+      this.originCountry,
+      this.originalLanguage,
+      this.originalName,
+      this.overview,
+      this.popularity,
+      this.posterPath,
+      this.firstAirDate,
+      this.name,
+      this.voteAverage,
+      this.voteCount,
+      this.mediaType})
       : super._();
 
   @override
@@ -327,6 +342,8 @@ class _$TvSeriesImpl extends _TvSeries {
   num? voteAverage;
   @override
   int? voteCount;
+  @override
+  String? mediaType;
 
   /// Create a copy of TvSeries
   /// with the given fields replaced by the non-null parameter values.
@@ -339,20 +356,21 @@ class _$TvSeriesImpl extends _TvSeries {
 
 abstract class _TvSeries extends TvSeries {
   factory _TvSeries(
-      {required bool? adult,
-      required String? backdropPath,
-      required List<int>? genreIds,
-      required int? id,
-      required List<String>? originCountry,
-      required String? originalLanguage,
-      required String? originalName,
-      required String? overview,
-      required num? popularity,
-      required String? posterPath,
-      required DateTime? firstAirDate,
-      required String? name,
-      required num? voteAverage,
-      required int? voteCount}) = _$TvSeriesImpl;
+      {bool? adult,
+      String? backdropPath,
+      List<int>? genreIds,
+      int? id,
+      List<String>? originCountry,
+      String? originalLanguage,
+      String? originalName,
+      String? overview,
+      num? popularity,
+      String? posterPath,
+      DateTime? firstAirDate,
+      String? name,
+      num? voteAverage,
+      int? voteCount,
+      String? mediaType}) = _$TvSeriesImpl;
   _TvSeries._() : super._();
 
   @override
@@ -397,6 +415,9 @@ abstract class _TvSeries extends TvSeries {
   @override
   int? get voteCount;
   set voteCount(int? value);
+  @override
+  String? get mediaType;
+  set mediaType(String? value);
 
   /// Create a copy of TvSeries
   /// with the given fields replaced by the non-null parameter values.

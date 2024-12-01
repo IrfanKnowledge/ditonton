@@ -24,6 +24,7 @@ class TvSeriesModel with _$TvSeriesModel {
     required final String? name,
     @JsonKey(name: "vote_average") required final num? voteAverage,
     @JsonKey(name: "vote_count") required final int? voteCount,
+    @JsonKey(name: "media_type") required final String? mediaType,
   }) = _TvSeriesModel;
 
   factory TvSeriesModel.fromJson(Map<String, dynamic> json) =>
@@ -45,6 +46,7 @@ class TvSeriesModel with _$TvSeriesModel {
       name: name,
       voteAverage: voteAverage,
       voteCount: voteCount,
+      mediaType: mediaType,
     );
   }
 }
