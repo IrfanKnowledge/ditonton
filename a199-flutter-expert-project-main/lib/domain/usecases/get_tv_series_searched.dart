@@ -24,6 +24,4 @@ class GetTvSeriesSearchedParams extends Equatable {
   List<Object?> get props {
     return [name];
   }
-
-
 }

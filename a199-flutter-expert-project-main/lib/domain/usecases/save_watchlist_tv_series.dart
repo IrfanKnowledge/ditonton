@@ -1,8 +1,8 @@
-
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_table.dart';
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/domain/repositories/tv_series_repository.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../common/failure.dart';
 
@@ -16,12 +16,19 @@ class SaveWatchlistTvSeries {
   }
 }
 
-class SaveWatchlistTvSeriesParams {
+class SaveWatchlistTvSeriesParams extends Equatable {
   final TvSeriesDetail tvSeriesDetail;
 
-  SaveWatchlistTvSeriesParams({required this.tvSeriesDetail});
+  const SaveWatchlistTvSeriesParams({required this.tvSeriesDetail});
 
   TvSeriesTable toTable() {
     return TvSeriesTable.fromEntity(tvSeriesDetail);
+  }
+
+  @override
+  List<Object?> get props {
+    return [
+      tvSeriesDetail,
+    ];
   }
 }

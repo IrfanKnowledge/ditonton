@@ -2,6 +2,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/domain/repositories/tv_series_repository.dart';
+import 'package:equatable/equatable.dart';
 
 import '../../common/failure.dart';
 import '../../data/models/tv_series/tv_series_table.dart';
@@ -16,12 +17,17 @@ class RemoveWatchlistTvSeries {
   }
 }
 
-class RemoveWatchlistTvSeriesParams {
+class RemoveWatchlistTvSeriesParams extends Equatable {
   final TvSeriesDetail tvSeriesDetail;
 
-  RemoveWatchlistTvSeriesParams({required this.tvSeriesDetail});
+  const RemoveWatchlistTvSeriesParams({required this.tvSeriesDetail});
 
   TvSeriesTable toTable() {
     return TvSeriesTable.fromEntity(tvSeriesDetail);
   }
+
+  @override
+  List<Object?> get props => [
+    tvSeriesDetail,
+  ];
 }
