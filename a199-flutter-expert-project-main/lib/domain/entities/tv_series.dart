@@ -61,6 +61,20 @@ class TvSeries extends Equatable with _$TvSeries {
     );
   }
 
+  factory TvSeries.watchlist({
+    required int? id,
+    required String? overview,
+    required String? posterPath,
+    required String? name,
+  }) {
+    return TvSeries(
+      id: id,
+      overview: overview,
+      posterPath: posterPath,
+      name: name,
+    );
+  }
+
   @override
   List<Object?> get props {
     return [

@@ -11,14 +11,20 @@ import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/domain/repositories/tv_series_repository.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_detail_recommendtaions.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_searched.dart';
+import 'package:ditonton/domain/usecases/get_watchlist_tv_series_status.dart';
+import 'package:ditonton/domain/usecases/remove_watchlist_tv_series.dart';
 
 import '../../domain/usecases/get_tv_series_detail.dart';
+import '../../domain/usecases/save_watchlist_tv_series.dart';
+import '../datasources/tv_series_local_data_source.dart';
 
 class TvSeriesRepositoryImpl implements TvSeriesRepository {
   final TvSeriesRemoteDataSource remoteDataSource;
+  final TvSeriesLocalDataSource localDataSource;
 
   TvSeriesRepositoryImpl({
     required this.remoteDataSource,
+    required this.localDataSource,
   });
 
   @override
@@ -103,12 +109,13 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
   }
 
   @override
-  Future<Either<Failure, List<TvSeries>>> getTvSeriesSearched(GetTvSeriesSearchedParams params) async {
+  Future<Either<Failure, List<TvSeries>>> getTvSeriesSearched(
+      GetTvSeriesSearchedParams params) async {
     try {
       final List<TvSeriesModel> dataModel =
-      await remoteDataSource.getTvSeriesSearched(params);
+          await remoteDataSource.getTvSeriesSearched(params);
       final List<TvSeries> dataEntity =
-      dataModel.map((e) => e.toEntity()).toList();
+          dataModel.map((e) => e.toEntity()).toList();
 
       return Right(dataEntity);
     } on ServerException {
@@ -116,5 +123,44 @@ class TvSeriesRepositoryImpl implements TvSeriesRepository {
     } on SocketException {
       return Left(ConnectionFailure('Failed to connect to the network'));
     }
+  }
+
+  @override
+  Future<Either<Failure, String>> saveWatchlist(
+      SaveWatchlistTvSeriesParams params) async {
+    try {
+      final data = await localDataSource.saveWatchlist(params);
+
+      return Right(data);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> removeWatchlist(
+      RemoveWatchlistTvSeriesParams params) async {
+    try {
+      final data = await localDataSource.removeWatchlist(params);
+
+      return Right(data);
+    } on DatabaseException catch (e) {
+      return Left(DatabaseFailure(e.message));
+    }
+  }
+
+  @override
+  Future<bool> getWatchlistStatus(
+      GetWatchlistStatusTvSeriesParams params) async {
+    final data = await localDataSource.getWatchlistStatus(params);
+    return data != null;
+  }
+
+  @override
+  Future<Either<Failure, List<TvSeries>>> getWatchlistTvSeries() async {
+    final data = await localDataSource.getWatchlistTvSeries();
+    return Right(data.map((e) => e.toEntity()).toList());
   }
 }

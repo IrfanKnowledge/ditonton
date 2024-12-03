@@ -12,6 +12,9 @@ import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_detail.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_detail_recommendtaions.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_searched.dart';
+import 'package:ditonton/domain/usecases/get_watchlist_tv_series_status.dart';
+import 'package:ditonton/domain/usecases/remove_watchlist_tv_series.dart';
+import 'package:ditonton/domain/usecases/save_watchlist_tv_series.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
@@ -25,12 +28,15 @@ import '../../helpers/test_helper.mocks.dart';
 void main() {
   late TvSeriesRepositoryImpl tvSeriesRepository;
   late MockTvSeriesRemoteDataSource mockTvSeriesRemoteDataSource;
+  late MockTvSeriesLocalDataSource mockTvSeriesLocalDataSource;
 
   setUp(
     () {
       mockTvSeriesRemoteDataSource = MockTvSeriesRemoteDataSource();
+      mockTvSeriesLocalDataSource = MockTvSeriesLocalDataSource();
       tvSeriesRepository = TvSeriesRepositoryImpl(
         remoteDataSource: mockTvSeriesRemoteDataSource,
+        localDataSource: mockTvSeriesLocalDataSource,
       );
     },
   );
@@ -409,8 +415,8 @@ void main() {
           );
 
           // act
-          final result = await tvSeriesRepository
-              .getTvSeriesDetailRecommendations(params);
+          final result =
+              await tvSeriesRepository.getTvSeriesDetailRecommendations(params);
 
           // assert
           verify(
@@ -436,8 +442,8 @@ void main() {
           ).thenThrow(ServerException());
 
           // act
-          final result = await tvSeriesRepository
-              .getTvSeriesDetailRecommendations(params);
+          final result =
+              await tvSeriesRepository.getTvSeriesDetailRecommendations(params);
 
           // assert
           verify(mockTvSeriesRemoteDataSource
@@ -460,8 +466,8 @@ void main() {
           );
 
           // act
-          final result = await tvSeriesRepository
-              .getTvSeriesDetailRecommendations(params);
+          final result =
+              await tvSeriesRepository.getTvSeriesDetailRecommendations(params);
 
           // assert
           verify(mockTvSeriesRemoteDataSource
@@ -491,23 +497,20 @@ void main() {
 
       test(
         'should return remote data when the call to remote data source is successful',
-            () async {
+        () async {
           // arrange
           when(
-            mockTvSeriesRemoteDataSource
-                .getTvSeriesSearched(params),
+            mockTvSeriesRemoteDataSource.getTvSeriesSearched(params),
           ).thenAnswer(
-                (_) async => tTvSeriesSearchedModelList,
+            (_) async => tTvSeriesSearchedModelList,
           );
 
           // act
-          final result = await tvSeriesRepository
-              .getTvSeriesSearched(params);
+          final result = await tvSeriesRepository.getTvSeriesSearched(params);
 
           // assert
           verify(
-            mockTvSeriesRemoteDataSource
-                .getTvSeriesSearched(params),
+            mockTvSeriesRemoteDataSource.getTvSeriesSearched(params),
           );
 
           // act
@@ -520,20 +523,17 @@ void main() {
 
       test(
         'should return server failure when the call to remote data source is unsuccessful',
-            () async {
+        () async {
           // arrange
           when(
-            mockTvSeriesRemoteDataSource
-                .getTvSeriesSearched(params),
+            mockTvSeriesRemoteDataSource.getTvSeriesSearched(params),
           ).thenThrow(ServerException());
 
           // act
-          final result = await tvSeriesRepository
-              .getTvSeriesSearched(params);
+          final result = await tvSeriesRepository.getTvSeriesSearched(params);
 
           // assert
-          verify(mockTvSeriesRemoteDataSource
-              .getTvSeriesSearched(params));
+          verify(mockTvSeriesRemoteDataSource.getTvSeriesSearched(params));
 
           // assrt
           expect(result, Left(ServerFailure('')));
@@ -542,22 +542,19 @@ void main() {
 
       test(
         'should return connection failure when the device is not connected to internet',
-            () async {
+        () async {
           // arrange
           when(
-            mockTvSeriesRemoteDataSource
-                .getTvSeriesSearched(params),
+            mockTvSeriesRemoteDataSource.getTvSeriesSearched(params),
           ).thenThrow(
             const SocketException('Failed to connect to the network'),
           );
 
           // act
-          final result = await tvSeriesRepository
-              .getTvSeriesSearched(params);
+          final result = await tvSeriesRepository.getTvSeriesSearched(params);
 
           // assert
-          verify(mockTvSeriesRemoteDataSource
-              .getTvSeriesSearched(params));
+          verify(mockTvSeriesRemoteDataSource.getTvSeriesSearched(params));
 
           expect(
             result,
@@ -567,4 +564,112 @@ void main() {
       );
     },
   );
+
+  group(
+    'Tv Series, Save Watchlist',
+    () {
+      late SaveWatchlistTvSeriesParams params;
+
+      setUp(
+        () {
+          params = SaveWatchlistTvSeriesParams(
+            tvSeriesDetail: tTvSeriesDetail,
+          );
+        },
+      );
+
+      test('should return success message when saving successful', () async {
+        // arrange
+        when(mockTvSeriesLocalDataSource.saveWatchlist(params))
+            .thenAnswer((_) async => 'Added to Watchlist');
+        // act
+        final result = await tvSeriesRepository.saveWatchlist(params);
+        // assert
+        expect(result, const Right('Added to Watchlist'));
+      });
+
+      test('should return DatabaseFailure when saving unsuccessful', () async {
+        // arrange
+        when(mockTvSeriesLocalDataSource.saveWatchlist(params))
+            .thenThrow(DatabaseException('Failed to add watchlist'));
+        // act
+        final result = await tvSeriesRepository.saveWatchlist(params);
+        // assert
+        expect(result, Left(DatabaseFailure('Failed to add watchlist')));
+      });
+    },
+  );
+
+  group('Tv Series, Remove Watchlist', () {
+    late RemoveWatchlistTvSeriesParams params;
+
+    setUp(
+      () {
+        params = RemoveWatchlistTvSeriesParams(
+          tvSeriesDetail: tTvSeriesDetail,
+        );
+      },
+    );
+
+    test('should return success message when remove successful', () async {
+      // arrange
+      when(mockTvSeriesLocalDataSource.removeWatchlist(params))
+          .thenAnswer((_) async => 'Removed from watchlist');
+      // act
+      final result = await tvSeriesRepository.removeWatchlist(params);
+      // assert
+      expect(result, const Right('Removed from watchlist'));
+    });
+
+    test('should return DatabaseFailure when remove unsuccessful', () async {
+      // arrange
+      when(mockTvSeriesLocalDataSource.removeWatchlist(params))
+          .thenThrow(DatabaseException('Failed to remove watchlist'));
+      // act
+      final result = await tvSeriesRepository.removeWatchlist(params);
+      // assert
+      expect(result, Left(DatabaseFailure('Failed to remove watchlist')));
+    });
+  });
+
+  group('Tv Series, Watchlist Status', () {
+    late GetWatchlistStatusTvSeriesParams params;
+
+    setUp(
+      () {
+        params = GetWatchlistStatusTvSeriesParams(
+          id: tTvSeriesDetail.id!,
+        );
+      },
+    );
+
+    test('should return watch status whether data is found', () async {
+      // arrange
+      when(mockTvSeriesLocalDataSource.getWatchlistStatus(params))
+          .thenAnswer((_) async => null);
+
+      // act
+      final result = await tvSeriesRepository.getWatchlistStatus(params);
+
+      // assert
+      expect(result, false);
+    });
+  });
+
+  group('Tv Series, Watchlist Tv Series', () {
+    test('should return list of Tv Series', () async {
+      // arrange
+      when(mockTvSeriesLocalDataSource.getWatchlistTvSeries())
+          .thenAnswer((_) async => tTvSeriesTableList);
+
+      // act
+      final result = await tvSeriesRepository.getWatchlistTvSeries();
+
+      // assert
+      final resultList = result.getOrElse(() => []);
+      expect(resultList, tTvSeriesFromTableList);
+    });
+  });
+
+
 }

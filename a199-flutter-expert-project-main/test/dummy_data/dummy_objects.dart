@@ -4,6 +4,7 @@ import 'package:ditonton/data/models/tv_series/tv_series_detail_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_response_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_season_model.dart';
+import 'package:ditonton/data/models/tv_series/tv_series_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
@@ -293,7 +294,7 @@ final tTvSeriesSearchedModel = TvSeriesModel(
   originalLanguage: "ja",
   originalName: "魔王学院の不適合者 ～史上最強の魔王の始祖、転生して子孫たちの学校へ通う～",
   overview:
-  "Anos Voldigord was a tyrannical Demon King that eradicated humans, spirits, and even the gods, but became bored of eternal warfare and reincarnated with dreams of a peaceful world. However, what awaited him in reincarnation after 2000 years were descendants who became too weak after being accustomed to peace, and all sorts of magic that deteriorated to the extreme. Anos enters Demon King Academy that gathers and educates those who are viewed as the reincarnation of the Demon King, but the academy could not see through his true powers and ends up branding him as a misfit.",
+      "Anos Voldigord was a tyrannical Demon King that eradicated humans, spirits, and even the gods, but became bored of eternal warfare and reincarnated with dreams of a peaceful world. However, what awaited him in reincarnation after 2000 years were descendants who became too weak after being accustomed to peace, and all sorts of magic that deteriorated to the extreme. Anos enters Demon King Academy that gathers and educates those who are viewed as the reincarnation of the Demon King, but the academy could not see through his true powers and ends up branding him as a misfit.",
   popularity: 114.919,
   posterPath: "/6VjUfaGkt3DJPLlNmnm1ALEhSfv.jpg",
   firstAirDate: DateTime.parse("2020-07-04"),
@@ -304,3 +305,33 @@ final tTvSeriesSearchedModel = TvSeriesModel(
 );
 
 final tTvSeriesSearchedModelList = <TvSeriesModel>[tTvSeriesSearchedModel];
+
+final tTvSeriesFromTable = TvSeries.watchlist(
+  id: 81329,
+  overview: "Claire is surprised when she gets arrested for the murder of her childhood friend after she returns to Montpellier.",
+  posterPath: "/t6jVlbPMtZOJoAOfeoR4yQmnjXM.jpg",
+  name: "Chronicles of the Sun",
+);
+
+final tTvSeriesFromTableList = <TvSeries>[tTvSeriesFromTable];
+
+const tTvSeriesTable = TvSeriesTable(
+  id: 81329,
+  title: "Chronicles of the Sun",
+  posterPath: "/t6jVlbPMtZOJoAOfeoR4yQmnjXM.jpg",
+  overview:
+      "Claire is surprised when she gets arrested for the murder of her childhood friend after she returns to Montpellier.",
+);
+
+final tTvSeriesTableList = <TvSeriesTable>[tTvSeriesTable];
+
+final tTvSeriesMap = {
+  'id': 81329,
+  'overview': 'Claire is surprised when she gets arrested for the murder of her childhood friend after she returns to Montpellier.',
+  'posterPath': '/t6jVlbPMtZOJoAOfeoR4yQmnjXM.jpg',
+  'title': 'Chronicles of the Sun',
+};
+
+final tTvSeriesMapList = <Map<String, dynamic>>[tTvSeriesMap];
+
+
