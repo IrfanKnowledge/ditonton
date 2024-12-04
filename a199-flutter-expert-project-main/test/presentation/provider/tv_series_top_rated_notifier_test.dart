@@ -14,7 +14,9 @@ import 'tv_series_top_rated_notifier_test.mocks.dart';
 /// Provider (ChangeNotifier) [TvSeriesTopRatedNotifier],
 /// bergantung pada usecase [GetTvSeriesTopRated]
 ///
-@GenerateMocks([GetTvSeriesTopRated])
+@GenerateMocks([
+  GetTvSeriesTopRated,
+])
 void main() {
   late TvSeriesTopRatedNotifier provider;
   late MockGetTvSeriesTopRated mockUseCase;

@@ -42,6 +42,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     };
   }
 
+  @override
   Future<List<TvSeriesModel>> getTvSeriesAiringToday() async {
     final uriParse = Uri.parse('$baseUrl/tv/airing_today?$apiKey');
     final response = await client.get(
@@ -66,6 +67,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     }
   }
 
+  @override
   Future<List<TvSeriesModel>> getTvSeriesPopular() async {
     final uriParse = Uri.parse('$baseUrl/tv/popular?$apiKey');
     final response = await client.get(
@@ -90,6 +92,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     }
   }
 
+  @override
   Future<List<TvSeriesModel>> getTvSeriesTopRated() async {
     final uriParse = Uri.parse('$baseUrl/tv/top_rated?$apiKey');
     final response = await client.get(
@@ -114,6 +117,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     }
   }
 
+  @override
   Future<TvSeriesDetailModel> getTvSeriesDetail(
       GetTvSeriesDetailParams params) async {
     final seriesId = params.id;
@@ -139,6 +143,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     }
   }
 
+  @override
   Future<List<TvSeriesModel>> getTvSeriesDetailRecommendations(
       GetTvSeriesDetailRecommendationsParams params) async {
     final seriesId = params.id;
@@ -165,6 +170,7 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     }
   }
 
+  @override
   Future<List<TvSeriesModel>> getTvSeriesSearched(
       GetTvSeriesSearchedParams params) async {
     final name = params.name;
