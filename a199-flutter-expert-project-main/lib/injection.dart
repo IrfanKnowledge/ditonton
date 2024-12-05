@@ -34,6 +34,7 @@ import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
+import 'package:ditonton/presentation/provider/tv_series_list_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series_popular_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series_search_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series_top_rated_notifier.dart';
@@ -85,6 +86,13 @@ void init() {
   );
 
   // provider tv series
+  locator.registerFactory(
+    () => TvSeriesListNotifier(
+      getTvSeriesAiringTodayUseCase: locator(),
+      getTvSeriesPopularUseCase: locator(),
+      getTvSeriesTopRatedUseCase: locator(),
+    ),
+  );
   locator.registerFactory(
     () => TvSeriesDetailNotifier(
       getTvSeriesDetailUseCase: locator(),
@@ -183,7 +191,7 @@ void init() {
   locator.registerLazySingleton<TvSeriesRemoteDataSource>(
     () => TvSeriesRemoteDataSourceImpl(
       client: locator(),
-      apiKey: dotenv.get('API_KEY_TMDB', fallback: ""),
+      apiKey: "api_key=${dotenv.get('API_KEY_TMDB', fallback: "")}",
       baseUrl: kBaseUrl,
     ),
   );
