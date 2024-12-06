@@ -10,6 +10,9 @@ import '../../domain/entities/tv_series.dart';
 import '../../domain/entities/tv_series_detail.dart';
 
 class TvSeriesDetailNotifier extends ChangeNotifier {
+  static const watchlistAddSuccessMessage = 'Added to Watchlist';
+  static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
+
   final GetTvSeriesDetail _getTvSeriesDetailUseCase;
   final GetTvSeriesDetailRecommendations
       _getTvSeriesDetailRecommendationsUseCase;

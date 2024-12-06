@@ -45,7 +45,7 @@ void main() {
       ).thenAnswer((_) async => Right(tTvSeriesSearchedList));
 
       // act
-      provider.fetchMovieSearch(tTvSeriesSearched.name!);
+      provider.fetchTvSeriesSearch(tTvSeriesSearched.name!);
 
       // assert
       expect(provider.state, RequestState.Loading);
@@ -60,7 +60,7 @@ void main() {
       ).thenAnswer((_) async => Right(tTvSeriesSearchedList));
 
       // act
-      await provider.fetchMovieSearch(tTvSeriesSearched.name!);
+      await provider.fetchTvSeriesSearch(tTvSeriesSearched.name!);
 
       // assert
       expect(provider.state, RequestState.Loaded);
@@ -76,7 +76,7 @@ void main() {
       ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
 
       // act
-      await provider.fetchMovieSearch(tTvSeriesSearched.name!);
+      await provider.fetchTvSeriesSearch(tTvSeriesSearched.name!);
       // assert
       expect(provider.state, RequestState.Error);
       expect(provider.message, 'Server Failure');

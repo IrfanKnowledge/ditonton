@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -52,26 +51,43 @@ class BodyMovieList extends StatelessWidget {
                   ),
                 );
               } else if (state == RequestState.Loaded) {
-                return _MovieList(data.nowPlayingMovies);
+                return _MovieList(
+                  key: const Key('list_view_movies_now_playing'),
+                  data.nowPlayingMovies,
+                );
               } else {
-                return const Text('Failed');
+                return const Text(
+                  key: Key('list_movies_now_playing_failed'),
+                  'Failed',
+                );
               }
             }),
             _buildSubHeading(
               title: 'Popular',
-              onTap: () =>
-                  Navigator.pushNamed(context, PopularMoviesPage.ROUTE_NAME),
+              onTap: () => Navigator.pushNamed(
+                context,
+                PopularMoviesPage.ROUTE_NAME,
+              ),
             ),
             Consumer<MovieListNotifier>(builder: (context, data, child) {
               final state = data.popularMoviesState;
               if (state == RequestState.Loading) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  key: Key('center_loading_popular'),
+                  child: CircularProgressIndicator(
+                    key: Key('loading_popular'),
+                  ),
                 );
               } else if (state == RequestState.Loaded) {
-                return _MovieList(data.popularMovies);
+                return _MovieList(
+                  key: const Key('list_view_movies_popular'),
+                  data.popularMovies,
+                );
               } else {
-                return const Text('Failed');
+                return const Text(
+                  key: Key('list_movies_popular_failed'),
+                  'Failed',
+                );
               }
             }),
             _buildSubHeading(
@@ -83,12 +99,21 @@ class BodyMovieList extends StatelessWidget {
               final state = data.topRatedMoviesState;
               if (state == RequestState.Loading) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  key: Key('center_loading_top_rated'),
+                  child: CircularProgressIndicator(
+                    key: Key('loading_top_rated'),
+                  ),
                 );
               } else if (state == RequestState.Loaded) {
-                return _MovieList(data.topRatedMovies);
+                return _MovieList(
+                  key: const Key('list_view_movies_top_rated'),
+                  data.topRatedMovies,
+                );
               } else {
-                return const Text('Failed');
+                return const Text(
+                  key: Key('list_movies_top_rated_failed'),
+                  'Failed',
+                );
               }
             }),
           ],

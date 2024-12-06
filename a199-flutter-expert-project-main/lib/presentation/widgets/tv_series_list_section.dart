@@ -11,7 +11,7 @@ import '../../common/state_enum.dart';
 AppBar appBarTvSeriesList(BuildContext context) {
   return AppBar(
     key: const Key('app_bar_tv_series_list'),
-    title: const Text('Ditonton - Movie'),
+    title: const Text('Ditonton - Tv Series'),
     actions: [
       IconButton(
         onPressed: () {
@@ -42,12 +42,21 @@ class BodyTvSeriesList extends StatelessWidget {
               final state = data.airingTodayState;
               if (state == RequestState.Loading) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  key: Key('center_loading_airing_today'),
+                  child: CircularProgressIndicator(
+                    key: Key('loading_airing_today'),
+                  ),
                 );
               } else if (state == RequestState.Loaded) {
-                return _TvSeriesList(data.tvSeriesAiringTodayList);
+                return _TvSeriesList(
+                  key: const Key('list_view_tv_series_airing_today'),
+                  data.tvSeriesAiringTodayList,
+                );
               } else {
-                return const Text('Failed');
+                return const Text(
+                  key: Key('list_tv_series_airing_today_failed'),
+                  'Failed',
+                );
               }
             }),
             _buildSubHeading(
@@ -61,12 +70,21 @@ class BodyTvSeriesList extends StatelessWidget {
               final state = data.popularState;
               if (state == RequestState.Loading) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  key: Key('center_loading_popular'),
+                  child: CircularProgressIndicator(
+                    key: Key('loading_popular'),
+                  ),
                 );
               } else if (state == RequestState.Loaded) {
-                return _TvSeriesList(data.tvSeriesPopularList);
+                return _TvSeriesList(
+                  key: const Key('list_view_tv_series_popular'),
+                  data.tvSeriesPopularList,
+                );
               } else {
-                return const Text('Failed');
+                return const Text(
+                  key: Key('list_tv_series_popular_failed'),
+                  'Failed',
+                );
               }
             }),
             _buildSubHeading(
@@ -80,12 +98,21 @@ class BodyTvSeriesList extends StatelessWidget {
               final state = data.topRatedState;
               if (state == RequestState.Loading) {
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  key: Key('center_loading_top_rated'),
+                  child: CircularProgressIndicator(
+                    key: Key('loading_top_rated'),
+                  ),
                 );
               } else if (state == RequestState.Loaded) {
-                return _TvSeriesList(data.tvSeriesTopRatedList);
+                return _TvSeriesList(
+                  key: const Key('list_view_tv_series_top_rated'),
+                  data.tvSeriesTopRatedList,
+                );
               } else {
-                return const Text('Failed');
+                return const Text(
+                  key: Key('list_tv_series_top_rated_failed'),
+                  'Failed',
+                );
               }
             }),
           ],

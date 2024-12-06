@@ -40,8 +40,8 @@ void main() {
     when(mockGetTvSeriesTopRatedNotifier.topRatedState)
         .thenReturn(RequestState.Loading);
 
-    final progressBarFinder = find.byType(CircularProgressIndicator);
     final centerFinder = find.byType(Center);
+    final progressBarFinder = find.byType(CircularProgressIndicator);
 
     await tester.pumpWidget(makeTestableWidget(const TopRatedTvSeriesPage()));
 

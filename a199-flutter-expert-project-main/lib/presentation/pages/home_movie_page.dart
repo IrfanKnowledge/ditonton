@@ -9,7 +9,11 @@ import 'package:provider/provider.dart';
 import '../widgets/movie_list_section.dart';
 
 class HomeMoviePage extends StatefulWidget {
-  const HomeMoviePage({super.key});
+  final HomeSection homeSection;
+  const HomeMoviePage({
+    super.key,
+    this.homeSection = HomeSection.movieList,
+  });
 
   @override
   State<HomeMoviePage> createState() => _HomeMoviePageState();
@@ -21,6 +25,8 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
+
+    currentSection = widget.homeSection;
 
     final providerMovieList = Provider.of<MovieListNotifier>(
       context,
@@ -70,6 +76,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 onTap = () {
                   setState(() {
                     currentSection = HomeSection.movieList;
+                    Navigator.pop(context);
                   });
                 };
               }
@@ -91,6 +98,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 onTap = () {
                   setState(() {
                     currentSection = HomeSection.tvSeriesList;
+                    Navigator.pop(context);
                   });
                 };
               }
