@@ -1,25 +1,26 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/widgets/movie_card_list.dart';
+import 'package:ditonton/presentation/provider/watchlist_tv_series_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class WatchlistMoviesPage extends StatefulWidget {
-  static const ROUTE_NAME = '/watchlist-movie';
+import '../../../common/state_enum.dart';
+import '../../../common/utils.dart';
+import '../../widgets/tv_series_card_list.dart';
+
+class WatchlistTvSeriesPage extends StatefulWidget {
+  const WatchlistTvSeriesPage({super.key});
 
   @override
-  _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
+  State<WatchlistTvSeriesPage> createState() => _WatchlistTvSeriesPageState();
 }
 
-class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
+class _WatchlistTvSeriesPageState extends State<WatchlistTvSeriesPage>
     with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistMovieNotifier>(context, listen: false)
-            .fetchWatchlistMovies());
+    final provider =
+        Provider.of<WatchlistTvSeriesNotifier>(context, listen: false);
+    Future.microtask(() => provider.fetchWatchlistTvSeries());
   }
 
   @override
@@ -28,36 +29,39 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
     routeObserver.subscribe(this, ModalRoute.of(context)!);
   }
 
+  @override
   void didPopNext() {
-    Provider.of<WatchlistMovieNotifier>(context, listen: false)
-        .fetchWatchlistMovies();
+    Provider.of<WatchlistTvSeriesNotifier>(context, listen: false)
+        .fetchWatchlistTvSeries();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Watchlist - Movie'),
+        title: const Text('Watchlist - Tv Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistMovieNotifier>(
+        child: Consumer<WatchlistTvSeriesNotifier>(
           builder: (context, data, child) {
             if (data.watchlistState == RequestState.Loading) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (data.watchlistState == RequestState.Loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final movie = data.watchlistMovies[index];
-                  return MovieCard(movie);
+                  final tvSeries = data.watchlistTvSeries[index];
+                  return TvSeriesCardList(
+                    tvSeries: tvSeries,
+                  );
                 },
-                itemCount: data.watchlistMovies.length,
+                itemCount: data.watchlistTvSeries.length,
               );
             } else {
               return Center(
-                key: Key('error_message'),
+                key: const Key('error_message'),
                 child: Text(data.message),
               );
             }

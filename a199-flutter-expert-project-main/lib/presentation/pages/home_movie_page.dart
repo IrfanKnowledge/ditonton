@@ -1,3 +1,4 @@
+import 'package:ditonton/common/route_name.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
@@ -111,9 +112,16 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
             }),
             ListTile(
               leading: const Icon(Icons.save_alt),
-              title: const Text('Watchlist'),
+              title: const Text('Watchlist Movie'),
               onTap: () {
                 Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.save_alt),
+              title: const Text('Watchlist Tv Series'),
+              onTap: () {
+                Navigator.pushNamed(context, kRouteNameWatchlistTvSeries);
               },
             ),
             ListTile(

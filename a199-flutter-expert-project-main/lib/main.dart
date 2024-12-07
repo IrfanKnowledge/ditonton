@@ -11,6 +11,7 @@ import 'package:ditonton/presentation/pages/tv_series/popular_tv_series_page.dar
 import 'package:ditonton/presentation/pages/tv_series/search_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/top_rated_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
+import 'package:ditonton/presentation/pages/tv_series/watchlist_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
@@ -110,9 +111,11 @@ class MyApp extends StatelessWidget {
 
             // tv series
             case kRouteNamePopularTvSeries:
-              return CupertinoPageRoute(builder: (_) => const PopularTvSeriesPage());
+              return CupertinoPageRoute(
+                  builder: (_) => const PopularTvSeriesPage());
             case kRouteNameTopRatedTvSeries:
-              return CupertinoPageRoute(builder: (_) => const TopRatedTvSeriesPage());
+              return CupertinoPageRoute(
+                  builder: (_) => const TopRatedTvSeriesPage());
             case kRouteNameTvSeriesDetail:
               final id = settings.arguments as int;
               return MaterialPageRoute(
@@ -120,10 +123,16 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
             case kRouteNameSearchTvSeries:
-              return CupertinoPageRoute(builder: (_) => const SearchTvSeriesPage());
+              return CupertinoPageRoute(
+                  builder: (_) => const SearchTvSeriesPage());
 
             case WatchlistMoviesPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
+
+            case kRouteNameWatchlistTvSeries:
+              return MaterialPageRoute(
+                  builder: (_) => const WatchlistTvSeriesPage());
+
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());
             default:
