@@ -79,8 +79,20 @@ class BodyMovieList extends StatelessWidget {
                   ),
                 );
               } else if (state == RequestState.Loaded) {
+                List<Key>? keyList = [];
+
+                for (int i = 0; i < data.popularMovies.length; i++) {
+                  final key = "movie_popular_$i";
+                  keyList.add(Key(key));
+                }
+
+                if (keyList.isEmpty) {
+                  keyList = null;
+                }
+
                 return _MovieList(
                   key: const Key('list_view_movies_popular'),
+                  keyInkWellList: keyList,
                   data.popularMovies,
                 );
               } else {
@@ -146,8 +158,13 @@ Row _buildSubHeading({required String title, required Function() onTap}) {
 
 class _MovieList extends StatelessWidget {
   final List<Movie> movies;
+  final List<Key>? keyInkWellList;
 
-  const _MovieList(this.movies, {super.key});
+  const _MovieList(
+    this.movies, {
+    super.key,
+    this.keyInkWellList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -156,10 +173,12 @@ class _MovieList extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
+          final keyInkWell = keyInkWellList?[index];
           final movie = movies[index];
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
+              key: keyInkWell,
               onTap: () {
                 Navigator.pushNamed(
                   context,
@@ -170,7 +189,7 @@ class _MovieList extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$kBaseImageUrl${movie.posterPath}',
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),

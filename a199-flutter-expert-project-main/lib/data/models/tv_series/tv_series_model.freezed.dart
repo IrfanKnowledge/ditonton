@@ -36,7 +36,9 @@ mixin _$TvSeriesModel {
   num? get popularity => throw _privateConstructorUsedError;
   @JsonKey(name: "poster_path")
   String? get posterPath => throw _privateConstructorUsedError;
-  @JsonKey(name: "first_air_date")
+  @JsonKey(
+      name: "first_air_date",
+      readValue: TvSeriesModelHelper.firstAirDateReadValue)
   DateTime? get firstAirDate => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: "vote_average")
@@ -73,7 +75,10 @@ abstract class $TvSeriesModelCopyWith<$Res> {
       String? overview,
       num? popularity,
       @JsonKey(name: "poster_path") String? posterPath,
-      @JsonKey(name: "first_air_date") DateTime? firstAirDate,
+      @JsonKey(
+          name: "first_air_date",
+          readValue: TvSeriesModelHelper.firstAirDateReadValue)
+      DateTime? firstAirDate,
       String? name,
       @JsonKey(name: "vote_average") num? voteAverage,
       @JsonKey(name: "vote_count") int? voteCount,
@@ -195,7 +200,10 @@ abstract class _$$TvSeriesModelImplCopyWith<$Res>
       String? overview,
       num? popularity,
       @JsonKey(name: "poster_path") String? posterPath,
-      @JsonKey(name: "first_air_date") DateTime? firstAirDate,
+      @JsonKey(
+          name: "first_air_date",
+          readValue: TvSeriesModelHelper.firstAirDateReadValue)
+      DateTime? firstAirDate,
       String? name,
       @JsonKey(name: "vote_average") num? voteAverage,
       @JsonKey(name: "vote_count") int? voteCount,
@@ -298,7 +306,7 @@ class __$$TvSeriesModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TvSeriesModelImpl extends _TvSeriesModel {
+class _$TvSeriesModelImpl extends _TvSeriesModel with DiagnosticableTreeMixin {
   const _$TvSeriesModelImpl(
       {required this.adult,
       @JsonKey(name: "backdrop_path") required this.backdropPath,
@@ -311,7 +319,10 @@ class _$TvSeriesModelImpl extends _TvSeriesModel {
       required this.overview,
       required this.popularity,
       @JsonKey(name: "poster_path") required this.posterPath,
-      @JsonKey(name: "first_air_date") required this.firstAirDate,
+      @JsonKey(
+          name: "first_air_date",
+          readValue: TvSeriesModelHelper.firstAirDateReadValue)
+      required this.firstAirDate,
       required this.name,
       @JsonKey(name: "vote_average") required this.voteAverage,
       @JsonKey(name: "vote_count") required this.voteCount,
@@ -366,7 +377,9 @@ class _$TvSeriesModelImpl extends _TvSeriesModel {
   @JsonKey(name: "poster_path")
   final String? posterPath;
   @override
-  @JsonKey(name: "first_air_date")
+  @JsonKey(
+      name: "first_air_date",
+      readValue: TvSeriesModelHelper.firstAirDateReadValue)
   final DateTime? firstAirDate;
   @override
   final String? name;
@@ -381,8 +394,30 @@ class _$TvSeriesModelImpl extends _TvSeriesModel {
   final String? mediaType;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'TvSeriesModel(adult: $adult, backdropPath: $backdropPath, genreIds: $genreIds, id: $id, originCountry: $originCountry, originalLanguage: $originalLanguage, originalName: $originalName, overview: $overview, popularity: $popularity, posterPath: $posterPath, firstAirDate: $firstAirDate, name: $name, voteAverage: $voteAverage, voteCount: $voteCount, mediaType: $mediaType)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'TvSeriesModel'))
+      ..add(DiagnosticsProperty('adult', adult))
+      ..add(DiagnosticsProperty('backdropPath', backdropPath))
+      ..add(DiagnosticsProperty('genreIds', genreIds))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('originCountry', originCountry))
+      ..add(DiagnosticsProperty('originalLanguage', originalLanguage))
+      ..add(DiagnosticsProperty('originalName', originalName))
+      ..add(DiagnosticsProperty('overview', overview))
+      ..add(DiagnosticsProperty('popularity', popularity))
+      ..add(DiagnosticsProperty('posterPath', posterPath))
+      ..add(DiagnosticsProperty('firstAirDate', firstAirDate))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('voteAverage', voteAverage))
+      ..add(DiagnosticsProperty('voteCount', voteCount))
+      ..add(DiagnosticsProperty('mediaType', mediaType));
   }
 
   @override
@@ -456,24 +491,27 @@ class _$TvSeriesModelImpl extends _TvSeriesModel {
 
 abstract class _TvSeriesModel extends TvSeriesModel {
   const factory _TvSeriesModel(
-      {required final bool? adult,
-      @JsonKey(name: "backdrop_path") required final String? backdropPath,
-      @JsonKey(name: "genre_ids") required final List<int>? genreIds,
-      required final int? id,
-      @JsonKey(name: "origin_country")
-      required final List<String>? originCountry,
-      @JsonKey(name: "original_language")
-      required final String? originalLanguage,
-      @JsonKey(name: "original_name") required final String? originalName,
-      required final String? overview,
-      required final num? popularity,
-      @JsonKey(name: "poster_path") required final String? posterPath,
-      @JsonKey(name: "first_air_date") required final DateTime? firstAirDate,
-      required final String? name,
-      @JsonKey(name: "vote_average") required final num? voteAverage,
-      @JsonKey(name: "vote_count") required final int? voteCount,
-      @JsonKey(name: "media_type")
-      required final String? mediaType}) = _$TvSeriesModelImpl;
+          {required final bool? adult,
+          @JsonKey(name: "backdrop_path") required final String? backdropPath,
+          @JsonKey(name: "genre_ids") required final List<int>? genreIds,
+          required final int? id,
+          @JsonKey(name: "origin_country")
+          required final List<String>? originCountry,
+          @JsonKey(name: "original_language")
+          required final String? originalLanguage,
+          @JsonKey(name: "original_name") required final String? originalName,
+          required final String? overview,
+          required final num? popularity,
+          @JsonKey(name: "poster_path") required final String? posterPath,
+          @JsonKey(
+              name: "first_air_date",
+              readValue: TvSeriesModelHelper.firstAirDateReadValue)
+          required final DateTime? firstAirDate,
+          required final String? name,
+          @JsonKey(name: "vote_average") required final num? voteAverage,
+          @JsonKey(name: "vote_count") required final int? voteCount,
+          @JsonKey(name: "media_type") required final String? mediaType}) =
+      _$TvSeriesModelImpl;
   const _TvSeriesModel._() : super._();
 
   factory _TvSeriesModel.fromJson(Map<String, dynamic> json) =
@@ -506,7 +544,9 @@ abstract class _TvSeriesModel extends TvSeriesModel {
   @JsonKey(name: "poster_path")
   String? get posterPath;
   @override
-  @JsonKey(name: "first_air_date")
+  @JsonKey(
+      name: "first_air_date",
+      readValue: TvSeriesModelHelper.firstAirDateReadValue)
   DateTime? get firstAirDate;
   @override
   String? get name;

@@ -304,6 +304,7 @@ class _DetailContent extends StatelessWidget {
             backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
+              key: const Key('tv_series_detail_back'),
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);

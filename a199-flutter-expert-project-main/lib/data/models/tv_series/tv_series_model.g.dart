@@ -22,9 +22,12 @@ _$TvSeriesModelImpl _$$TvSeriesModelImplFromJson(Map<String, dynamic> json) =>
       overview: json['overview'] as String?,
       popularity: json['popularity'] as num?,
       posterPath: json['poster_path'] as String?,
-      firstAirDate: json['first_air_date'] == null
-          ? null
-          : DateTime.parse(json['first_air_date'] as String),
+      firstAirDate:
+          TvSeriesModelHelper.firstAirDateReadValue(json, 'first_air_date') ==
+                  null
+              ? null
+              : DateTime.parse(TvSeriesModelHelper.firstAirDateReadValue(
+                  json, 'first_air_date') as String),
       name: json['name'] as String?,
       voteAverage: json['vote_average'] as num?,
       voteCount: (json['vote_count'] as num?)?.toInt(),

@@ -76,8 +76,20 @@ class BodyTvSeriesList extends StatelessWidget {
                   ),
                 );
               } else if (state == RequestState.Loaded) {
+                List<Key>? listKey = [];
+
+                for (int i=0; i<data.tvSeriesPopularList.length; i++) {
+                  final key = "tv_series_popular_$i";
+                  listKey.add(Key(key));
+                }
+
+                if (listKey.isEmpty) {
+                  listKey = null;
+                }
+
                 return _TvSeriesList(
                   key: const Key('list_view_tv_series_popular'),
+                  keyInkWellList: listKey,
                   data.tvSeriesPopularList,
                 );
               } else {
@@ -145,8 +157,13 @@ class BodyTvSeriesList extends StatelessWidget {
 
 class _TvSeriesList extends StatelessWidget {
   final List<TvSeries> tvSeries;
+  final List<Key>? keyInkWellList;
 
-  const _TvSeriesList(this.tvSeries, {super.key});
+  const _TvSeriesList(
+    this.tvSeries, {
+    super.key,
+    this.keyInkWellList,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -155,21 +172,23 @@ class _TvSeriesList extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          final movie = tvSeries[index];
+          final keyInkWell = keyInkWellList?[index];
+          final tvSeriesItem = tvSeries[index];
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
+              key: keyInkWell,
               onTap: () {
                 Navigator.pushNamed(
                   context,
                   kRouteNameTvSeriesDetail,
-                  arguments: movie.id,
+                  arguments: tvSeriesItem.id,
                 );
               },
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$kBaseImageUrl${tvSeriesItem.posterPath}',
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),

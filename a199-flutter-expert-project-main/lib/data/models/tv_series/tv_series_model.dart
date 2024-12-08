@@ -1,4 +1,5 @@
 import 'package:ditonton/domain/entities/tv_series.dart';
+import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'tv_series_model.freezed.dart';
@@ -20,7 +21,7 @@ class TvSeriesModel with _$TvSeriesModel {
     required final String? overview,
     required final num? popularity,
     @JsonKey(name: "poster_path") required final String? posterPath,
-    @JsonKey(name: "first_air_date") required final DateTime? firstAirDate,
+    @JsonKey(name: "first_air_date", readValue: TvSeriesModelHelper.firstAirDateReadValue) required final DateTime? firstAirDate,
     required final String? name,
     @JsonKey(name: "vote_average") required final num? voteAverage,
     @JsonKey(name: "vote_count") required final int? voteCount,
@@ -48,5 +49,22 @@ class TvSeriesModel with _$TvSeriesModel {
       voteCount: voteCount,
       mediaType: mediaType,
     );
+  }
+}
+
+class TvSeriesModelHelper {
+  static Object? firstAirDateReadValue(Map<dynamic, dynamic> json, String value) {
+    String? dataString = json[value];
+    DateTime? dataDateTime;
+
+    if (dataString != null) {
+      dataDateTime = DateTime.tryParse(dataString);
+    }
+
+    if (dataDateTime == null) {
+      dataString = null;
+    }
+
+    return dataString;
   }
 }

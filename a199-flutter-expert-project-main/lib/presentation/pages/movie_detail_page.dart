@@ -268,6 +268,7 @@ class DetailContent extends StatelessWidget {
             backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
+              key: const Key('movie_detail_back'),
               icon: Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);

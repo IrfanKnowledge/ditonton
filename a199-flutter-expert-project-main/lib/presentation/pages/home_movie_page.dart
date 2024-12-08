@@ -105,6 +105,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               }
 
               return ListTile(
+                key: const Key('list_tile_tv_series'),
                 leading: const Icon(Icons.tv),
                 title: const Text('Tv Series'),
                 onTap: onTap,

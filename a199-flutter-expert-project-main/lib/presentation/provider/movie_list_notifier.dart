@@ -38,17 +38,22 @@ class MovieListNotifier extends ChangeNotifier {
   final GetTopRatedMovies getTopRatedMovies;
 
   Future<void> fetchNowPlayingMovies() async {
+    print('fetchNowPlayingMovies() before loading');
     _nowPlayingState = RequestState.Loading;
     notifyListeners();
 
     final result = await getNowPlayingMovies.execute();
     result.fold(
       (failure) {
+        print('fetchNowPlayingMovies() error');
+
         _nowPlayingState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
       (moviesData) {
+        print('fetchNowPlayingMovies() loaded');
+
         _nowPlayingState = RequestState.Loaded;
         _nowPlayingMovies = moviesData;
         notifyListeners();

@@ -5,6 +5,7 @@ import 'package:ditonton/data/models/tv_series/tv_series_detail_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_response_model.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_detail_recommendtaions.dart';
 import 'package:ditonton/domain/usecases/get_tv_series_searched.dart';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../domain/usecases/get_tv_series_detail.dart';
@@ -53,13 +54,17 @@ class TvSeriesRemoteDataSourceImpl implements TvSeriesRemoteDataSource {
     final is200To299 = response.statusCode >= 200 && response.statusCode < 300;
     if (is200To299) {
       try {
+        print('getTvSeriesAiringToday, uriParse: $uriParse');
         final dataModel = TvSeriesResponseModel.fromJson(
               json.decode(response.body),
             ).results ??
             [];
 
         return dataModel;
-      } catch (_, __) {
+      } catch (e, s) {
+        if (kDebugMode) {
+          print('e: $s | s: ${s.toString()}');
+        }
         throw ParsingJsonException();
       }
     } else {
