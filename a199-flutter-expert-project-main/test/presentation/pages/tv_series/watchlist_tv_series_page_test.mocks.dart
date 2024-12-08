@@ -44,7 +44,7 @@ class MockWatchlistTvSeriesNotifier extends _i1.Mock
   @override
   _i4.RequestState get watchlistState => (super.noSuchMethod(
         Invocation.getter(#watchlistState),
-        returnValue: _i4.RequestState.Empty,
+        returnValue: _i4.RequestState.empty,
       ) as _i4.RequestState);
 
   @override

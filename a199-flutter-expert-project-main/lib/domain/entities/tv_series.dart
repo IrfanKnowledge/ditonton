@@ -8,21 +8,21 @@ class TvSeries extends Equatable with _$TvSeries {
   TvSeries._();
 
   factory TvSeries({
-    bool? adult,
-    String? backdropPath,
-    List<int>? genreIds,
-    int? id,
-    List<String>? originCountry,
-    String? originalLanguage,
-    String? originalName,
-    String? overview,
-    num? popularity,
-    String? posterPath,
-    DateTime? firstAirDate,
-    String? name,
-    num? voteAverage,
-    int? voteCount,
-    String? mediaType,
+    final bool? adult,
+    final String? backdropPath,
+    final List<int>? genreIds,
+    final int? id,
+    final List<String>? originCountry,
+    final String? originalLanguage,
+    final String? originalName,
+    final String? overview,
+    final num? popularity,
+    final String? posterPath,
+    final DateTime? firstAirDate,
+    final String? name,
+    final num? voteAverage,
+    final int? voteCount,
+    final String? mediaType,
   }) = _TvSeries;
 
   factory TvSeries.required({

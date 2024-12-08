@@ -53,7 +53,7 @@ void main() {
         'when provider still on initialState',
         () {
           // assert
-          expect(provider.airingTodayState, RequestState.Empty);
+          expect(provider.airingTodayState, RequestState.empty);
         },
       );
 
@@ -93,7 +93,7 @@ void main() {
           verify(mockGetTvSeriesAiringToday.execute());
 
           final result = provider.airingTodayState;
-          expect(result, RequestState.Loading);
+          expect(result, RequestState.loading);
         },
       );
 
@@ -109,7 +109,7 @@ void main() {
           await provider.fetchAiringToday();
 
           // assert
-          expect(provider.airingTodayState, RequestState.Loaded);
+          expect(provider.airingTodayState, RequestState.loaded);
           expect(provider.tvSeriesAiringTodayList, tTvSeriesList);
           expect(listenerCallCount, 2);
         },
@@ -120,14 +120,14 @@ void main() {
         () async {
           // arrange
           when(mockGetTvSeriesAiringToday.execute()).thenAnswer(
-            (_) async => Left(ServerFailure('')),
+            (_) async => const Left(ServerFailure('')),
           );
 
           // act
           await provider.fetchAiringToday();
 
           // assert
-          expect(provider.airingTodayState, RequestState.Error);
+          expect(provider.airingTodayState, RequestState.error);
           expect(listenerCallCount, 2);
         },
       );
@@ -137,14 +137,14 @@ void main() {
         () async {
           // arrange
           when(mockGetTvSeriesAiringToday.execute()).thenAnswer(
-            (_) async => Left(ServerFailure('Server Failure')),
+            (_) async => const Left(ServerFailure('Server Failure')),
           );
 
           // act
           await provider.fetchAiringToday();
 
           // assert
-          expect(provider.airingTodayState, RequestState.Error);
+          expect(provider.airingTodayState, RequestState.error);
           expect(provider.message, 'Server Failure');
           expect(listenerCallCount, 2);
         },
@@ -160,7 +160,7 @@ void main() {
         'when provider still on initialState',
         () {
           // assert
-          expect(provider.popularState, RequestState.Empty);
+          expect(provider.popularState, RequestState.empty);
         },
       );
 
@@ -200,7 +200,7 @@ void main() {
           verify(mockGetTvSeriesPopular.execute());
 
           final result = provider.popularState;
-          expect(result, RequestState.Loading);
+          expect(result, RequestState.loading);
         },
       );
 
@@ -216,7 +216,7 @@ void main() {
           await provider.fetchPopular();
 
           // assert
-          expect(provider.popularState, RequestState.Loaded);
+          expect(provider.popularState, RequestState.loaded);
           expect(provider.tvSeriesPopularList, tTvSeriesList);
           expect(listenerCallCount, 2);
         },
@@ -227,14 +227,14 @@ void main() {
         () async {
           // arrange
           when(mockGetTvSeriesPopular.execute()).thenAnswer(
-            (_) async => Left(ServerFailure('')),
+            (_) async => const Left(ServerFailure('')),
           );
 
           // act
           await provider.fetchPopular();
 
           // assert
-          expect(provider.popularState, RequestState.Error);
+          expect(provider.popularState, RequestState.error);
           expect(listenerCallCount, 2);
         },
       );
@@ -244,14 +244,14 @@ void main() {
         () async {
           // arrange
           when(mockGetTvSeriesPopular.execute()).thenAnswer(
-            (_) async => Left(ServerFailure('Server Failure')),
+            (_) async => const Left(ServerFailure('Server Failure')),
           );
 
           // act
           await provider.fetchPopular();
 
           // assert
-          expect(provider.popularState, RequestState.Error);
+          expect(provider.popularState, RequestState.error);
           expect(provider.message, 'Server Failure');
           expect(listenerCallCount, 2);
         },
@@ -267,7 +267,7 @@ void main() {
             'when provider still on initialState',
             () {
           // assert
-          expect(provider.topRatedState, RequestState.Empty);
+          expect(provider.topRatedState, RequestState.empty);
         },
       );
 
@@ -307,7 +307,7 @@ void main() {
           verify(mockGetTvSeriesTopRated.execute());
 
           final result = provider.topRatedState;
-          expect(result, RequestState.Loading);
+          expect(result, RequestState.loading);
         },
       );
 
@@ -323,7 +323,7 @@ void main() {
           await provider.fetchTopRated();
 
           // assert
-          expect(provider.topRatedState, RequestState.Loaded);
+          expect(provider.topRatedState, RequestState.loaded);
           expect(provider.tvSeriesTopRatedList, tTvSeriesList);
           expect(listenerCallCount, 2);
         },
@@ -334,14 +334,14 @@ void main() {
             () async {
           // arrange
           when(mockGetTvSeriesTopRated.execute()).thenAnswer(
-                (_) async => Left(ServerFailure('')),
+                (_) async => const Left(ServerFailure('')),
           );
 
           // act
           await provider.fetchTopRated();
 
           // assert
-          expect(provider.topRatedState, RequestState.Error);
+          expect(provider.topRatedState, RequestState.error);
           expect(listenerCallCount, 2);
         },
       );
@@ -351,14 +351,14 @@ void main() {
             () async {
           // arrange
           when(mockGetTvSeriesTopRated.execute()).thenAnswer(
-                (_) async => Left(ServerFailure('Server Failure')),
+                (_) async => const Left(ServerFailure('Server Failure')),
           );
 
           // act
           await provider.fetchTopRated();
 
           // assert
-          expect(provider.topRatedState, RequestState.Error);
+          expect(provider.topRatedState, RequestState.error);
           expect(provider.message, 'Server Failure');
           expect(listenerCallCount, 2);
         },

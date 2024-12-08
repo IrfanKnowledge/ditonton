@@ -1,28 +1,16 @@
-import 'dart:convert';
-import 'dart:io';
 
-import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/exception.dart';
 import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/datasources/tv_series_local_data_source.dart';
-import 'package:ditonton/data/datasources/tv_series_remote_data_source.dart';
-import 'package:ditonton/data/models/tv_series/tv_series_detail_model.dart';
-import 'package:ditonton/data/models/tv_series/tv_series_response_model.dart';
 import 'package:ditonton/data/models/watchlist_table.dart';
-import 'package:ditonton/domain/usecases/get_tv_series_detail.dart';
-import 'package:ditonton/domain/usecases/get_tv_series_detail_recommendtaions.dart';
-import 'package:ditonton/domain/usecases/get_tv_series_searched.dart';
 import 'package:ditonton/domain/usecases/get_watchlist_tv_series_status.dart';
 import 'package:ditonton/domain/usecases/remove_watchlist_tv_series.dart';
 import 'package:ditonton/domain/usecases/save_watchlist_tv_series.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 
 import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/test_helper.mocks.dart';
-import '../../json_reader.dart';
 
 ///
 /// Remote Data Source [TvSeriesLocalDataSourceImpl], bergantung pada

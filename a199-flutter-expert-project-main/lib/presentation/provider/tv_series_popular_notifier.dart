@@ -12,25 +12,25 @@ class TvSeriesPopularNotifier extends ChangeNotifier {
   List<TvSeries> _tvSeriesList = [];
   List<TvSeries> get tvSeriesList => _tvSeriesList;
 
-  RequestState _popularState = RequestState.Empty;
+  RequestState _popularState = RequestState.empty;
   RequestState get popularState => _popularState;
 
   String _message = '';
   String get message => _message;
 
   Future<void> fetchPopular() async {
-    _popularState = RequestState.Loading;
+    _popularState = RequestState.loading;
     notifyListeners();
 
     final result = await getTvSeriesPopularUseCase.execute();
     result.fold(
           (l) {
-        _popularState = RequestState.Error;
+        _popularState = RequestState.error;
         _message = l.message;
         notifyListeners();
       },
           (r) {
-        _popularState = RequestState.Loaded;
+        _popularState = RequestState.loaded;
         _tvSeriesList = r;
         notifyListeners();
       },

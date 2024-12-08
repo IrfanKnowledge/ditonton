@@ -57,11 +57,11 @@ void main() {
       testWidgets('Page should display center progress bar when loading',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockMovieListNotifier.popularMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockMovieListNotifier.topRatedMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final appBarMovieListFinder =
             find.byKey(const Key('app_bar_movie_list'));
@@ -82,13 +82,13 @@ void main() {
       testWidgets('Page should display ListView when data is loaded',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
-            .thenReturn(RequestState.Loaded);
+            .thenReturn(RequestState.loaded);
         when(mockMovieListNotifier.nowPlayingMovies).thenReturn(<Movie>[]);
 
         when(mockMovieListNotifier.popularMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockMovieListNotifier.topRatedMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final listViewMoviesNowPlayingFinder =
             find.byKey(const Key('list_view_movies_now_playing'));
@@ -101,13 +101,13 @@ void main() {
       testWidgets('Page should display text with message when Error',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
-            .thenReturn(RequestState.Error);
+            .thenReturn(RequestState.error);
         when(mockMovieListNotifier.message).thenReturn('Failed');
 
         when(mockMovieListNotifier.popularMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockMovieListNotifier.topRatedMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final textFinder =
             find.byKey(const Key('list_movies_now_playing_failed'));
@@ -125,11 +125,11 @@ void main() {
       testWidgets('Page should display center progress bar when loading',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockMovieListNotifier.popularMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockMovieListNotifier.topRatedMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final appBarMovieListFinder =
             find.byKey(const Key('app_bar_movie_list'));
@@ -149,14 +149,14 @@ void main() {
       testWidgets('Page should display ListView when data is loaded',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockMovieListNotifier.popularMoviesState)
-            .thenReturn(RequestState.Loaded);
+            .thenReturn(RequestState.loaded);
         when(mockMovieListNotifier.popularMovies).thenReturn(<Movie>[]);
 
         when(mockMovieListNotifier.topRatedMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final listViewMoviesPopularFinder =
             find.byKey(const Key('list_view_movies_popular'));
@@ -169,14 +169,14 @@ void main() {
       testWidgets('Page should display text with message when Error',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockMovieListNotifier.popularMoviesState)
-            .thenReturn(RequestState.Error);
+            .thenReturn(RequestState.error);
         when(mockMovieListNotifier.message).thenReturn('Failed');
 
         when(mockMovieListNotifier.topRatedMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final textFinder = find.byKey(const Key('list_movies_popular_failed'));
 
@@ -193,11 +193,11 @@ void main() {
       testWidgets('Page should display center progress bar when loading',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockMovieListNotifier.popularMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockMovieListNotifier.topRatedMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final appBarMovieListFinder =
             find.byKey(const Key('app_bar_movie_list'));
@@ -218,13 +218,13 @@ void main() {
       testWidgets('Page should display ListView when data is loaded',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockMovieListNotifier.popularMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockMovieListNotifier.topRatedMoviesState)
-            .thenReturn(RequestState.Loaded);
+            .thenReturn(RequestState.loaded);
         when(mockMovieListNotifier.topRatedMovies).thenReturn(<Movie>[]);
 
         final listViewMoviesTopRatedFinder =
@@ -238,13 +238,13 @@ void main() {
       testWidgets('Page should display text with message when Error',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockMovieListNotifier.popularMoviesState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockMovieListNotifier.topRatedMoviesState)
-            .thenReturn(RequestState.Error);
+            .thenReturn(RequestState.error);
         when(mockMovieListNotifier.message).thenReturn('Failed');
 
         final textFinder =
@@ -259,11 +259,11 @@ void main() {
 
   void setUpMovies() {
     when(mockMovieListNotifier.nowPlayingState)
-        .thenReturn(RequestState.Loading);
+        .thenReturn(RequestState.loading);
     when(mockMovieListNotifier.popularMoviesState)
-        .thenReturn(RequestState.Loading);
+        .thenReturn(RequestState.loading);
     when(mockMovieListNotifier.topRatedMoviesState)
-        .thenReturn(RequestState.Loading);
+        .thenReturn(RequestState.loading);
   }
 
   group(
@@ -274,11 +274,11 @@ void main() {
         setUpMovies();
 
         when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final appBarTvSeriesListFinder =
             find.byKey(const Key('app_bar_tv_series_list'));
@@ -306,15 +306,15 @@ void main() {
         setUpMovies();
 
         when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.Loaded);
+            .thenReturn(RequestState.loaded);
         when(mockTvSeriesListNotifier.tvSeriesAiringTodayList)
             .thenReturn(<TvSeries>[]);
 
         when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final listViewAiringTodayFinder =
             find.byKey(const Key('list_view_tv_series_airing_today'));
@@ -329,14 +329,14 @@ void main() {
       testWidgets('Page should display text with message when Error',
           (WidgetTester tester) async {
         when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.Error);
+            .thenReturn(RequestState.error);
         when(mockTvSeriesListNotifier.message).thenReturn('Failed');
 
         when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final textFinder =
             find.byKey(const Key('list_tv_series_airing_today_failed'));
@@ -358,11 +358,11 @@ void main() {
         setUpMovies();
 
         when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final appBarTvSeriesListFinder =
             find.byKey(const Key('app_bar_tv_series_list'));
@@ -389,15 +389,15 @@ void main() {
         setUpMovies();
 
         when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.Loaded);
+            .thenReturn(RequestState.loaded);
         when(mockTvSeriesListNotifier.tvSeriesPopularList)
             .thenReturn(<TvSeries>[]);
 
         when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final listViewPopularFinder =
             find.byKey(const Key('list_view_tv_series_popular'));
@@ -412,14 +412,14 @@ void main() {
       testWidgets('Page should display text with message when Error',
           (WidgetTester tester) async {
         when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.Error);
+            .thenReturn(RequestState.error);
         when(mockTvSeriesListNotifier.message).thenReturn('Failed');
 
         when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final textFinder =
             find.byKey(const Key('list_tv_series_popular_failed'));
@@ -441,11 +441,11 @@ void main() {
         setUpMovies();
 
         when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
         when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         final appBarTvSeriesListFinder =
             find.byKey(const Key('app_bar_tv_series_list'));
@@ -472,13 +472,13 @@ void main() {
         setUpMovies();
 
         when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.Loaded);
+            .thenReturn(RequestState.loaded);
         when(mockTvSeriesListNotifier.tvSeriesTopRatedList)
             .thenReturn(<TvSeries>[]);
 
@@ -495,13 +495,13 @@ void main() {
       testWidgets('Page should display text with message when Error',
           (WidgetTester tester) async {
         when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.Loading);
+            .thenReturn(RequestState.loading);
 
         when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.Error);
+            .thenReturn(RequestState.error);
         when(mockTvSeriesListNotifier.message).thenReturn('Failed');
 
         final textFinder =

@@ -17,50 +17,27 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TvSeriesDetail {
   bool? get adult => throw _privateConstructorUsedError;
-  set adult(bool? value) => throw _privateConstructorUsedError;
   String? get backdropPath => throw _privateConstructorUsedError;
-  set backdropPath(String? value) => throw _privateConstructorUsedError;
   DateTime? get firstAirDate => throw _privateConstructorUsedError;
-  set firstAirDate(DateTime? value) => throw _privateConstructorUsedError;
   List<Genre>? get genres => throw _privateConstructorUsedError;
-  set genres(List<Genre>? value) => throw _privateConstructorUsedError;
   String? get homepage => throw _privateConstructorUsedError;
-  set homepage(String? value) => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
-  set id(int? value) => throw _privateConstructorUsedError;
   bool? get inProduction => throw _privateConstructorUsedError;
-  set inProduction(bool? value) => throw _privateConstructorUsedError;
   DateTime? get lastAirDate => throw _privateConstructorUsedError;
-  set lastAirDate(DateTime? value) => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  set name(String? value) => throw _privateConstructorUsedError;
   int? get numberOfEpisodes => throw _privateConstructorUsedError;
-  set numberOfEpisodes(int? value) => throw _privateConstructorUsedError;
   int? get numberOfSeasons => throw _privateConstructorUsedError;
-  set numberOfSeasons(int? value) => throw _privateConstructorUsedError;
   String? get originalLanguage => throw _privateConstructorUsedError;
-  set originalLanguage(String? value) => throw _privateConstructorUsedError;
   String? get originalName => throw _privateConstructorUsedError;
-  set originalName(String? value) => throw _privateConstructorUsedError;
   String? get overview => throw _privateConstructorUsedError;
-  set overview(String? value) => throw _privateConstructorUsedError;
   double? get popularity => throw _privateConstructorUsedError;
-  set popularity(double? value) => throw _privateConstructorUsedError;
   String? get posterPath => throw _privateConstructorUsedError;
-  set posterPath(String? value) => throw _privateConstructorUsedError;
   List<TvSeriesSeason>? get seasons => throw _privateConstructorUsedError;
-  set seasons(List<TvSeriesSeason>? value) =>
-      throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
-  set status(String? value) => throw _privateConstructorUsedError;
   String? get tagline => throw _privateConstructorUsedError;
-  set tagline(String? value) => throw _privateConstructorUsedError;
   String? get type => throw _privateConstructorUsedError;
-  set type(String? value) => throw _privateConstructorUsedError;
   int? get voteAverage => throw _privateConstructorUsedError;
-  set voteAverage(int? value) => throw _privateConstructorUsedError;
   int? get voteCount => throw _privateConstructorUsedError;
-  set voteCount(int? value) => throw _privateConstructorUsedError;
 
   /// Create a copy of TvSeriesDetail
   /// with the given fields replaced by the non-null parameter values.
@@ -422,49 +399,49 @@ class _$TvSeriesDetailImpl extends _TvSeriesDetail {
       : super._();
 
   @override
-  bool? adult;
+  final bool? adult;
   @override
-  String? backdropPath;
+  final String? backdropPath;
   @override
-  DateTime? firstAirDate;
+  final DateTime? firstAirDate;
   @override
-  List<Genre>? genres;
+  final List<Genre>? genres;
   @override
-  String? homepage;
+  final String? homepage;
   @override
-  int? id;
+  final int? id;
   @override
-  bool? inProduction;
+  final bool? inProduction;
   @override
-  DateTime? lastAirDate;
+  final DateTime? lastAirDate;
   @override
-  String? name;
+  final String? name;
   @override
-  int? numberOfEpisodes;
+  final int? numberOfEpisodes;
   @override
-  int? numberOfSeasons;
+  final int? numberOfSeasons;
   @override
-  String? originalLanguage;
+  final String? originalLanguage;
   @override
-  String? originalName;
+  final String? originalName;
   @override
-  String? overview;
+  final String? overview;
   @override
-  double? popularity;
+  final double? popularity;
   @override
-  String? posterPath;
+  final String? posterPath;
   @override
-  List<TvSeriesSeason>? seasons;
+  final List<TvSeriesSeason>? seasons;
   @override
-  String? status;
+  final String? status;
   @override
-  String? tagline;
+  final String? tagline;
   @override
-  String? type;
+  final String? type;
   @override
-  int? voteAverage;
+  final int? voteAverage;
   @override
-  int? voteCount;
+  final int? voteCount;
 
   /// Create a copy of TvSeriesDetail
   /// with the given fields replaced by the non-null parameter values.
@@ -478,96 +455,74 @@ class _$TvSeriesDetailImpl extends _TvSeriesDetail {
 
 abstract class _TvSeriesDetail extends TvSeriesDetail {
   factory _TvSeriesDetail(
-      {bool? adult,
-      String? backdropPath,
-      DateTime? firstAirDate,
-      List<Genre>? genres,
-      String? homepage,
-      int? id,
-      bool? inProduction,
-      DateTime? lastAirDate,
-      String? name,
-      int? numberOfEpisodes,
-      int? numberOfSeasons,
-      String? originalLanguage,
-      String? originalName,
-      String? overview,
-      double? popularity,
-      String? posterPath,
-      List<TvSeriesSeason>? seasons,
-      String? status,
-      String? tagline,
-      String? type,
-      int? voteAverage,
-      int? voteCount}) = _$TvSeriesDetailImpl;
+      {final bool? adult,
+      final String? backdropPath,
+      final DateTime? firstAirDate,
+      final List<Genre>? genres,
+      final String? homepage,
+      final int? id,
+      final bool? inProduction,
+      final DateTime? lastAirDate,
+      final String? name,
+      final int? numberOfEpisodes,
+      final int? numberOfSeasons,
+      final String? originalLanguage,
+      final String? originalName,
+      final String? overview,
+      final double? popularity,
+      final String? posterPath,
+      final List<TvSeriesSeason>? seasons,
+      final String? status,
+      final String? tagline,
+      final String? type,
+      final int? voteAverage,
+      final int? voteCount}) = _$TvSeriesDetailImpl;
   _TvSeriesDetail._() : super._();
 
   @override
   bool? get adult;
-  set adult(bool? value);
   @override
   String? get backdropPath;
-  set backdropPath(String? value);
   @override
   DateTime? get firstAirDate;
-  set firstAirDate(DateTime? value);
   @override
   List<Genre>? get genres;
-  set genres(List<Genre>? value);
   @override
   String? get homepage;
-  set homepage(String? value);
   @override
   int? get id;
-  set id(int? value);
   @override
   bool? get inProduction;
-  set inProduction(bool? value);
   @override
   DateTime? get lastAirDate;
-  set lastAirDate(DateTime? value);
   @override
   String? get name;
-  set name(String? value);
   @override
   int? get numberOfEpisodes;
-  set numberOfEpisodes(int? value);
   @override
   int? get numberOfSeasons;
-  set numberOfSeasons(int? value);
   @override
   String? get originalLanguage;
-  set originalLanguage(String? value);
   @override
   String? get originalName;
-  set originalName(String? value);
   @override
   String? get overview;
-  set overview(String? value);
   @override
   double? get popularity;
-  set popularity(double? value);
   @override
   String? get posterPath;
-  set posterPath(String? value);
   @override
   List<TvSeriesSeason>? get seasons;
-  set seasons(List<TvSeriesSeason>? value);
   @override
   String? get status;
-  set status(String? value);
   @override
   String? get tagline;
-  set tagline(String? value);
   @override
   String? get type;
-  set type(String? value);
   @override
   int? get voteAverage;
-  set voteAverage(int? value);
   @override
   int? get voteCount;
-  set voteCount(int? value);
 
   /// Create a copy of TvSeriesDetail
   /// with the given fields replaced by the non-null parameter values.

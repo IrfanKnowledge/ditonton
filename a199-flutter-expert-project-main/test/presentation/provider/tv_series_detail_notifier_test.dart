@@ -105,7 +105,7 @@ void main() {
       // act
       provider.fetchTvSeriesDetail(tId);
       // assert
-      expect(provider.tvSeriesState, RequestState.Loading);
+      expect(provider.tvSeriesState, RequestState.loading);
       expect(listenerCallCount, 1);
     });
 
@@ -117,7 +117,7 @@ void main() {
       await provider.fetchTvSeriesDetail(tId);
 
       // assert
-      expect(provider.tvSeriesState, RequestState.Loaded);
+      expect(provider.tvSeriesState, RequestState.loaded);
       expect(provider.tvSeriesDetail, tTvSeriesDetail);
       expect(listenerCallCount, 3);
     });
@@ -130,7 +130,7 @@ void main() {
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert
-      expect(provider.tvSeriesState, RequestState.Loaded);
+      expect(provider.tvSeriesState, RequestState.loaded);
       expect(
           provider.tvSeriesRecommendations, tTvSeriesDetailRecommendationList);
     });
@@ -161,7 +161,7 @@ void main() {
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert
-      expect(provider.recommendationState, RequestState.Loaded);
+      expect(provider.recommendationState, RequestState.loaded);
       expect(
           provider.tvSeriesRecommendations, tTvSeriesDetailRecommendationList);
     });
@@ -175,13 +175,13 @@ void main() {
       when(
         mockGetTvSeriesDetailRecommendations
             .execute(GetTvSeriesDetailRecommendationsParams(id: tId)),
-      ).thenAnswer((_) async => Left(ServerFailure('Failed')));
+      ).thenAnswer((_) async => const Left(ServerFailure('Failed')));
 
       // act
       await provider.fetchTvSeriesDetail(tId);
 
       // assert
-      expect(provider.recommendationState, RequestState.Error);
+      expect(provider.recommendationState, RequestState.error);
       expect(provider.message, 'Failed');
     });
   });
@@ -278,7 +278,7 @@ void main() {
       when(
         mockSaveWatchlistTvSeries.execute(
             SaveWatchlistTvSeriesParams(tvSeriesDetail: tTvSeriesDetail)),
-      ).thenAnswer((_) async => Left(DatabaseFailure('Failed')));
+      ).thenAnswer((_) async => const Left(DatabaseFailure('Failed')));
       when(
         mockGetWatchlistStatusTvSeries
             .execute(GetWatchlistStatusTvSeriesParams(id: tId)),
@@ -298,7 +298,7 @@ void main() {
       // arrange
       when(
         mockGetTvSeriesDetail.execute(GetTvSeriesDetailParams(id: tId)),
-      ).thenAnswer((_) async => Left(ServerFailure('Server Failure')));
+      ).thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
 
       when(
         mockGetTvSeriesDetailRecommendations
@@ -308,7 +308,7 @@ void main() {
       // act
       await provider.fetchTvSeriesDetail(tId);
       // assert
-      expect(provider.tvSeriesState, RequestState.Error);
+      expect(provider.tvSeriesState, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     });

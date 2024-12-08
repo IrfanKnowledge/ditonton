@@ -11,7 +11,7 @@ class TvSeriesSearchNotifier extends ChangeNotifier {
     required GetTvSeriesSearched getTvSeriesSearchedUseCase,
   }) : _getTvSeriesSearchedUseCase = getTvSeriesSearchedUseCase;
 
-  RequestState _state = RequestState.Empty;
+  RequestState _state = RequestState.empty;
 
   RequestState get state => _state;
 
@@ -24,7 +24,7 @@ class TvSeriesSearchNotifier extends ChangeNotifier {
   String get message => _message;
 
   Future<void> fetchTvSeriesSearch(String query) async {
-    _state = RequestState.Loading;
+    _state = RequestState.loading;
     notifyListeners();
 
     final result = await _getTvSeriesSearchedUseCase.execute(
@@ -33,12 +33,12 @@ class TvSeriesSearchNotifier extends ChangeNotifier {
     result.fold(
       (failure) {
         _message = failure.message;
-        _state = RequestState.Error;
+        _state = RequestState.error;
         notifyListeners();
       },
       (data) {
         _searchResult = data;
-        _state = RequestState.Loaded;
+        _state = RequestState.loaded;
         notifyListeners();
       },
     );

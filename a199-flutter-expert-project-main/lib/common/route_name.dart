@@ -1,3 +1,4 @@
+const kRouteNameAiringTodayTvSeries = '/airing-today-tv-series';
 const kRouteNamePopularTvSeries = '/popular-tv-series';
 const kRouteNameTopRatedTvSeries = '/top-rated-tv-series';
 const kRouteNameTvSeriesDetail = '/tv-series-detail';

@@ -34,20 +34,23 @@ class BodyTvSeriesList extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Airing Today',
-              style: kHeading6,
+            _buildSubHeading(
+              title: 'Airing Today',
+              onTap: () => Navigator.pushNamed(
+                context,
+                kRouteNameAiringTodayTvSeries,
+              ),
             ),
             Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
               final state = data.airingTodayState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return const Center(
                   key: Key('center_loading_airing_today'),
                   child: CircularProgressIndicator(
                     key: Key('loading_airing_today'),
                   ),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 return _TvSeriesList(
                   key: const Key('list_view_tv_series_airing_today'),
                   data.tvSeriesAiringTodayList,
@@ -68,14 +71,14 @@ class BodyTvSeriesList extends StatelessWidget {
             ),
             Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
               final state = data.popularState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return const Center(
                   key: Key('center_loading_popular'),
                   child: CircularProgressIndicator(
                     key: Key('loading_popular'),
                   ),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 List<Key>? listKey = [];
 
                 for (int i=0; i<data.tvSeriesPopularList.length; i++) {
@@ -108,14 +111,14 @@ class BodyTvSeriesList extends StatelessWidget {
             ),
             Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
               final state = data.topRatedState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return const Center(
                   key: Key('center_loading_top_rated'),
                   child: CircularProgressIndicator(
                     key: Key('loading_top_rated'),
                   ),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 return _TvSeriesList(
                   key: const Key('list_view_tv_series_top_rated'),
                   data.tvSeriesTopRatedList,

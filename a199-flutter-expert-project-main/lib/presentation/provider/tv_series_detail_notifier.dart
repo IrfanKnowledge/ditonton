@@ -38,7 +38,7 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
 
   TvSeriesDetail get tvSeriesDetail => _tvSeriesDetail;
 
-  RequestState _tvSeriesState = RequestState.Empty;
+  RequestState _tvSeriesState = RequestState.empty;
 
   RequestState get tvSeriesState => _tvSeriesState;
 
@@ -46,7 +46,7 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
 
   List<TvSeries> get tvSeriesRecommendations => _tvSeriesRecommendations;
 
-  RequestState _recommendationState = RequestState.Empty;
+  RequestState _recommendationState = RequestState.empty;
 
   RequestState get recommendationState => _recommendationState;
 
@@ -63,7 +63,7 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
   String get watchlistMessage => _watchlistMessage;
 
   Future<void> fetchTvSeriesDetail(int id) async {
-    _tvSeriesState = RequestState.Loading;
+    _tvSeriesState = RequestState.loading;
     notifyListeners();
     final detailResult = await _getTvSeriesDetailUseCase.execute(
       GetTvSeriesDetailParams(id: id),
@@ -75,25 +75,25 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
 
     detailResult.fold(
       (failure) {
-        _tvSeriesState = RequestState.Error;
+        _tvSeriesState = RequestState.error;
         _message = failure.message;
         notifyListeners();
       },
       (tvSeriesDetail) {
-        _recommendationState = RequestState.Loading;
+        _recommendationState = RequestState.loading;
         _tvSeriesDetail = tvSeriesDetail;
         notifyListeners();
         recommendationResult.fold(
           (failure) {
-            _recommendationState = RequestState.Error;
+            _recommendationState = RequestState.error;
             _message = failure.message;
           },
           (tvSeriesDetailRecommendations) {
-            _recommendationState = RequestState.Loaded;
+            _recommendationState = RequestState.loaded;
             _tvSeriesRecommendations = tvSeriesDetailRecommendations;
           },
         );
-        _tvSeriesState = RequestState.Loaded;
+        _tvSeriesState = RequestState.loaded;
         notifyListeners();
       },
     );

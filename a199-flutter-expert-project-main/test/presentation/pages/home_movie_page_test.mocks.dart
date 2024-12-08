@@ -145,7 +145,7 @@ class MockMovieListNotifier extends _i1.Mock implements _i8.MovieListNotifier {
   @override
   _i10.RequestState get nowPlayingState => (super.noSuchMethod(
         Invocation.getter(#nowPlayingState),
-        returnValue: _i10.RequestState.Empty,
+        returnValue: _i10.RequestState.empty,
       ) as _i10.RequestState);
 
   @override
@@ -157,7 +157,7 @@ class MockMovieListNotifier extends _i1.Mock implements _i8.MovieListNotifier {
   @override
   _i10.RequestState get popularMoviesState => (super.noSuchMethod(
         Invocation.getter(#popularMoviesState),
-        returnValue: _i10.RequestState.Empty,
+        returnValue: _i10.RequestState.empty,
       ) as _i10.RequestState);
 
   @override
@@ -169,7 +169,7 @@ class MockMovieListNotifier extends _i1.Mock implements _i8.MovieListNotifier {
   @override
   _i10.RequestState get topRatedMoviesState => (super.noSuchMethod(
         Invocation.getter(#topRatedMoviesState),
-        returnValue: _i10.RequestState.Empty,
+        returnValue: _i10.RequestState.empty,
       ) as _i10.RequestState);
 
   @override
@@ -300,7 +300,7 @@ class MockTvSeriesListNotifier extends _i1.Mock
   @override
   _i10.RequestState get airingTodayState => (super.noSuchMethod(
         Invocation.getter(#airingTodayState),
-        returnValue: _i10.RequestState.Empty,
+        returnValue: _i10.RequestState.empty,
       ) as _i10.RequestState);
 
   @override
@@ -312,7 +312,7 @@ class MockTvSeriesListNotifier extends _i1.Mock
   @override
   _i10.RequestState get popularState => (super.noSuchMethod(
         Invocation.getter(#popularState),
-        returnValue: _i10.RequestState.Empty,
+        returnValue: _i10.RequestState.empty,
       ) as _i10.RequestState);
 
   @override
@@ -324,7 +324,7 @@ class MockTvSeriesListNotifier extends _i1.Mock
   @override
   _i10.RequestState get topRatedState => (super.noSuchMethod(
         Invocation.getter(#topRatedState),
-        returnValue: _i10.RequestState.Empty,
+        returnValue: _i10.RequestState.empty,
       ) as _i10.RequestState);
 
   @override

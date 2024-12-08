@@ -41,7 +41,7 @@ void main() {
     'when provider still on initialState',
     () {
       // assert
-      expect(provider.topRatedState, RequestState.Empty);
+      expect(provider.topRatedState, RequestState.empty);
     },
   );
 
@@ -81,7 +81,7 @@ void main() {
       verify(mockUseCase.execute());
 
       final result = provider.topRatedState;
-      expect(result, RequestState.Loading);
+      expect(result, RequestState.loading);
     },
   );
 
@@ -97,7 +97,7 @@ void main() {
       await provider.fetchTopRated();
 
       // assert
-      expect(provider.topRatedState, RequestState.Loaded);
+      expect(provider.topRatedState, RequestState.loaded);
       expect(provider.tvSeriesList, tTvSeriesList);
       expect(listenerCallCount, 2);
     },
@@ -108,14 +108,14 @@ void main() {
     () async {
       // arrange
       when(mockUseCase.execute()).thenAnswer(
-        (_) async => Left(ServerFailure('')),
+        (_) async => const Left(ServerFailure('')),
       );
 
       // act
       await provider.fetchTopRated();
 
       // assert
-      expect(provider.topRatedState, RequestState.Error);
+      expect(provider.topRatedState, RequestState.error);
       expect(listenerCallCount, 2);
     },
   );
@@ -125,14 +125,14 @@ void main() {
     () async {
       // arrange
       when(mockUseCase.execute()).thenAnswer(
-        (_) async => Left(ServerFailure('Server Failure')),
+        (_) async => const Left(ServerFailure('Server Failure')),
       );
 
       // act
       await provider.fetchTopRated();
 
       // assert
-      expect(provider.topRatedState, RequestState.Error);
+      expect(provider.topRatedState, RequestState.error);
       expect(provider.message, 'Server Failure');
       expect(listenerCallCount, 2);
     },

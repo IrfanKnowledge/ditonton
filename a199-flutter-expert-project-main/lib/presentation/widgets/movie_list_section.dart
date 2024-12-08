@@ -18,7 +18,7 @@ AppBar appBarMovieList(BuildContext context) {
     actions: [
       IconButton(
         onPressed: () {
-          Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+          Navigator.pushNamed(context, SearchPage.routeName);
         },
         icon: const Icon(Icons.search),
       )
@@ -43,14 +43,14 @@ class BodyMovieList extends StatelessWidget {
             ),
             Consumer<MovieListNotifier>(builder: (context, data, child) {
               final state = data.nowPlayingState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return const Center(
                   key: Key('center_loading_now_playing'),
                   child: CircularProgressIndicator(
                     key: Key('loading_now_playing'),
                   ),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 return _MovieList(
                   key: const Key('list_view_movies_now_playing'),
                   data.nowPlayingMovies,
@@ -66,19 +66,19 @@ class BodyMovieList extends StatelessWidget {
               title: 'Popular',
               onTap: () => Navigator.pushNamed(
                 context,
-                PopularMoviesPage.ROUTE_NAME,
+                PopularMoviesPage.routeName,
               ),
             ),
             Consumer<MovieListNotifier>(builder: (context, data, child) {
               final state = data.popularMoviesState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return const Center(
                   key: Key('center_loading_popular'),
                   child: CircularProgressIndicator(
                     key: Key('loading_popular'),
                   ),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 List<Key>? keyList = [];
 
                 for (int i = 0; i < data.popularMovies.length; i++) {
@@ -105,18 +105,18 @@ class BodyMovieList extends StatelessWidget {
             _buildSubHeading(
               title: 'Top Rated',
               onTap: () =>
-                  Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+                  Navigator.pushNamed(context, TopRatedMoviesPage.routeName),
             ),
             Consumer<MovieListNotifier>(builder: (context, data, child) {
               final state = data.topRatedMoviesState;
-              if (state == RequestState.Loading) {
+              if (state == RequestState.loading) {
                 return const Center(
                   key: Key('center_loading_top_rated'),
                   child: CircularProgressIndicator(
                     key: Key('loading_top_rated'),
                   ),
                 );
-              } else if (state == RequestState.Loaded) {
+              } else if (state == RequestState.loaded) {
                 return _MovieList(
                   key: const Key('list_view_movies_top_rated'),
                   data.topRatedMovies,
@@ -182,7 +182,7 @@ class _MovieList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  MovieDetailPage.ROUTE_NAME,
+                  MovieDetailPage.routeName,
                   arguments: movie.id,
                 );
               },

@@ -38,7 +38,7 @@ class MockTvSeriesSearchNotifier extends _i1.Mock
   @override
   _i3.RequestState get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _i3.RequestState.Empty,
+        returnValue: _i3.RequestState.empty,
       ) as _i3.RequestState);
 
   @override

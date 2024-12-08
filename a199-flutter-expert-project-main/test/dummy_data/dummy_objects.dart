@@ -2,7 +2,6 @@ import 'package:ditonton/data/models/genre_model.dart';
 import 'package:ditonton/data/models/movie_table.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_detail_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_model.dart';
-import 'package:ditonton/data/models/tv_series/tv_series_response_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_season_model.dart';
 import 'package:ditonton/data/models/tv_series/tv_series_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
@@ -12,7 +11,7 @@ import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/domain/entities/tv_series_season.dart';
 
-final testMovie = Movie(
+const testMovie = Movie(
   adult: false,
   backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
   genreIds: [14, 28],
@@ -31,7 +30,7 @@ final testMovie = Movie(
 
 final testMovieList = [testMovie];
 
-final testMovieDetail = MovieDetail(
+const testMovieDetail = MovieDetail(
   adult: false,
   backdropPath: 'backdropPath',
   genres: [Genre(id: 1, name: 'Action')],
@@ -46,14 +45,14 @@ final testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
-final testWatchlistMovie = Movie.watchlist(
+const testWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',
   overview: 'overview',
 );
 
-final testMovieTable = MovieTable(
+const testMovieTable = MovieTable(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',
@@ -70,9 +69,9 @@ final testMovieMap = {
 final tTvSeries = TvSeries(
   adult: false,
   backdropPath: "/aizbHLcKVWvJ7jxkflJzTu5Z8GE.jpg",
-  genreIds: [10766],
+  genreIds: const [10766],
   id: 81329,
-  originCountry: ["FR"],
+  originCountry: const ["FR"],
   originalLanguage: "fr",
   originalName: "Un si grand soleil",
   overview:
@@ -112,7 +111,7 @@ final tTvSeriesDetail = TvSeriesDetail(
   adult: false,
   backdropPath: "/aizbHLcKVWvJ7jxkflJzTu5Z8GE.jpg",
   firstAirDate: DateTime.parse('2018-08-27'),
-  genres: [
+  genres: const [
     Genre(id: 10766, name: "Soap"),
   ],
   homepage: "https://www.france.tv/france-2/un-si-grand-soleil/",
@@ -161,7 +160,7 @@ final tTvSeriesDetailModel = TvSeriesDetailModel(
   adult: false,
   backdropPath: "/aizbHLcKVWvJ7jxkflJzTu5Z8GE.jpg",
   firstAirDate: DateTime.parse('2018-08-27'),
-  genres: [
+  genres: const [
     GenreModel(id: 10766, name: "Soap"),
   ],
   homepage: "https://www.france.tv/france-2/un-si-grand-soleil/",

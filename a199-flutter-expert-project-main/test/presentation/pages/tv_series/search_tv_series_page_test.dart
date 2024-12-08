@@ -1,8 +1,6 @@
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
 import 'package:ditonton/presentation/pages/tv_series/search_tv_series_page.dart';
-import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
-import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_series_search_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -40,7 +38,7 @@ void main() {
   testWidgets(
     'Page should display center progress bar when loading',
     (tester) async {
-      when(mockTvSeriesSearchNotifier.state).thenReturn(RequestState.Loading);
+      when(mockTvSeriesSearchNotifier.state).thenReturn(RequestState.loading);
 
       final centerFinder = find.byKey(const Key('center_loading'));
       final progressBarFinder = find.byKey(const Key('loading'));
@@ -54,7 +52,7 @@ void main() {
 
   testWidgets('Page should display ListView when data is loaded',
       (tester) async {
-    when(mockTvSeriesSearchNotifier.state).thenReturn(RequestState.Loaded);
+    when(mockTvSeriesSearchNotifier.state).thenReturn(RequestState.loaded);
     when(mockTvSeriesSearchNotifier.searchResult).thenReturn(<TvSeries>[]);
 
     final listViewFinder = find.byType(ListView);
@@ -66,7 +64,7 @@ void main() {
 
   testWidgets('Page should display Empty Container when Error',
       (WidgetTester tester) async {
-    when(mockTvSeriesSearchNotifier.state).thenReturn(RequestState.Error);
+    when(mockTvSeriesSearchNotifier.state).thenReturn(RequestState.error);
     when(mockTvSeriesSearchNotifier.message).thenReturn('Error message');
 
     final containerFinder = find.byKey(const Key('container_empty'));

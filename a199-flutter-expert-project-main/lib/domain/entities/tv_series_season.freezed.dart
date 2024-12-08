@@ -17,21 +17,13 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TvSeriesSeason {
   DateTime? get airDate => throw _privateConstructorUsedError;
-  set airDate(DateTime? value) => throw _privateConstructorUsedError;
   int? get episodeCount => throw _privateConstructorUsedError;
-  set episodeCount(int? value) => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
-  set id(int? value) => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  set name(String? value) => throw _privateConstructorUsedError;
   String? get overview => throw _privateConstructorUsedError;
-  set overview(String? value) => throw _privateConstructorUsedError;
   String? get posterPath => throw _privateConstructorUsedError;
-  set posterPath(String? value) => throw _privateConstructorUsedError;
   int? get seasonNumber => throw _privateConstructorUsedError;
-  set seasonNumber(int? value) => throw _privateConstructorUsedError;
   int? get voteAverage => throw _privateConstructorUsedError;
-  set voteAverage(int? value) => throw _privateConstructorUsedError;
 
   /// Create a copy of TvSeriesSeason
   /// with the given fields replaced by the non-null parameter values.
@@ -211,21 +203,21 @@ class _$TvSeriesSeasonImpl extends _TvSeriesSeason {
       : super._();
 
   @override
-  DateTime? airDate;
+  final DateTime? airDate;
   @override
-  int? episodeCount;
+  final int? episodeCount;
   @override
-  int? id;
+  final int? id;
   @override
-  String? name;
+  final String? name;
   @override
-  String? overview;
+  final String? overview;
   @override
-  String? posterPath;
+  final String? posterPath;
   @override
-  int? seasonNumber;
+  final int? seasonNumber;
   @override
-  int? voteAverage;
+  final int? voteAverage;
 
   /// Create a copy of TvSeriesSeason
   /// with the given fields replaced by the non-null parameter values.
@@ -239,40 +231,32 @@ class _$TvSeriesSeasonImpl extends _TvSeriesSeason {
 
 abstract class _TvSeriesSeason extends TvSeriesSeason {
   factory _TvSeriesSeason(
-      {required DateTime? airDate,
-      required int? episodeCount,
-      required int? id,
-      required String? name,
-      required String? overview,
-      required String? posterPath,
-      required int? seasonNumber,
-      required int? voteAverage}) = _$TvSeriesSeasonImpl;
+      {required final DateTime? airDate,
+      required final int? episodeCount,
+      required final int? id,
+      required final String? name,
+      required final String? overview,
+      required final String? posterPath,
+      required final int? seasonNumber,
+      required final int? voteAverage}) = _$TvSeriesSeasonImpl;
   _TvSeriesSeason._() : super._();
 
   @override
   DateTime? get airDate;
-  set airDate(DateTime? value);
   @override
   int? get episodeCount;
-  set episodeCount(int? value);
   @override
   int? get id;
-  set id(int? value);
   @override
   String? get name;
-  set name(String? value);
   @override
   String? get overview;
-  set overview(String? value);
   @override
   String? get posterPath;
-  set posterPath(String? value);
   @override
   int? get seasonNumber;
-  set seasonNumber(int? value);
   @override
   int? get voteAverage;
-  set voteAverage(int? value);
 
   /// Create a copy of TvSeriesSeason
   /// with the given fields replaced by the non-null parameter values.

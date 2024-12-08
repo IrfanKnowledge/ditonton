@@ -65,7 +65,7 @@ class MockTvSeriesPopularNotifier extends _i1.Mock
   @override
   _i5.RequestState get popularState => (super.noSuchMethod(
         Invocation.getter(#popularState),
-        returnValue: _i5.RequestState.Empty,
+        returnValue: _i5.RequestState.empty,
       ) as _i5.RequestState);
 
   @override

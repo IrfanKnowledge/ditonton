@@ -35,11 +35,11 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
         padding: const EdgeInsets.all(8.0),
         child: Consumer<TvSeriesTopRatedNotifier>(
           builder: (context, data, child) {
-            if (data.topRatedState == RequestState.Loading) {
+            if (data.topRatedState == RequestState.loading) {
               return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.topRatedState == RequestState.Loaded) {
+            } else if (data.topRatedState == RequestState.loaded) {
               return ListView.builder(
                 itemBuilder: (context, index) {
                   final tvSeries = data.tvSeriesList[index];

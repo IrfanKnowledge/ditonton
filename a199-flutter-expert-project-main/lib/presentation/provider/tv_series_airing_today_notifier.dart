@@ -13,25 +13,25 @@ class TvSeriesAiringTodayNotifier extends ChangeNotifier {
   List<TvSeries> _tvSeriesList = [];
   List<TvSeries> get tvSeriesList => _tvSeriesList;
 
-  RequestState _airingTodayState = RequestState.Empty;
+  RequestState _airingTodayState = RequestState.empty;
   RequestState get airingTodayState => _airingTodayState;
 
   String _message = '';
   String get message => _message;
 
   Future<void> fetchAiringToday() async {
-    _airingTodayState = RequestState.Loading;
+    _airingTodayState = RequestState.loading;
     notifyListeners();
 
     final result = await getTvSeriesAiringTodayUseCase.execute();
     result.fold(
       (l) {
-        _airingTodayState = RequestState.Error;
+        _airingTodayState = RequestState.error;
         _message = l.message;
         notifyListeners();
       },
       (r) {
-        _airingTodayState = RequestState.Loaded;
+        _airingTodayState = RequestState.loaded;
         _tvSeriesList = r;
         notifyListeners();
       },

@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-import 'package:ditonton/data/models/tv_series/tv_series_table.dart';
 import 'package:ditonton/domain/entities/tv_series_detail.dart';
 import 'package:ditonton/domain/repositories/tv_series_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -20,10 +19,6 @@ class SaveWatchlistTvSeriesParams extends Equatable {
   final TvSeriesDetail tvSeriesDetail;
 
   const SaveWatchlistTvSeriesParams({required this.tvSeriesDetail});
-
-  TvSeriesTable toTable() {
-    return TvSeriesTable.fromEntity(tvSeriesDetail);
-  }
 
   @override
   List<Object?> get props {

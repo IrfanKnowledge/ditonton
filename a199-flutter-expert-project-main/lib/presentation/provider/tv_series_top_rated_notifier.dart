@@ -12,25 +12,25 @@ class TvSeriesTopRatedNotifier extends ChangeNotifier {
   List<TvSeries> _tvSeriesList = [];
   List<TvSeries> get tvSeriesList => _tvSeriesList;
 
-  RequestState _topRatedState = RequestState.Empty;
+  RequestState _topRatedState = RequestState.empty;
   RequestState get topRatedState => _topRatedState;
 
   String _message = '';
   String get message => _message;
 
   Future<void> fetchTopRated() async {
-    _topRatedState = RequestState.Loading;
+    _topRatedState = RequestState.loading;
     notifyListeners();
 
     final result = await getTvSeriesTopRatedUseCase.execute();
     result.fold(
           (l) {
-        _topRatedState = RequestState.Error;
+        _topRatedState = RequestState.error;
         _message = l.message;
         notifyListeners();
       },
           (r) {
-        _topRatedState = RequestState.Loaded;
+        _topRatedState = RequestState.loaded;
         _tvSeriesList = r;
         notifyListeners();
       },
