@@ -14,6 +14,7 @@ part 'tv_series_detail_remove_watchlist_bloc.freezed.dart';
 class TvSeriesDetailRemoveWatchlistBloc extends Bloc<
     TvSeriesDetailRemoveWatchlistEvent, TvSeriesDetailRemoveWatchlistState> {
   static const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
+  static const watchlistRemoveResetMessage = '';
 
   final RemoveWatchlistTvSeries _removeWatchlistTvSeriesUseCase;
 
@@ -21,11 +22,11 @@ class TvSeriesDetailRemoveWatchlistBloc extends Bloc<
     required RemoveWatchlistTvSeries removeWatchlistTvSeriesUseCase,
   })  : _removeWatchlistTvSeriesUseCase = removeWatchlistTvSeriesUseCase,
         super(const TvSeriesDetailRemoveWatchlistState(watchlistMessage: '')) {
-    on<TvSeriesDetailRemoveWatchlistEvent>((event, emit) {
-      event.map(
+    on<TvSeriesDetailRemoveWatchlistEvent>((event, emit) async {
+      await event.map(
         started: (value) {
           final TvSeriesDetail tvSeriesDetail = value.tvSeriesDetail;
-          removeFromWatchlist(emit: emit, tvSeriesDetail: tvSeriesDetail);
+          return removeFromWatchlist(emit: emit, tvSeriesDetail: tvSeriesDetail);
         },
       );
     });
@@ -45,6 +46,7 @@ class TvSeriesDetailRemoveWatchlistBloc extends Bloc<
       },
       (r) async {
         emit(TvSeriesDetailRemoveWatchlistState(watchlistMessage: r));
+        emit(const TvSeriesDetailRemoveWatchlistState(watchlistMessage: ''));
       },
     );
   }

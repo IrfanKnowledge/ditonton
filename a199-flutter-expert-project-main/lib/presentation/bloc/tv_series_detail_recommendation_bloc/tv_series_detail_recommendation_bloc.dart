@@ -16,11 +16,11 @@ class TvSeriesDetailRecommendationBloc extends Bloc<
     required GetTvSeriesDetailRecommendations getTvSeriesDetailRecommendations,
   })  : _getTvSeriesDetailRecommendations = getTvSeriesDetailRecommendations,
         super(const RequestStateFr.initial()) {
-    on<TvSeriesDetailRecommendationEvent>((event, emit) {
-      event.map(
+    on<TvSeriesDetailRecommendationEvent>((event, emit) async {
+      await event.map(
         started: (value) {
           final int id = value.id;
-          fetchTvSeriesDetailRecommendation(emit: emit, id: id);
+          return fetchTvSeriesDetailRecommendation(emit: emit, id: id);
         },
       );
     });

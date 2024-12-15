@@ -28,6 +28,7 @@ class TvSeriesDetailPage extends StatefulWidget {
 }
 
 class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
+
   @override
   void initState() {
     // final provider =
@@ -109,6 +110,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
                               state.isAddedToWatchList;
 
                           void showSnackBarWhenResponseSuccess(String message) {
+                            ScaffoldMessenger.of(context).removeCurrentSnackBar();
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(SnackBar(content: Text(message)));
                           }
@@ -127,11 +129,27 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
                               TvSeriesDetailAddWatchlistState>(
                             listener: (context, state) {
                               final message = state.watchlistMessage;
-
-                              if (message ==
+                              final isSuccess = message ==
                                   TvSeriesDetailAddWatchlistBloc
-                                      .watchlistAddSuccessMessage) {
+                                      .watchlistAddSuccessMessage;
+                              final isReset = message ==
+                                  TvSeriesDetailAddWatchlistBloc
+                                      .watchlistAddResetMessage;
+
+                              if (isSuccess) {
                                 showSnackBarWhenResponseSuccess(message);
+
+                                final blocLoad = BlocProvider.of<
+                                    TvSeriesDetailLoadWatchlistStatusBloc>(
+                                  context,
+                                  listen: false,
+                                );
+
+                                blocLoad.add(
+                                    TvSeriesDetailLoadWatchlistStatusEvent
+                                        .started(widget.id));
+                              } else if (isReset) {
+                                return;
                               } else {
                                 showDialogWhenResponseFailed(message);
                               }
@@ -141,11 +159,26 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
                                 TvSeriesDetailRemoveWatchlistState>(
                               listener: (context, state) {
                                 final message = state.watchlistMessage;
-
-                                if (message ==
+                                final isSuccess = message ==
                                     TvSeriesDetailRemoveWatchlistBloc
-                                        .watchlistRemoveSuccessMessage) {
+                                        .watchlistRemoveSuccessMessage;
+                                final isReset = message ==
+                                    TvSeriesDetailRemoveWatchlistBloc
+                                        .watchlistRemoveResetMessage;
+
+                                if (isSuccess) {
                                   showSnackBarWhenResponseSuccess(message);
+
+                                  final blocLoad = BlocProvider.of<
+                                      TvSeriesDetailLoadWatchlistStatusBloc>(
+                                    context,
+                                    listen: false,
+                                  );
+                                  blocLoad.add(
+                                      TvSeriesDetailLoadWatchlistStatusEvent
+                                          .started(widget.id));
+                                } else if (isReset) {
+                                  return;
                                 } else {
                                   showDialogWhenResponseFailed(message);
                                 }

@@ -14,6 +14,7 @@ part 'tv_series_detail_add_watchlist_bloc.freezed.dart';
 class TvSeriesDetailAddWatchlistBloc extends Bloc<
     TvSeriesDetailAddWatchlistEvent, TvSeriesDetailAddWatchlistState> {
   static const watchlistAddSuccessMessage = 'Added to Watchlist';
+  static const watchlistAddResetMessage = '';
 
   final SaveWatchlistTvSeries _saveWatchlistTvSeriesUseCase;
 
@@ -21,11 +22,11 @@ class TvSeriesDetailAddWatchlistBloc extends Bloc<
     required SaveWatchlistTvSeries saveWatchlistTvSeriesUseCase,
   })  : _saveWatchlistTvSeriesUseCase = saveWatchlistTvSeriesUseCase,
         super(const TvSeriesDetailAddWatchlistState(watchlistMessage: '')) {
-    on<TvSeriesDetailAddWatchlistEvent>((event, emit) {
-      event.map(
+    on<TvSeriesDetailAddWatchlistEvent>((event, emit) async {
+      await event.map(
         started: (value) {
           final TvSeriesDetail tvSeriesDetail = value.tvSeriesDetail;
-          addWatchlist(emit: emit, tvSeriesDetail: tvSeriesDetail);
+          return addWatchlist(emit: emit, tvSeriesDetail: tvSeriesDetail);
         },
       );
     });
@@ -41,14 +42,11 @@ class TvSeriesDetailAddWatchlistBloc extends Bloc<
 
     result.fold(
       (l) async {
-        emit(
-          TvSeriesDetailAddWatchlistState(watchlistMessage: l.message),
-        );
+        emit(TvSeriesDetailAddWatchlistState(watchlistMessage: l.message));
       },
       (r) async {
-        emit(
-          TvSeriesDetailAddWatchlistState(watchlistMessage: r),
-        );
+        emit(TvSeriesDetailAddWatchlistState(watchlistMessage: r));
+        emit(const TvSeriesDetailAddWatchlistState(watchlistMessage: ''));
       },
     );
   }

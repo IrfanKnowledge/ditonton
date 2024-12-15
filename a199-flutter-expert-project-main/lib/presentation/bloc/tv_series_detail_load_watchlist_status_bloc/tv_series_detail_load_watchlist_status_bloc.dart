@@ -18,11 +18,11 @@ class TvSeriesDetailLoadWatchlistStatusBloc extends Bloc<
   })  : _getWatchlistStatusTvSeriesUseCase = getWatchlistStatusTvSeriesUseCase,
         super(const TvSeriesDetailLoadWatchlistStatusState(
             isAddedToWatchList: false)) {
-    on<TvSeriesDetailLoadWatchlistStatusEvent>((event, emit) {
-      event.map(
+    on<TvSeriesDetailLoadWatchlistStatusEvent>((event, emit) async {
+      await event.map(
         started: (value) {
           final id = value.id;
-          loadWatchlistStatus(emit: emit, id: id);
+          return loadWatchlistStatus(emit: emit, id: id);
         },
       );
     });

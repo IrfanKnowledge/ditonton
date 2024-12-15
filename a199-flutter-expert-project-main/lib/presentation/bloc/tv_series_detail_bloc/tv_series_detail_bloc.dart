@@ -15,11 +15,11 @@ class TvSeriesDetailBloc
     required GetTvSeriesDetail getTvSeriesDetailUseCase,
   })  : _getTvSeriesDetailUseCase = getTvSeriesDetailUseCase,
         super(const RequestStateFr.initial()) {
-    on<TvSeriesDetailEvent>((event, emit) {
-      event.map(
+    on<TvSeriesDetailEvent>((event, emit) async {
+      await event.map(
         started: (value) {
           final int id = value.id;
-          fetchTvSeriesDetail(emit: emit, id: id);
+          return fetchTvSeriesDetail(emit: emit, id: id);
         },
       );
     });
