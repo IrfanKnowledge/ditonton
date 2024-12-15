@@ -1,35 +1,47 @@
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/common/state_freezed.dart';
 import 'package:ditonton/domain/entities/movie.dart';
-import 'package:ditonton/domain/entities/tv_series.dart';
+import 'package:ditonton/presentation/bloc/tv_series_list_airing_today_bloc/tv_series_list_airing_today_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_list_popular_bloc/tv_series_list_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_list_top_rated_bloc/tv_series_list_top_rated_bloc.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series_list_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:provider/provider.dart';
 
+import '../../dummy_data/dummy_objects.dart';
 import 'home_movie_page_test.mocks.dart';
 
 ///
 /// Page [HomeMoviePage],
 /// bergantung pada:
 ///   - provider [MovieListNotifier]
-///   - provider [TvSeriesListNotifier]
+///   - provider [TvSeriesListAiringTodayBloc]
+///   - provider [TvSeriesListPopularBloc]
+///   - provider [TvSeriesListTopRatedBloc]
 ///
 @GenerateMocks([
   MovieListNotifier,
-  TvSeriesListNotifier,
+  TvSeriesListAiringTodayBloc,
+  TvSeriesListPopularBloc,
+  TvSeriesListTopRatedBloc,
 ])
 void main() {
   late MockMovieListNotifier mockMovieListNotifier;
-  late MockTvSeriesListNotifier mockTvSeriesListNotifier;
+  late MockTvSeriesListAiringTodayBloc mockTvSeriesListAiringToday;
+  late MockTvSeriesListPopularBloc mockTvSeriesListPopular;
+  late MockTvSeriesListTopRatedBloc mockTvSeriesListTopRated;
 
   setUp(
     () {
       mockMovieListNotifier = MockMovieListNotifier();
-      mockTvSeriesListNotifier = MockTvSeriesListNotifier();
+      mockTvSeriesListAiringToday = MockTvSeriesListAiringTodayBloc();
+      mockTvSeriesListPopular = MockTvSeriesListPopularBloc();
+      mockTvSeriesListTopRated = MockTvSeriesListTopRatedBloc();
     },
   );
 
@@ -41,19 +53,83 @@ void main() {
         ChangeNotifierProvider<MovieListNotifier>.value(
           value: mockMovieListNotifier,
         ),
-        ChangeNotifierProvider<TvSeriesListNotifier>.value(
-          value: mockTvSeriesListNotifier,
-        ),
       ],
-      child: MaterialApp(
-        home: body,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<TvSeriesListAiringTodayBloc>.value(
+            value: mockTvSeriesListAiringToday,
+          ),
+          BlocProvider<TvSeriesListPopularBloc>.value(
+            value: mockTvSeriesListPopular,
+          ),
+          BlocProvider<TvSeriesListTopRatedBloc>.value(
+            value: mockTvSeriesListTopRated,
+          ),
+        ],
+        child: MaterialApp(
+          home: body,
+        ),
       ),
     );
+  }
+
+  void setUpMovies() {
+    when(mockMovieListNotifier.nowPlayingState)
+        .thenReturn(RequestState.loading);
+    when(mockMovieListNotifier.popularMoviesState)
+        .thenReturn(RequestState.loading);
+    when(mockMovieListNotifier.topRatedMoviesState)
+        .thenReturn(RequestState.loading);
+  }
+
+  void arrangeStreamTvSeriesAiringToday() {
+    when(mockTvSeriesListAiringToday.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const RequestStateFr.initial(),
+        const RequestStateFr.loading(),
+        RequestStateFr.loaded(tTvSeriesList),
+        const RequestStateFr.error('Server Failure'),
+      ]),
+    );
+  }
+
+  void arrangeStreamTvSeriesPopular() {
+    when(mockTvSeriesListPopular.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const RequestStateFr.initial(),
+        const RequestStateFr.loading(),
+        RequestStateFr.loaded(tTvSeriesList),
+        const RequestStateFr.error('Server Failure'),
+      ]),
+    );
+  }
+
+  void arrangeStreamTvSeriesTopRated() {
+    when(mockTvSeriesListTopRated.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const RequestStateFr.initial(),
+        const RequestStateFr.loading(),
+        RequestStateFr.loaded(tTvSeriesList),
+        const RequestStateFr.error('Server Failure'),
+      ]),
+    );
+  }
+
+  void arrangeStreamTvSeries() {
+    arrangeStreamTvSeriesAiringToday();
+    arrangeStreamTvSeriesPopular();
+    arrangeStreamTvSeriesTopRated();
   }
 
   group(
     'Movie Now Playing',
     () {
+      setUp(
+        () {
+          arrangeStreamTvSeries();
+        },
+      );
+
       testWidgets('Page should display center progress bar when loading',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
@@ -122,6 +198,12 @@ void main() {
   group(
     'Movie Popular',
     () {
+      setUp(
+        () {
+          arrangeStreamTvSeries();
+        },
+      );
+
       testWidgets('Page should display center progress bar when loading',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
@@ -190,6 +272,12 @@ void main() {
   group(
     'Movie Top Rated',
     () {
+      setUp(
+        () {
+          arrangeStreamTvSeries();
+        },
+      );
+
       testWidgets('Page should display center progress bar when loading',
           (WidgetTester tester) async {
         when(mockMovieListNotifier.nowPlayingState)
@@ -257,28 +345,24 @@ void main() {
     },
   );
 
-  void setUpMovies() {
-    when(mockMovieListNotifier.nowPlayingState)
-        .thenReturn(RequestState.loading);
-    when(mockMovieListNotifier.popularMoviesState)
-        .thenReturn(RequestState.loading);
-    when(mockMovieListNotifier.topRatedMoviesState)
-        .thenReturn(RequestState.loading);
-  }
-
   group(
     'Tv Series Airing Today',
     () {
+      setUp(
+        () {
+          setUpMovies();
+          arrangeStreamTvSeries();
+        },
+      );
+
       testWidgets('Page should display center progress bar when loading',
           (WidgetTester tester) async {
-        setUpMovies();
-
-        when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.loading);
-        when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.loading);
-        when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListAiringToday.state)
+            .thenReturn(const RequestStateFr.loading());
+        when(mockTvSeriesListPopular.state)
+            .thenReturn(const RequestStateFr.loading());
+        when(mockTvSeriesListTopRated.state)
+            .thenReturn(const RequestStateFr.loading());
 
         final appBarTvSeriesListFinder =
             find.byKey(const Key('app_bar_tv_series_list'));
@@ -303,18 +387,12 @@ void main() {
 
       testWidgets('Page should display ListView when data is loaded',
           (WidgetTester tester) async {
-        setUpMovies();
-
-        when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.loaded);
-        when(mockTvSeriesListNotifier.tvSeriesAiringTodayList)
-            .thenReturn(<TvSeries>[]);
-
-        when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.loading);
-
-        when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListAiringToday.state)
+            .thenReturn(RequestStateFr.loaded(tTvSeriesList));
+        when(mockTvSeriesListPopular.state)
+            .thenReturn(const RequestStateFr.loading());
+        when(mockTvSeriesListTopRated.state)
+            .thenReturn(const RequestStateFr.loading());
 
         final listViewAiringTodayFinder =
             find.byKey(const Key('list_view_tv_series_airing_today'));
@@ -328,15 +406,15 @@ void main() {
 
       testWidgets('Page should display text with message when Error',
           (WidgetTester tester) async {
-        when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.error);
-        when(mockTvSeriesListNotifier.message).thenReturn('Failed');
+        when(mockTvSeriesListAiringToday.state)
+            .thenReturn(const RequestStateFr.loading());
+        when(mockTvSeriesListAiringToday.state)
+            .thenReturn(const RequestStateFr.error('Failed'));
 
-        when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.loading);
-
-        when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListPopular.state)
+            .thenReturn(const RequestStateFr.loading());
+        when(mockTvSeriesListTopRated.state)
+            .thenReturn(const RequestStateFr.loading());
 
         final textFinder =
             find.byKey(const Key('list_tv_series_airing_today_failed'));
@@ -353,16 +431,21 @@ void main() {
   group(
     'Tv Series Popular',
     () {
+      setUp(
+        () {
+          setUpMovies();
+          arrangeStreamTvSeries();
+        },
+      );
+
       testWidgets('Page should display center progress bar when loading',
           (WidgetTester tester) async {
-        setUpMovies();
-
-        when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.loading);
-        when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.loading);
-        when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListAiringToday.state)
+            .thenReturn(const RequestStateFr.loading());
+        when(mockTvSeriesListPopular.state)
+            .thenReturn(const RequestStateFr.loading());
+        when(mockTvSeriesListTopRated.state)
+            .thenReturn(const RequestStateFr.loading());
 
         final appBarTvSeriesListFinder =
             find.byKey(const Key('app_bar_tv_series_list'));
@@ -386,18 +469,14 @@ void main() {
 
       testWidgets('Page should display ListView when data is loaded',
           (WidgetTester tester) async {
-        setUpMovies();
+        when(mockTvSeriesListAiringToday.state)
+            .thenReturn(const RequestStateFr.loading());
 
-        when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListPopular.state)
+            .thenReturn(RequestStateFr.loaded(tTvSeriesList));
 
-        when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.loaded);
-        when(mockTvSeriesListNotifier.tvSeriesPopularList)
-            .thenReturn(<TvSeries>[]);
-
-        when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListTopRated.state)
+            .thenReturn(const RequestStateFr.loading());
 
         final listViewPopularFinder =
             find.byKey(const Key('list_view_tv_series_popular'));
@@ -411,15 +490,14 @@ void main() {
 
       testWidgets('Page should display text with message when Error',
           (WidgetTester tester) async {
-        when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListAiringToday.state)
+            .thenReturn(const RequestStateFr.loading());
 
-        when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.error);
-        when(mockTvSeriesListNotifier.message).thenReturn('Failed');
+        when(mockTvSeriesListPopular.state)
+            .thenReturn(const RequestStateFr.error('Failed'));
 
-        when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListTopRated.state)
+            .thenReturn(const RequestStateFr.loading());
 
         final textFinder =
             find.byKey(const Key('list_tv_series_popular_failed'));
@@ -436,16 +514,21 @@ void main() {
   group(
     'Tv Series Top Rated',
     () {
+      setUp(
+        () {
+          setUpMovies();
+          arrangeStreamTvSeries();
+        },
+      );
+
       testWidgets('Page should display center progress bar when loading',
           (WidgetTester tester) async {
-        setUpMovies();
-
-        when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.loading);
-        when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.loading);
-        when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListAiringToday.state)
+            .thenReturn(const RequestStateFr.loading());
+        when(mockTvSeriesListPopular.state)
+            .thenReturn(const RequestStateFr.loading());
+        when(mockTvSeriesListTopRated.state)
+            .thenReturn(const RequestStateFr.loading());
 
         final appBarTvSeriesListFinder =
             find.byKey(const Key('app_bar_tv_series_list'));
@@ -453,7 +536,8 @@ void main() {
             find.byKey(const Key('body_tv_series_list'));
         final centerLoadingTopRatedFinder =
             find.byKey(const Key('center_loading_top_rated'));
-        final loadingTopRatedFinder = find.byKey(const Key('loading_top_rated'));
+        final loadingTopRatedFinder =
+            find.byKey(const Key('loading_top_rated'));
 
         await tester.pumpWidget(
           makeTestableWidget(const HomeMoviePage(
@@ -469,18 +553,14 @@ void main() {
 
       testWidgets('Page should display ListView when data is loaded',
           (WidgetTester tester) async {
-        setUpMovies();
+        when(mockTvSeriesListAiringToday.state)
+            .thenReturn(const RequestStateFr.loading());
 
-        when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListPopular.state)
+            .thenReturn(const RequestStateFr.loading());
 
-        when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.loading);
-
-        when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.loaded);
-        when(mockTvSeriesListNotifier.tvSeriesTopRatedList)
-            .thenReturn(<TvSeries>[]);
+        when(mockTvSeriesListTopRated.state)
+            .thenReturn(RequestStateFr.loaded(tTvSeriesList));
 
         final listViewTopRatedFinder =
             find.byKey(const Key('list_view_tv_series_top_rated'));
@@ -494,15 +574,14 @@ void main() {
 
       testWidgets('Page should display text with message when Error',
           (WidgetTester tester) async {
-        when(mockTvSeriesListNotifier.airingTodayState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListAiringToday.state)
+            .thenReturn(const RequestStateFr.loading());
 
-        when(mockTvSeriesListNotifier.popularState)
-            .thenReturn(RequestState.loading);
+        when(mockTvSeriesListPopular.state)
+            .thenReturn(const RequestStateFr.loading());
 
-        when(mockTvSeriesListNotifier.topRatedState)
-            .thenReturn(RequestState.error);
-        when(mockTvSeriesListNotifier.message).thenReturn('Failed');
+        when(mockTvSeriesListTopRated.state)
+            .thenReturn(const RequestStateFr.error('Failed'));
 
         final textFinder =
             find.byKey(const Key('list_tv_series_top_rated_failed'));

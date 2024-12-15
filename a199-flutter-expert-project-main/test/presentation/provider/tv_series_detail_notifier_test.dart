@@ -92,6 +92,7 @@ void main() {
       verify(
         mockGetTvSeriesDetail.execute(GetTvSeriesDetailParams(id: tId)),
       );
+
       verify(
         mockGetTvSeriesDetailRecommendations
             .execute(GetTvSeriesDetailRecommendationsParams(id: tId)),

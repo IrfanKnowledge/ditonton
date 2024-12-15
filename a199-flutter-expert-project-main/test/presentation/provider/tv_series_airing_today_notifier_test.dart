@@ -26,9 +26,11 @@ void main() {
       mockUseCase = MockGetTvSeriesAiringToday();
       provider = TvSeriesAiringTodayNotifier(
         getTvSeriesAiringTodayUseCase: mockUseCase,
-      )..addListener(() {
-        listenerCallCount += 1;
-      },);
+      )..addListener(
+          () {
+            listenerCallCount += 1;
+          },
+        );
     },
   );
 
@@ -101,10 +103,10 @@ void main() {
 
   test(
     'should return error when data is gotten unsuccessful',
-        () async {
+    () async {
       // arrange
       when(mockUseCase.execute()).thenAnswer(
-            (_) async => const Left(ServerFailure('')),
+        (_) async => const Left(ServerFailure('')),
       );
 
       // act
@@ -118,10 +120,10 @@ void main() {
 
   test(
     'should return error when data is gotten unsuccessful',
-        () async {
+    () async {
       // arrange
       when(mockUseCase.execute()).thenAnswer(
-            (_) async => const Left(ServerFailure('Server Failure')),
+        (_) async => const Left(ServerFailure('Server Failure')),
       );
 
       // act

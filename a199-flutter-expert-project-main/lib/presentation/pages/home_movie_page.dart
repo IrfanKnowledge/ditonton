@@ -1,16 +1,20 @@
 import 'package:ditonton/common/route_name.dart';
+import 'package:ditonton/presentation/bloc/tv_series_list_airing_today_bloc/tv_series_list_airing_today_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_list_popular_bloc/tv_series_list_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_list_top_rated_bloc/tv_series_list_top_rated_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
 import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
 import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/tv_series_list_section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/movie_list_section.dart';
 
 class HomeMoviePage extends StatefulWidget {
   final HomeSection homeSection;
+
   const HomeMoviePage({
     super.key,
     this.homeSection = HomeSection.movieList,
@@ -33,7 +37,21 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
       context,
       listen: false,
     );
-    final providerTvSeriesList = Provider.of<TvSeriesListNotifier>(
+
+    final blocTvSeriesListAiringToday =
+        BlocProvider.of<TvSeriesListAiringTodayBloc>(
+      context,
+      listen: false,
+    );
+
+    final blocTvSeriesListPopularBloc =
+        BlocProvider.of<TvSeriesListPopularBloc>(
+      context,
+      listen: false,
+    );
+
+    final blocTvSeriesListTopRatedBloc =
+        BlocProvider.of<TvSeriesListTopRatedBloc>(
       context,
       listen: false,
     );
@@ -45,10 +63,12 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
           ..fetchPopularMovies()
           ..fetchTopRatedMovies();
 
-        providerTvSeriesList
-          ..fetchAiringToday()
-          ..fetchPopular()
-          ..fetchTopRated();
+        blocTvSeriesListAiringToday
+            .add(const TvSeriesListAiringTodayEvent.started());
+        blocTvSeriesListPopularBloc
+            .add(const TvSeriesListPopularEvent.started());
+        blocTvSeriesListTopRatedBloc
+            .add(const TvSeriesListTopRatedEvent.started());
       },
     );
   }

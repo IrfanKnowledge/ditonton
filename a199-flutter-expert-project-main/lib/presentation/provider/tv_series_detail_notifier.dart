@@ -80,8 +80,8 @@ class TvSeriesDetailNotifier extends ChangeNotifier {
         notifyListeners();
       },
       (tvSeriesDetail) {
-        _recommendationState = RequestState.loading;
         _tvSeriesDetail = tvSeriesDetail;
+        _recommendationState = RequestState.loading;
         notifyListeners();
         recommendationResult.fold(
           (failure) {

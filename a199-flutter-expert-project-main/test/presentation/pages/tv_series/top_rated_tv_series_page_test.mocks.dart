@@ -3,16 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
-import 'dart:ui' as _i8;
+import 'dart:async' as _i5;
 
-import 'package:ditonton/common/state_enum.dart' as _i5;
+import 'package:ditonton/common/state_freezed.dart' as _i2;
 import 'package:ditonton/domain/entities/tv_series.dart' as _i4;
-import 'package:ditonton/domain/usecases/get_tv_series_top_rated.dart' as _i2;
-import 'package:ditonton/presentation/provider/tv_series_top_rated_notifier.dart'
+import 'package:ditonton/presentation/bloc/tv_series_top_rated_bloc/tv_series_top_rated_bloc.dart'
     as _i3;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -27,9 +25,9 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeGetTvSeriesTopRated_0 extends _i1.SmartFake
-    implements _i2.GetTvSeriesTopRated {
-  _FakeGetTvSeriesTopRated_0(
+class _FakeRequestStateFr_0<T> extends _i1.SmartFake
+    implements _i2.RequestStateFr<T> {
+  _FakeRequestStateFr_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -38,93 +36,154 @@ class _FakeGetTvSeriesTopRated_0 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [TvSeriesTopRatedNotifier].
+/// A class which mocks [TvSeriesTopRatedBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvSeriesTopRatedNotifier extends _i1.Mock
-    implements _i3.TvSeriesTopRatedNotifier {
-  MockTvSeriesTopRatedNotifier() {
+class MockTvSeriesTopRatedBloc extends _i1.Mock
+    implements _i3.TvSeriesTopRatedBloc {
+  MockTvSeriesTopRatedBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.GetTvSeriesTopRated get getTvSeriesTopRatedUseCase => (super.noSuchMethod(
-        Invocation.getter(#getTvSeriesTopRatedUseCase),
-        returnValue: _FakeGetTvSeriesTopRated_0(
+  _i2.RequestStateFr<List<_i4.TvSeries>> get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeRequestStateFr_0<List<_i4.TvSeries>>(
           this,
-          Invocation.getter(#getTvSeriesTopRatedUseCase),
+          Invocation.getter(#state),
         ),
-      ) as _i2.GetTvSeriesTopRated);
+      ) as _i2.RequestStateFr<List<_i4.TvSeries>>);
 
   @override
-  List<_i4.TvSeries> get tvSeriesList => (super.noSuchMethod(
-        Invocation.getter(#tvSeriesList),
-        returnValue: <_i4.TvSeries>[],
-      ) as List<_i4.TvSeries>);
+  _i5.Stream<_i2.RequestStateFr<List<_i4.TvSeries>>> get stream =>
+      (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue: _i5.Stream<_i2.RequestStateFr<List<_i4.TvSeries>>>.empty(),
+      ) as _i5.Stream<_i2.RequestStateFr<List<_i4.TvSeries>>>);
 
   @override
-  _i5.RequestState get topRatedState => (super.noSuchMethod(
-        Invocation.getter(#topRatedState),
-        returnValue: _i5.RequestState.empty,
-      ) as _i5.RequestState);
-
-  @override
-  String get message => (super.noSuchMethod(
-        Invocation.getter(#message),
-        returnValue: _i6.dummyValue<String>(
-          this,
-          Invocation.getter(#message),
-        ),
-      ) as String);
-
-  @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
         returnValue: false,
       ) as bool);
 
   @override
-  _i7.Future<void> fetchTopRated() => (super.noSuchMethod(
+  _i5.Future<void> fetchTopRated(
+          {required _i6.Emitter<_i2.RequestStateFr<List<_i4.TvSeries>>>?
+              emit}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #fetchTopRated,
           [],
+          {#emit: emit},
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  void addListener(_i8.VoidCallback? listener) => super.noSuchMethod(
+  void add(_i3.TvSeriesTopRatedEvent? event) => super.noSuchMethod(
         Invocation.method(
-          #addListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void removeListener(_i8.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #removeListener,
-          [listener],
+          #add,
+          [event],
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  void dispose() => super.noSuchMethod(
+  void onEvent(_i3.TvSeriesTopRatedEvent? event) => super.noSuchMethod(
         Invocation.method(
-          #dispose,
+          #onEvent,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void emit(_i2.RequestStateFr<List<_i4.TvSeries>>? state) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void on<E extends _i3.TvSeriesTopRatedEvent>(
+    _i6.EventHandler<E, _i2.RequestStateFr<List<_i4.TvSeries>>>? handler, {
+    _i6.EventTransformer<E>? transformer,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #on,
+          [handler],
+          {#transformer: transformer},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onTransition(
+          _i6.Transition<_i3.TvSeriesTopRatedEvent,
+                  _i2.RequestStateFr<List<_i4.TvSeries>>>?
+              transition) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [transition],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
           [],
         ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void onChange(_i6.Change<_i2.RequestStateFr<List<_i4.TvSeries>>>? change) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
         returnValueForMissingStub: null,
       );
 
   @override
-  void notifyListeners() => super.noSuchMethod(
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
         Invocation.method(
-          #notifyListeners,
-          [],
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
         ),
         returnValueForMissingStub: null,
       );

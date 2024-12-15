@@ -3,17 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i7;
-import 'dart:ui' as _i8;
+import 'dart:async' as _i5;
 
-import 'package:ditonton/common/state_enum.dart' as _i5;
+import 'package:ditonton/common/state_freezed.dart' as _i2;
 import 'package:ditonton/domain/entities/tv_series.dart' as _i4;
-import 'package:ditonton/domain/usecases/get_tv_series_airing_today.dart'
-    as _i2;
-import 'package:ditonton/presentation/provider/tv_series_airing_today_notifier.dart'
+import 'package:ditonton/presentation/bloc/tv_series_airing_today_bloc/tv_series_airing_today_bloc.dart'
     as _i3;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i6;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -28,9 +25,9 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeGetTvSeriesAiringToday_0 extends _i1.SmartFake
-    implements _i2.GetTvSeriesAiringToday {
-  _FakeGetTvSeriesAiringToday_0(
+class _FakeRequestStateFr_0<T> extends _i1.SmartFake
+    implements _i2.RequestStateFr<T> {
+  _FakeRequestStateFr_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -39,94 +36,154 @@ class _FakeGetTvSeriesAiringToday_0 extends _i1.SmartFake
         );
 }
 
-/// A class which mocks [TvSeriesAiringTodayNotifier].
+/// A class which mocks [TvSeriesAiringTodayBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockTvSeriesAiringTodayNotifier extends _i1.Mock
-    implements _i3.TvSeriesAiringTodayNotifier {
-  MockTvSeriesAiringTodayNotifier() {
+class MockTvSeriesAiringTodayBloc extends _i1.Mock
+    implements _i3.TvSeriesAiringTodayBloc {
+  MockTvSeriesAiringTodayBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.GetTvSeriesAiringToday get getTvSeriesAiringTodayUseCase =>
+  _i2.RequestStateFr<List<_i4.TvSeries>> get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeRequestStateFr_0<List<_i4.TvSeries>>(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i2.RequestStateFr<List<_i4.TvSeries>>);
+
+  @override
+  _i5.Stream<_i2.RequestStateFr<List<_i4.TvSeries>>> get stream =>
       (super.noSuchMethod(
-        Invocation.getter(#getTvSeriesAiringTodayUseCase),
-        returnValue: _FakeGetTvSeriesAiringToday_0(
-          this,
-          Invocation.getter(#getTvSeriesAiringTodayUseCase),
-        ),
-      ) as _i2.GetTvSeriesAiringToday);
+        Invocation.getter(#stream),
+        returnValue: _i5.Stream<_i2.RequestStateFr<List<_i4.TvSeries>>>.empty(),
+      ) as _i5.Stream<_i2.RequestStateFr<List<_i4.TvSeries>>>);
 
   @override
-  List<_i4.TvSeries> get tvSeriesList => (super.noSuchMethod(
-        Invocation.getter(#tvSeriesList),
-        returnValue: <_i4.TvSeries>[],
-      ) as List<_i4.TvSeries>);
-
-  @override
-  _i5.RequestState get airingTodayState => (super.noSuchMethod(
-        Invocation.getter(#airingTodayState),
-        returnValue: _i5.RequestState.empty,
-      ) as _i5.RequestState);
-
-  @override
-  String get message => (super.noSuchMethod(
-        Invocation.getter(#message),
-        returnValue: _i6.dummyValue<String>(
-          this,
-          Invocation.getter(#message),
-        ),
-      ) as String);
-
-  @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
         returnValue: false,
       ) as bool);
 
   @override
-  _i7.Future<void> fetchAiringToday() => (super.noSuchMethod(
+  _i5.Future<void> fetchAiringToday(
+          {required _i6.Emitter<_i2.RequestStateFr<List<_i4.TvSeries>>>?
+              emit}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #fetchAiringToday,
           [],
+          {#emit: emit},
         ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  void addListener(_i8.VoidCallback? listener) => super.noSuchMethod(
+  void add(_i3.TvSeriesAiringTodayEvent? event) => super.noSuchMethod(
         Invocation.method(
-          #addListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void removeListener(_i8.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #removeListener,
-          [listener],
+          #add,
+          [event],
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  void dispose() => super.noSuchMethod(
+  void onEvent(_i3.TvSeriesAiringTodayEvent? event) => super.noSuchMethod(
         Invocation.method(
-          #dispose,
+          #onEvent,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void emit(_i2.RequestStateFr<List<_i4.TvSeries>>? state) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void on<E extends _i3.TvSeriesAiringTodayEvent>(
+    _i6.EventHandler<E, _i2.RequestStateFr<List<_i4.TvSeries>>>? handler, {
+    _i6.EventTransformer<E>? transformer,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #on,
+          [handler],
+          {#transformer: transformer},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onTransition(
+          _i6.Transition<_i3.TvSeriesAiringTodayEvent,
+                  _i2.RequestStateFr<List<_i4.TvSeries>>>?
+              transition) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [transition],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
           [],
         ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void onChange(_i6.Change<_i2.RequestStateFr<List<_i4.TvSeries>>>? change) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
         returnValueForMissingStub: null,
       );
 
   @override
-  void notifyListeners() => super.noSuchMethod(
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
         Invocation.method(
-          #notifyListeners,
-          [],
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
         ),
         returnValueForMissingStub: null,
       );

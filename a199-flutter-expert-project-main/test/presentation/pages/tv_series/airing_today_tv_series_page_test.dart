@@ -1,42 +1,55 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv_series.dart';
+import 'package:ditonton/common/state_freezed.dart';
+import 'package:ditonton/presentation/bloc/tv_series_airing_today_bloc/tv_series_airing_today_bloc.dart';
 import 'package:ditonton/presentation/pages/tv_series/airing_today_tv_series_page.dart';
-import 'package:ditonton/presentation/provider/tv_series_airing_today_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
 
+import '../../../dummy_data/dummy_objects.dart';
 import 'airing_today_tv_series_page_test.mocks.dart';
 
 ///
 /// Page [AiringTodayTvSeriesPage],
-/// bergantung pada provider [TvSeriesAiringTodayNotifier]
+/// bergantung pada bloc [TvSeriesAiringTodayBloc]
 ///
-@GenerateMocks([TvSeriesAiringTodayNotifier])
+@GenerateMocks([TvSeriesAiringTodayBloc])
 void main() {
-  late MockTvSeriesAiringTodayNotifier mockTvSeriesAiringTodayNotifier;
+  late MockTvSeriesAiringTodayBloc mockTvSeriesAiringTodayBloc;
 
   setUp(
     () {
-      mockTvSeriesAiringTodayNotifier = MockTvSeriesAiringTodayNotifier();
+      mockTvSeriesAiringTodayBloc = MockTvSeriesAiringTodayBloc();
     },
   );
 
   Widget makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TvSeriesAiringTodayNotifier>.value(
-      value: mockTvSeriesAiringTodayNotifier,
+    return BlocProvider<TvSeriesAiringTodayBloc>.value(
+      value: mockTvSeriesAiringTodayBloc,
       child: MaterialApp(
         home: body,
       ),
     );
   }
 
+  void arrangeStream() {
+    when(mockTvSeriesAiringTodayBloc.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const RequestStateFr.initial(),
+        const RequestStateFr.loading(),
+        RequestStateFr.loaded(tTvSeriesList),
+        const RequestStateFr.error('Server Failure'),
+      ]),
+    );
+  }
+
   testWidgets('Page should display center progress bar when loading',
       (WidgetTester tester) async {
-    when(mockTvSeriesAiringTodayNotifier.airingTodayState)
-        .thenReturn(RequestState.loading);
+    arrangeStream();
+
+    when(mockTvSeriesAiringTodayBloc.state)
+        .thenReturn(const RequestStateFr.loading());
 
     final centerFinder = find.byType(Center);
     final progressBarFinder = find.byType(CircularProgressIndicator);
@@ -50,9 +63,10 @@ void main() {
 
   testWidgets('Page should display ListView when data is loaded',
       (WidgetTester tester) async {
-    when(mockTvSeriesAiringTodayNotifier.airingTodayState)
-        .thenReturn(RequestState.loaded);
-    when(mockTvSeriesAiringTodayNotifier.tvSeriesList).thenReturn(<TvSeries>[]);
+    arrangeStream();
+
+    when(mockTvSeriesAiringTodayBloc.state)
+        .thenReturn(RequestStateFr.loaded(tTvSeriesList));
 
     final listViewFinder = find.byType(ListView);
 
@@ -64,9 +78,10 @@ void main() {
 
   testWidgets('Page should display text with message when Error',
       (WidgetTester tester) async {
-    when(mockTvSeriesAiringTodayNotifier.airingTodayState)
-        .thenReturn(RequestState.error);
-    when(mockTvSeriesAiringTodayNotifier.message).thenReturn('Error message');
+    arrangeStream();
+
+    when(mockTvSeriesAiringTodayBloc.state)
+        .thenReturn(const RequestStateFr.error('Error message'));
 
     final textFinder = find.byKey(const Key('error_message'));
 
