@@ -28,12 +28,8 @@ class TvSeriesDetailPage extends StatefulWidget {
 }
 
 class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
-
   @override
   void initState() {
-    // final provider =
-    //     Provider.of<TvSeriesDetailNotifier>(context, listen: false);
-
     final blocTvSeriesDetail = BlocProvider.of<TvSeriesDetailBloc>(
       context,
       listen: false,
@@ -53,10 +49,6 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
 
     Future.microtask(
       () {
-        // provider
-        //   ..fetchTvSeriesDetail(widget.id)
-        //   ..loadWatchlistStatus(widget.id);
-
         blocTvSeriesDetail.add(TvSeriesDetailEvent.started(widget.id));
         blocTvSeriesDetailRecommendation
             .add(TvSeriesDetailRecommendationEvent.started(widget.id));
@@ -110,7 +102,8 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
                               state.isAddedToWatchList;
 
                           void showSnackBarWhenResponseSuccess(String message) {
-                            ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                            ScaffoldMessenger.of(context)
+                                .removeCurrentSnackBar();
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(SnackBar(content: Text(message)));
                           }
@@ -208,26 +201,6 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
           );
         },
       ),
-      // body: Consumer<TvSeriesDetailNotifier>(
-      //   builder: (context, provider, child) {
-      //     if (provider.tvSeriesState == RequestState.loading) {
-      //       return const Center(
-      //         child: CircularProgressIndicator(),
-      //       );
-      //     } else if (provider.tvSeriesState == RequestState.loaded) {
-      //       final tvSeries = provider.tvSeriesDetail;
-      //       return SafeArea(
-      //         child: _DetailContent(
-      //           tvSeries,
-      //           provider.tvSeriesRecommendations,
-      //           provider.isAddedToWatchlist,
-      //         ),
-      //       );
-      //     } else {
-      //       return Text(provider.message);
-      //     }
-      //   },
-      // ),
     );
   }
 }
@@ -285,11 +258,6 @@ class _DetailContent extends StatelessWidget {
                               style: kHeading5,
                             ),
                             Builder(builder: (_) {
-                              // final provider =
-                              //     Provider.of<TvSeriesDetailNotifier>(
-                              //   context,
-                              //   listen: false,
-                              // );
 
                               final blocTvSeriesDetailAddWatchlist =
                                   BlocProvider.of<
@@ -305,35 +273,15 @@ class _DetailContent extends StatelessWidget {
                                 listen: false,
                               );
 
-                              // void showSnackBarWhenResponseSuccess(
-                              //     String message) {
-                              //   ScaffoldMessenger.of(context).showSnackBar(
-                              //       SnackBar(content: Text(message)));
-                              // }
-                              //
-                              // void showDialogWhenResponseFailed(
-                              //     String message) {
-                              //   showDialog(
-                              //       context: context,
-                              //       builder: (context) {
-                              //         return AlertDialog(
-                              //           content: Text(message),
-                              //         );
-                              //       });
-                              // }
-
                               return ElevatedButton(
                                 onPressed: () async {
                                   if (!isAddedWatchlist) {
-                                    // await provider.addWatchlist(tvSeriesDetail);
                                     blocTvSeriesDetailAddWatchlist.add(
                                       TvSeriesDetailAddWatchlistEvent.started(
                                         tvSeriesDetail,
                                       ),
                                     );
                                   } else {
-                                    // await provider
-                                    //     .removeFromWatchlist(tvSeriesDetail);
                                     blocTvSeriesDetailRemoveWatchlistBloc.add(
                                       TvSeriesDetailRemoveWatchlistEvent
                                           .started(
@@ -341,19 +289,6 @@ class _DetailContent extends StatelessWidget {
                                       ),
                                     );
                                   }
-
-                                  // final message = provider.watchlistMessage;
-                                  //
-                                  // if (message ==
-                                  //         TvSeriesDetailNotifier
-                                  //             .watchlistAddSuccessMessage ||
-                                  //     message ==
-                                  //         TvSeriesDetailNotifier
-                                  //             .watchlistRemoveSuccessMessage) {
-                                  //   showSnackBarWhenResponseSuccess(message);
-                                  // } else {
-                                  //   showDialogWhenResponseFailed(message);
-                                  // }
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -450,63 +385,6 @@ class _DetailContent extends StatelessWidget {
                                 itemCount: recommendations.length,
                               ),
                             ),
-                            // Consumer<TvSeriesDetailNotifier>(
-                            //   builder: (context, data, child) {
-                            //     if (data.recommendationState ==
-                            //         RequestState.loading) {
-                            //       return const Center(
-                            //         child: CircularProgressIndicator(),
-                            //       );
-                            //     } else if (data.recommendationState ==
-                            //         RequestState.error) {
-                            //       return Text(data.message);
-                            //     } else if (data.recommendationState ==
-                            //         RequestState.loaded) {
-                            //       return SizedBox(
-                            //         height: 150,
-                            //         child: ListView.builder(
-                            //           scrollDirection: Axis.horizontal,
-                            //           itemBuilder: (context, index) {
-                            //             final tvSeries = recommendations[index];
-                            //             return Padding(
-                            //               padding: const EdgeInsets.all(4.0),
-                            //               child: InkWell(
-                            //                 onTap: () {
-                            //                   Navigator.pushReplacementNamed(
-                            //                     context,
-                            //                     kRouteNameTvSeriesDetail,
-                            //                     arguments: tvSeries.id,
-                            //                   );
-                            //                 },
-                            //                 child: ClipRRect(
-                            //                   borderRadius:
-                            //                       const BorderRadius.all(
-                            //                     Radius.circular(8),
-                            //                   ),
-                            //                   child: CachedNetworkImage(
-                            //                     imageUrl:
-                            //                         'https://image.tmdb.org/t/p/w500${tvSeries.posterPath}',
-                            //                     placeholder: (context, url) =>
-                            //                         const Center(
-                            //                       child:
-                            //                           CircularProgressIndicator(),
-                            //                     ),
-                            //                     errorWidget:
-                            //                         (context, url, error) =>
-                            //                             const Icon(Icons.error),
-                            //                   ),
-                            //                 ),
-                            //               ),
-                            //             );
-                            //           },
-                            //           itemCount: recommendations.length,
-                            //         ),
-                            //       );
-                            //     } else {
-                            //       return Container();
-                            //     }
-                            //   },
-                            // ),
                           ],
                         ),
                       ),
