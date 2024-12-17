@@ -12,6 +12,7 @@ import 'package:ditonton/presentation/bloc/tv_series_list_airing_today_bloc/tv_s
 import 'package:ditonton/presentation/bloc/tv_series_list_popular_bloc/tv_series_list_popular_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_list_top_rated_bloc/tv_series_list_top_rated_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_popular_bloc/tv_series_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_search_bloc/tv_series_search_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_top_rated_bloc/tv_series_top_rated_bloc.dart';
 import 'package:ditonton/presentation/bloc/watchlist_tv_series_bloc/watchlist_tv_series_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
@@ -32,7 +33,6 @@ import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series_search_notifier.dart';
 import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -72,14 +72,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
         ),
-
-        // tv series
-        ChangeNotifierProvider(
-          create: (context) => di.locator<TvSeriesSearchNotifier>(),
-        ),
       ],
       child: MultiBlocProvider(
         providers: [
+          // tv series
           BlocProvider<TvSeriesListAiringTodayBloc>(
             create: (context) => di.locator<TvSeriesListAiringTodayBloc>(),
           ),
@@ -89,6 +85,7 @@ class MyApp extends StatelessWidget {
           BlocProvider<TvSeriesListTopRatedBloc>(
             create: (context) => di.locator<TvSeriesListTopRatedBloc>(),
           ),
+
           BlocProvider(
             create: (context) => di.locator<TvSeriesDetailBloc>(),
           ),
@@ -106,6 +103,11 @@ class MyApp extends StatelessWidget {
             create: (context) =>
                 di.locator<TvSeriesDetailRemoveWatchlistBloc>(),
           ),
+
+          BlocProvider(
+            create: (context) => di.locator<TvSeriesSearchBloc>(),
+          ),
+
           BlocProvider<TvSeriesAiringTodayBloc>(
             create: (context) => di.locator<TvSeriesAiringTodayBloc>(),
           ),
@@ -115,6 +117,7 @@ class MyApp extends StatelessWidget {
           BlocProvider<TvSeriesTopRatedBloc>(
             create: (context) => di.locator<TvSeriesTopRatedBloc>(),
           ),
+
           BlocProvider<WatchlistTvSeriesBloc>(
             create: (context) => di.locator<WatchlistTvSeriesBloc>(),
           ),

@@ -1,11 +1,11 @@
-
-import 'package:ditonton/presentation/provider/tv_series_search_notifier.dart';
+import 'package:ditonton/common/state_freezed.dart';
+import 'package:ditonton/domain/entities/tv_series.dart';
+import 'package:ditonton/presentation/bloc/tv_series_search_bloc/tv_series_search_bloc.dart';
 import 'package:ditonton/presentation/widgets/tv_series_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../common/constants.dart';
-import '../../../common/state_enum.dart';
 
 class SearchTvSeriesPage extends StatelessWidget {
   const SearchTvSeriesPage({super.key});
@@ -22,9 +22,13 @@ class SearchTvSeriesPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
-                Provider.of<TvSeriesSearchNotifier>(context, listen: false)
-                    .fetchTvSeriesSearch(query);
+              onChanged: (query) {
+                final bloc = BlocProvider.of<TvSeriesSearchBloc>(
+                  context,
+                  listen: false,
+                );
+
+                bloc.add(TvSeriesSearchEvent.onQueryChanged(query));
               },
               decoration: const InputDecoration(
                 hintText: 'Search title',
@@ -38,34 +42,48 @@ class SearchTvSeriesPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvSeriesSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.loading) {
-                  return const Center(
-                    key: Key('center_loading'),
-                    child: CircularProgressIndicator(
-                      key: Key('loading'),
-                    ),
-                  );
-                } else if (data.state == RequestState.loaded) {
-                  final result = data.searchResult;
-                  return Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final tvSeries = data.searchResult[index];
-                        return TvSeriesCardList(tvSeries: tvSeries,);
-                      },
-                      itemCount: result.length,
-                    ),
-                  );
-                } else {
-                  return Expanded(
-                    child: Container(
-                      key: const Key('container_empty'),
-                    ),
-                  );
-                }
+            BlocBuilder<TvSeriesSearchBloc, RequestStateFr<List<TvSeries>>>(
+              builder: (context, state) {
+                return state.map(
+                  initial: (value) {
+                    return Expanded(
+                      child: Container(
+                        key: const Key('container_empty'),
+                      ),
+                    );
+                  },
+                  loading: (value) {
+                    return const Center(
+                      key: Key('center_loading'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading'),
+                      ),
+                    );
+                  },
+                  loaded: (value) {
+                    final List<TvSeries> data = value.data;
+                    final result = data;
+                    return Expanded(
+                      child: ListView.builder(
+                        padding: const EdgeInsets.all(8),
+                        itemBuilder: (context, index) {
+                          final tvSeries = data[index];
+                          return TvSeriesCardList(
+                            tvSeries: tvSeries,
+                          );
+                        },
+                        itemCount: result.length,
+                      ),
+                    );
+                  },
+                  error: (value) {
+                    return Expanded(
+                      child: Container(
+                        key: const Key('container_empty'),
+                      ),
+                    );
+                  },
+                );
               },
             ),
           ],
@@ -73,5 +91,4 @@ class SearchTvSeriesPage extends StatelessWidget {
       ),
     );
   }
-
 }

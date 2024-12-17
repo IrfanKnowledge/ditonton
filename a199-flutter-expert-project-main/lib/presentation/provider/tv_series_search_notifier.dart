@@ -8,8 +8,8 @@ class TvSeriesSearchNotifier extends ChangeNotifier {
   final GetTvSeriesSearched _getTvSeriesSearchedUseCase;
 
   TvSeriesSearchNotifier({
-    required GetTvSeriesSearched getTvSeriesSearchedUseCase,
-  }) : _getTvSeriesSearchedUseCase = getTvSeriesSearchedUseCase;
+required GetTvSeriesSearched getTvSeriesSearchedUseCase,
+}) : _getTvSeriesSearchedUseCase = getTvSeriesSearchedUseCase;
 
   RequestState _state = RequestState.empty;
 
