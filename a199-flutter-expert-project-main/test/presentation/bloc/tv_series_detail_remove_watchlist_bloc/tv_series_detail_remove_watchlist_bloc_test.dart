@@ -71,6 +71,7 @@ void main() {
     wait: const Duration(milliseconds: 100),
     expect: () => <TvSeriesDetailRemoveWatchlistState>[
       TvSeriesDetailRemoveWatchlistState(watchlistMessage: tMessage),
+      const TvSeriesDetailRemoveWatchlistState(watchlistMessage: TvSeriesDetailRemoveWatchlistBloc.watchlistRemoveResetMessage),
     ],
     verify: (_) {
       verify(

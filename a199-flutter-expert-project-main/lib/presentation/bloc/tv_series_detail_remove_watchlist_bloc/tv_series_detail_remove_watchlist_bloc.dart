@@ -46,7 +46,7 @@ class TvSeriesDetailRemoveWatchlistBloc extends Bloc<
       },
       (r) async {
         emit(TvSeriesDetailRemoveWatchlistState(watchlistMessage: r));
-        emit(const TvSeriesDetailRemoveWatchlistState(watchlistMessage: ''));
+        emit(const TvSeriesDetailRemoveWatchlistState(watchlistMessage: watchlistRemoveResetMessage));
       },
     );
   }

@@ -46,7 +46,7 @@ class TvSeriesDetailAddWatchlistBloc extends Bloc<
       },
       (r) async {
         emit(TvSeriesDetailAddWatchlistState(watchlistMessage: r));
-        emit(const TvSeriesDetailAddWatchlistState(watchlistMessage: ''));
+        emit(const TvSeriesDetailAddWatchlistState(watchlistMessage: watchlistAddResetMessage));
       },
     );
   }
