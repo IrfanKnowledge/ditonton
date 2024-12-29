@@ -258,7 +258,6 @@ class _DetailContent extends StatelessWidget {
                               style: kHeading5,
                             ),
                             Builder(builder: (_) {
-
                               final blocTvSeriesDetailAddWatchlist =
                                   BlocProvider.of<
                                       TvSeriesDetailAddWatchlistBloc>(
