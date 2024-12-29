@@ -1,4 +1,5 @@
 import 'package:ditonton/common/constants.dart';
+import 'package:ditonton/common/utils.dart';
 import 'package:ditonton/data/datasources/db/database_helper.dart';
 import 'package:ditonton/data/datasources/movie_local_data_source.dart';
 import 'package:ditonton/data/datasources/movie_remote_data_source.dart';
@@ -53,7 +54,7 @@ import 'package:http/http.dart' as http;
 
 final locator = GetIt.instance;
 
-void init() {
+void init() async {
   // provider
   locator.registerFactory(
     () => MovieListNotifier(
@@ -245,5 +246,6 @@ void init() {
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingletonAsync(() async => getSslPinningClient());
+  await locator.isReady<http.Client>();
 }
