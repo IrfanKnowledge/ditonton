@@ -54,7 +54,7 @@ import 'package:http/http.dart' as http;
 
 final locator = GetIt.instance;
 
-Future<void> init() async {
+void init() async {
   // provider
   locator.registerFactory(
     () => MovieListNotifier(
