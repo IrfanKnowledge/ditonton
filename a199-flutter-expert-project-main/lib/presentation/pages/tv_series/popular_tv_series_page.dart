@@ -66,28 +66,6 @@ class _PopularTvSeriesPageState extends State<PopularTvSeriesPage> {
             );
           },
         ),
-        // child: Consumer<TvSeriesPopularNotifier>(
-        //   builder: (context, data, child) {
-        //     if (data.popularState == RequestState.loading) {
-        //       return const Center(
-        //         child: CircularProgressIndicator(),
-        //       );
-        //     } else if (data.popularState == RequestState.loaded) {
-        //       return ListView.builder(
-        //         itemBuilder: (context, index) {
-        //           final tvSeries = data.tvSeriesList[index];
-        //           return TvSeriesCardList(tvSeries: tvSeries);
-        //         },
-        //         itemCount: data.tvSeriesList.length,
-        //       );
-        //     } else {
-        //       return Center(
-        //         key: const Key('error_message'),
-        //         child: Text(data.message),
-        //       );
-        //     }
-        //   },
-        // ),
       ),
     );
   }

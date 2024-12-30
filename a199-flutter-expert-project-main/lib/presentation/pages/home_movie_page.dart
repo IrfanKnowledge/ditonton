@@ -1,15 +1,15 @@
 import 'package:ditonton/common/route_name.dart';
+import 'package:ditonton/presentation/bloc/movies/movies_list_now_playing_bloc/movies_list_now_playing_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_list_airing_today_bloc/tv_series_list_airing_today_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_list_popular_bloc/tv_series_list_popular_bloc.dart';
 import 'package:ditonton/presentation/bloc/tv_series_list_top_rated_bloc/tv_series_list_top_rated_bloc.dart';
 import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
 import 'package:ditonton/presentation/widgets/tv_series_list_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
+import '../bloc/movies/movies_list_popular_bloc/movies_list_popular_bloc.dart';
+import '../bloc/movies/movies_list_top_rated_bloc/movies_list_top_rated_bloc.dart';
 import '../widgets/movie_list_section.dart';
 
 class HomeMoviePage extends StatefulWidget {
@@ -33,7 +33,18 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
 
     currentSection = widget.homeSection;
 
-    final providerMovieList = Provider.of<MovieListNotifier>(
+    final blocMoviesListNowPlayingBloc =
+        BlocProvider.of<MoviesListNowPlayingBloc>(
+      context,
+      listen: false,
+    );
+
+    final blocMoviesListPopularBloc = BlocProvider.of<MoviesListPopularBloc>(
+      context,
+      listen: false,
+    );
+
+    final blocMoviesListTopRatedBloc = BlocProvider.of<MoviesListTopRatedBloc>(
       context,
       listen: false,
     );
@@ -58,10 +69,10 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
 
     Future.microtask(
       () {
-        providerMovieList
-          ..fetchNowPlayingMovies()
-          ..fetchPopularMovies()
-          ..fetchTopRatedMovies();
+        blocMoviesListNowPlayingBloc
+            .add(const MoviesListNowPlayingEvent.started());
+        blocMoviesListPopularBloc.add(const MoviesListPopularEvent.started());
+        blocMoviesListTopRatedBloc.add(const MoviesListTopRatedEvent.started());
 
         blocTvSeriesListAiringToday
             .add(const TvSeriesListAiringTodayEvent.started());
@@ -135,7 +146,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
               leading: const Icon(Icons.save_alt),
               title: const Text('Watchlist Movie'),
               onTap: () {
-                Navigator.pushNamed(context, WatchlistMoviesPage.routeName);
+                Navigator.pushNamed(context, kRouteNameWatchlistMovies);
               },
             ),
             ListTile(

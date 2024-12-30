@@ -3,26 +3,25 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i10;
-import 'dart:ui' as _i11;
+import 'dart:async' as _i5;
 
-import 'package:ditonton/common/state_enum.dart' as _i8;
-import 'package:ditonton/common/state_freezed.dart' as _i5;
-import 'package:ditonton/domain/entities/movie.dart' as _i7;
-import 'package:ditonton/domain/entities/tv_series.dart' as _i13;
-import 'package:ditonton/domain/usecases/get_now_playing_movies.dart' as _i2;
-import 'package:ditonton/domain/usecases/get_popular_movies.dart' as _i3;
-import 'package:ditonton/domain/usecases/get_top_rated_movies.dart' as _i4;
+import 'package:ditonton/common/state_freezed.dart' as _i2;
+import 'package:ditonton/domain/entities/movie.dart' as _i4;
+import 'package:ditonton/domain/entities/tv_series.dart' as _i10;
+import 'package:ditonton/presentation/bloc/movies/movies_list_now_playing_bloc/movies_list_now_playing_bloc.dart'
+    as _i3;
+import 'package:ditonton/presentation/bloc/movies/movies_list_popular_bloc/movies_list_popular_bloc.dart'
+    as _i7;
+import 'package:ditonton/presentation/bloc/movies/movies_list_top_rated_bloc/movies_list_top_rated_bloc.dart'
+    as _i8;
 import 'package:ditonton/presentation/bloc/tv_series_list_airing_today_bloc/tv_series_list_airing_today_bloc.dart'
-    as _i12;
+    as _i9;
 import 'package:ditonton/presentation/bloc/tv_series_list_popular_bloc/tv_series_list_popular_bloc.dart'
-    as _i15;
+    as _i11;
 import 'package:ditonton/presentation/bloc/tv_series_list_top_rated_bloc/tv_series_list_top_rated_bloc.dart'
-    as _i16;
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart' as _i6;
-import 'package:flutter_bloc/flutter_bloc.dart' as _i14;
+    as _i12;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i9;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -37,9 +36,9 @@ import 'package:mockito/src/dummies.dart' as _i9;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeGetNowPlayingMovies_0 extends _i1.SmartFake
-    implements _i2.GetNowPlayingMovies {
-  _FakeGetNowPlayingMovies_0(
+class _FakeRequestStateFr_0<T> extends _i1.SmartFake
+    implements _i2.RequestStateFr<T> {
+  _FakeRequestStateFr_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -48,217 +47,30 @@ class _FakeGetNowPlayingMovies_0 extends _i1.SmartFake
         );
 }
 
-class _FakeGetPopularMovies_1 extends _i1.SmartFake
-    implements _i3.GetPopularMovies {
-  _FakeGetPopularMovies_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeGetTopRatedMovies_2 extends _i1.SmartFake
-    implements _i4.GetTopRatedMovies {
-  _FakeGetTopRatedMovies_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeRequestStateFr_3<T> extends _i1.SmartFake
-    implements _i5.RequestStateFr<T> {
-  _FakeRequestStateFr_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-/// A class which mocks [MovieListNotifier].
+/// A class which mocks [MoviesListNowPlayingBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockMovieListNotifier extends _i1.Mock implements _i6.MovieListNotifier {
-  MockMovieListNotifier() {
+class MockMoviesListNowPlayingBloc extends _i1.Mock
+    implements _i3.MoviesListNowPlayingBloc {
+  MockMoviesListNowPlayingBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.GetNowPlayingMovies get getNowPlayingMovies => (super.noSuchMethod(
-        Invocation.getter(#getNowPlayingMovies),
-        returnValue: _FakeGetNowPlayingMovies_0(
-          this,
-          Invocation.getter(#getNowPlayingMovies),
-        ),
-      ) as _i2.GetNowPlayingMovies);
-
-  @override
-  _i3.GetPopularMovies get getPopularMovies => (super.noSuchMethod(
-        Invocation.getter(#getPopularMovies),
-        returnValue: _FakeGetPopularMovies_1(
-          this,
-          Invocation.getter(#getPopularMovies),
-        ),
-      ) as _i3.GetPopularMovies);
-
-  @override
-  _i4.GetTopRatedMovies get getTopRatedMovies => (super.noSuchMethod(
-        Invocation.getter(#getTopRatedMovies),
-        returnValue: _FakeGetTopRatedMovies_2(
-          this,
-          Invocation.getter(#getTopRatedMovies),
-        ),
-      ) as _i4.GetTopRatedMovies);
-
-  @override
-  List<_i7.Movie> get nowPlayingMovies => (super.noSuchMethod(
-        Invocation.getter(#nowPlayingMovies),
-        returnValue: <_i7.Movie>[],
-      ) as List<_i7.Movie>);
-
-  @override
-  _i8.RequestState get nowPlayingState => (super.noSuchMethod(
-        Invocation.getter(#nowPlayingState),
-        returnValue: _i8.RequestState.empty,
-      ) as _i8.RequestState);
-
-  @override
-  List<_i7.Movie> get popularMovies => (super.noSuchMethod(
-        Invocation.getter(#popularMovies),
-        returnValue: <_i7.Movie>[],
-      ) as List<_i7.Movie>);
-
-  @override
-  _i8.RequestState get popularMoviesState => (super.noSuchMethod(
-        Invocation.getter(#popularMoviesState),
-        returnValue: _i8.RequestState.empty,
-      ) as _i8.RequestState);
-
-  @override
-  List<_i7.Movie> get topRatedMovies => (super.noSuchMethod(
-        Invocation.getter(#topRatedMovies),
-        returnValue: <_i7.Movie>[],
-      ) as List<_i7.Movie>);
-
-  @override
-  _i8.RequestState get topRatedMoviesState => (super.noSuchMethod(
-        Invocation.getter(#topRatedMoviesState),
-        returnValue: _i8.RequestState.empty,
-      ) as _i8.RequestState);
-
-  @override
-  String get message => (super.noSuchMethod(
-        Invocation.getter(#message),
-        returnValue: _i9.dummyValue<String>(
-          this,
-          Invocation.getter(#message),
-        ),
-      ) as String);
-
-  @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
-        returnValue: false,
-      ) as bool);
-
-  @override
-  _i10.Future<void> fetchNowPlayingMovies() => (super.noSuchMethod(
-        Invocation.method(
-          #fetchNowPlayingMovies,
-          [],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-
-  @override
-  _i10.Future<void> fetchPopularMovies() => (super.noSuchMethod(
-        Invocation.method(
-          #fetchPopularMovies,
-          [],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-
-  @override
-  _i10.Future<void> fetchTopRatedMovies() => (super.noSuchMethod(
-        Invocation.method(
-          #fetchTopRatedMovies,
-          [],
-        ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
-
-  @override
-  void addListener(_i11.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #addListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void removeListener(_i11.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #removeListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void dispose() => super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void notifyListeners() => super.noSuchMethod(
-        Invocation.method(
-          #notifyListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
-}
-
-/// A class which mocks [TvSeriesListAiringTodayBloc].
-///
-/// See the documentation for Mockito's code generation for more information.
-class MockTvSeriesListAiringTodayBloc extends _i1.Mock
-    implements _i12.TvSeriesListAiringTodayBloc {
-  MockTvSeriesListAiringTodayBloc() {
-    _i1.throwOnMissingStub(this);
-  }
-
-  @override
-  _i5.RequestStateFr<List<_i13.TvSeries>> get state => (super.noSuchMethod(
+  _i2.RequestStateFr<List<_i4.Movie>> get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeRequestStateFr_3<List<_i13.TvSeries>>(
+        returnValue: _FakeRequestStateFr_0<List<_i4.Movie>>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i5.RequestStateFr<List<_i13.TvSeries>>);
+      ) as _i2.RequestStateFr<List<_i4.Movie>>);
 
   @override
-  _i10.Stream<_i5.RequestStateFr<List<_i13.TvSeries>>> get stream =>
+  _i5.Stream<_i2.RequestStateFr<List<_i4.Movie>>> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
-        returnValue:
-            _i10.Stream<_i5.RequestStateFr<List<_i13.TvSeries>>>.empty(),
-      ) as _i10.Stream<_i5.RequestStateFr<List<_i13.TvSeries>>>);
+        returnValue: _i5.Stream<_i2.RequestStateFr<List<_i4.Movie>>>.empty(),
+      ) as _i5.Stream<_i2.RequestStateFr<List<_i4.Movie>>>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -267,21 +79,20 @@ class MockTvSeriesListAiringTodayBloc extends _i1.Mock
       ) as bool);
 
   @override
-  _i10.Future<void> fetchAiringToday(
-          {required _i14.Emitter<_i5.RequestStateFr<List<_i13.TvSeries>>>?
-              emit}) =>
+  _i5.Future<void> fetchNowPlaying(
+          {required _i6.Emitter<_i2.RequestStateFr<List<_i4.Movie>>>? emit}) =>
       (super.noSuchMethod(
         Invocation.method(
-          #fetchAiringToday,
+          #fetchNowPlaying,
           [],
           {#emit: emit},
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  void add(_i12.TvSeriesListAiringTodayEvent? event) => super.noSuchMethod(
+  void add(_i3.MoviesListNowPlayingEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
           [event],
@@ -290,7 +101,7 @@ class MockTvSeriesListAiringTodayBloc extends _i1.Mock
       );
 
   @override
-  void onEvent(_i12.TvSeriesListAiringTodayEvent? event) => super.noSuchMethod(
+  void onEvent(_i3.MoviesListNowPlayingEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onEvent,
           [event],
@@ -299,8 +110,7 @@ class MockTvSeriesListAiringTodayBloc extends _i1.Mock
       );
 
   @override
-  void emit(_i5.RequestStateFr<List<_i13.TvSeries>>? state) =>
-      super.noSuchMethod(
+  void emit(_i2.RequestStateFr<List<_i4.Movie>>? state) => super.noSuchMethod(
         Invocation.method(
           #emit,
           [state],
@@ -309,9 +119,9 @@ class MockTvSeriesListAiringTodayBloc extends _i1.Mock
       );
 
   @override
-  void on<E extends _i12.TvSeriesListAiringTodayEvent>(
-    _i14.EventHandler<E, _i5.RequestStateFr<List<_i13.TvSeries>>>? handler, {
-    _i14.EventTransformer<E>? transformer,
+  void on<E extends _i3.MoviesListNowPlayingEvent>(
+    _i6.EventHandler<E, _i2.RequestStateFr<List<_i4.Movie>>>? handler, {
+    _i6.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -324,8 +134,8 @@ class MockTvSeriesListAiringTodayBloc extends _i1.Mock
 
   @override
   void onTransition(
-          _i14.Transition<_i12.TvSeriesListAiringTodayEvent,
-                  _i5.RequestStateFr<List<_i13.TvSeries>>>?
+          _i6.Transition<_i3.MoviesListNowPlayingEvent,
+                  _i2.RequestStateFr<List<_i4.Movie>>>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -336,17 +146,473 @@ class MockTvSeriesListAiringTodayBloc extends _i1.Mock
       );
 
   @override
-  _i10.Future<void> close() => (super.noSuchMethod(
+  _i5.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  void onChange(_i14.Change<_i5.RequestStateFr<List<_i13.TvSeries>>>? change) =>
+  void onChange(_i6.Change<_i2.RequestStateFr<List<_i4.Movie>>>? change) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [MoviesListPopularBloc].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMoviesListPopularBloc extends _i1.Mock
+    implements _i7.MoviesListPopularBloc {
+  MockMoviesListPopularBloc() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.RequestStateFr<List<_i4.Movie>> get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeRequestStateFr_0<List<_i4.Movie>>(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i2.RequestStateFr<List<_i4.Movie>>);
+
+  @override
+  _i5.Stream<_i2.RequestStateFr<List<_i4.Movie>>> get stream =>
+      (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue: _i5.Stream<_i2.RequestStateFr<List<_i4.Movie>>>.empty(),
+      ) as _i5.Stream<_i2.RequestStateFr<List<_i4.Movie>>>);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  _i5.Future<void> fetchPopular(
+          {required _i6.Emitter<_i2.RequestStateFr<List<_i4.Movie>>>? emit}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchPopular,
+          [],
+          {#emit: emit},
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void add(_i7.MoviesListPopularEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #add,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onEvent(_i7.MoviesListPopularEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #onEvent,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void emit(_i2.RequestStateFr<List<_i4.Movie>>? state) => super.noSuchMethod(
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void on<E extends _i7.MoviesListPopularEvent>(
+    _i6.EventHandler<E, _i2.RequestStateFr<List<_i4.Movie>>>? handler, {
+    _i6.EventTransformer<E>? transformer,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #on,
+          [handler],
+          {#transformer: transformer},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onTransition(
+          _i6.Transition<_i7.MoviesListPopularEvent,
+                  _i2.RequestStateFr<List<_i4.Movie>>>?
+              transition) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [transition],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void onChange(_i6.Change<_i2.RequestStateFr<List<_i4.Movie>>>? change) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [MoviesListTopRatedBloc].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockMoviesListTopRatedBloc extends _i1.Mock
+    implements _i8.MoviesListTopRatedBloc {
+  MockMoviesListTopRatedBloc() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.RequestStateFr<List<_i4.Movie>> get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeRequestStateFr_0<List<_i4.Movie>>(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i2.RequestStateFr<List<_i4.Movie>>);
+
+  @override
+  _i5.Stream<_i2.RequestStateFr<List<_i4.Movie>>> get stream =>
+      (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue: _i5.Stream<_i2.RequestStateFr<List<_i4.Movie>>>.empty(),
+      ) as _i5.Stream<_i2.RequestStateFr<List<_i4.Movie>>>);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  _i5.Future<void> fetchTopRated(
+          {required _i6.Emitter<_i2.RequestStateFr<List<_i4.Movie>>>? emit}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchTopRated,
+          [],
+          {#emit: emit},
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void add(_i8.MoviesListTopRatedEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #add,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onEvent(_i8.MoviesListTopRatedEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #onEvent,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void emit(_i2.RequestStateFr<List<_i4.Movie>>? state) => super.noSuchMethod(
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void on<E extends _i8.MoviesListTopRatedEvent>(
+    _i6.EventHandler<E, _i2.RequestStateFr<List<_i4.Movie>>>? handler, {
+    _i6.EventTransformer<E>? transformer,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #on,
+          [handler],
+          {#transformer: transformer},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onTransition(
+          _i6.Transition<_i8.MoviesListTopRatedEvent,
+                  _i2.RequestStateFr<List<_i4.Movie>>>?
+              transition) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [transition],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void onChange(_i6.Change<_i2.RequestStateFr<List<_i4.Movie>>>? change) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+}
+
+/// A class which mocks [TvSeriesListAiringTodayBloc].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockTvSeriesListAiringTodayBloc extends _i1.Mock
+    implements _i9.TvSeriesListAiringTodayBloc {
+  MockTvSeriesListAiringTodayBloc() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i2.RequestStateFr<List<_i10.TvSeries>> get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeRequestStateFr_0<List<_i10.TvSeries>>(
+          this,
+          Invocation.getter(#state),
+        ),
+      ) as _i2.RequestStateFr<List<_i10.TvSeries>>);
+
+  @override
+  _i5.Stream<_i2.RequestStateFr<List<_i10.TvSeries>>> get stream =>
+      (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue:
+            _i5.Stream<_i2.RequestStateFr<List<_i10.TvSeries>>>.empty(),
+      ) as _i5.Stream<_i2.RequestStateFr<List<_i10.TvSeries>>>);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
+        returnValue: false,
+      ) as bool);
+
+  @override
+  _i5.Future<void> fetchAiringToday(
+          {required _i6.Emitter<_i2.RequestStateFr<List<_i10.TvSeries>>>?
+              emit}) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #fetchAiringToday,
+          [],
+          {#emit: emit},
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void add(_i9.TvSeriesListAiringTodayEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #add,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onEvent(_i9.TvSeriesListAiringTodayEvent? event) => super.noSuchMethod(
+        Invocation.method(
+          #onEvent,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void emit(_i2.RequestStateFr<List<_i10.TvSeries>>? state) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void on<E extends _i9.TvSeriesListAiringTodayEvent>(
+    _i6.EventHandler<E, _i2.RequestStateFr<List<_i10.TvSeries>>>? handler, {
+    _i6.EventTransformer<E>? transformer,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #on,
+          [handler],
+          {#transformer: transformer},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onTransition(
+          _i6.Transition<_i9.TvSeriesListAiringTodayEvent,
+                  _i2.RequestStateFr<List<_i10.TvSeries>>>?
+              transition) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [transition],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
+          [],
+        ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void onChange(_i6.Change<_i2.RequestStateFr<List<_i10.TvSeries>>>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -392,27 +658,27 @@ class MockTvSeriesListAiringTodayBloc extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTvSeriesListPopularBloc extends _i1.Mock
-    implements _i15.TvSeriesListPopularBloc {
+    implements _i11.TvSeriesListPopularBloc {
   MockTvSeriesListPopularBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.RequestStateFr<List<_i13.TvSeries>> get state => (super.noSuchMethod(
+  _i2.RequestStateFr<List<_i10.TvSeries>> get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeRequestStateFr_3<List<_i13.TvSeries>>(
+        returnValue: _FakeRequestStateFr_0<List<_i10.TvSeries>>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i5.RequestStateFr<List<_i13.TvSeries>>);
+      ) as _i2.RequestStateFr<List<_i10.TvSeries>>);
 
   @override
-  _i10.Stream<_i5.RequestStateFr<List<_i13.TvSeries>>> get stream =>
+  _i5.Stream<_i2.RequestStateFr<List<_i10.TvSeries>>> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
         returnValue:
-            _i10.Stream<_i5.RequestStateFr<List<_i13.TvSeries>>>.empty(),
-      ) as _i10.Stream<_i5.RequestStateFr<List<_i13.TvSeries>>>);
+            _i5.Stream<_i2.RequestStateFr<List<_i10.TvSeries>>>.empty(),
+      ) as _i5.Stream<_i2.RequestStateFr<List<_i10.TvSeries>>>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -421,8 +687,8 @@ class MockTvSeriesListPopularBloc extends _i1.Mock
       ) as bool);
 
   @override
-  _i10.Future<void> fetchPopular(
-          {required _i14.Emitter<_i5.RequestStateFr<List<_i13.TvSeries>>>?
+  _i5.Future<void> fetchPopular(
+          {required _i6.Emitter<_i2.RequestStateFr<List<_i10.TvSeries>>>?
               emit}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -430,12 +696,12 @@ class MockTvSeriesListPopularBloc extends _i1.Mock
           [],
           {#emit: emit},
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  void add(_i15.TvSeriesListPopularEvent? event) => super.noSuchMethod(
+  void add(_i11.TvSeriesListPopularEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
           [event],
@@ -444,7 +710,7 @@ class MockTvSeriesListPopularBloc extends _i1.Mock
       );
 
   @override
-  void onEvent(_i15.TvSeriesListPopularEvent? event) => super.noSuchMethod(
+  void onEvent(_i11.TvSeriesListPopularEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onEvent,
           [event],
@@ -453,7 +719,7 @@ class MockTvSeriesListPopularBloc extends _i1.Mock
       );
 
   @override
-  void emit(_i5.RequestStateFr<List<_i13.TvSeries>>? state) =>
+  void emit(_i2.RequestStateFr<List<_i10.TvSeries>>? state) =>
       super.noSuchMethod(
         Invocation.method(
           #emit,
@@ -463,9 +729,9 @@ class MockTvSeriesListPopularBloc extends _i1.Mock
       );
 
   @override
-  void on<E extends _i15.TvSeriesListPopularEvent>(
-    _i14.EventHandler<E, _i5.RequestStateFr<List<_i13.TvSeries>>>? handler, {
-    _i14.EventTransformer<E>? transformer,
+  void on<E extends _i11.TvSeriesListPopularEvent>(
+    _i6.EventHandler<E, _i2.RequestStateFr<List<_i10.TvSeries>>>? handler, {
+    _i6.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -478,8 +744,8 @@ class MockTvSeriesListPopularBloc extends _i1.Mock
 
   @override
   void onTransition(
-          _i14.Transition<_i15.TvSeriesListPopularEvent,
-                  _i5.RequestStateFr<List<_i13.TvSeries>>>?
+          _i6.Transition<_i11.TvSeriesListPopularEvent,
+                  _i2.RequestStateFr<List<_i10.TvSeries>>>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -490,17 +756,17 @@ class MockTvSeriesListPopularBloc extends _i1.Mock
       );
 
   @override
-  _i10.Future<void> close() => (super.noSuchMethod(
+  _i5.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  void onChange(_i14.Change<_i5.RequestStateFr<List<_i13.TvSeries>>>? change) =>
+  void onChange(_i6.Change<_i2.RequestStateFr<List<_i10.TvSeries>>>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -546,27 +812,27 @@ class MockTvSeriesListPopularBloc extends _i1.Mock
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockTvSeriesListTopRatedBloc extends _i1.Mock
-    implements _i16.TvSeriesListTopRatedBloc {
+    implements _i12.TvSeriesListTopRatedBloc {
   MockTvSeriesListTopRatedBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i5.RequestStateFr<List<_i13.TvSeries>> get state => (super.noSuchMethod(
+  _i2.RequestStateFr<List<_i10.TvSeries>> get state => (super.noSuchMethod(
         Invocation.getter(#state),
-        returnValue: _FakeRequestStateFr_3<List<_i13.TvSeries>>(
+        returnValue: _FakeRequestStateFr_0<List<_i10.TvSeries>>(
           this,
           Invocation.getter(#state),
         ),
-      ) as _i5.RequestStateFr<List<_i13.TvSeries>>);
+      ) as _i2.RequestStateFr<List<_i10.TvSeries>>);
 
   @override
-  _i10.Stream<_i5.RequestStateFr<List<_i13.TvSeries>>> get stream =>
+  _i5.Stream<_i2.RequestStateFr<List<_i10.TvSeries>>> get stream =>
       (super.noSuchMethod(
         Invocation.getter(#stream),
         returnValue:
-            _i10.Stream<_i5.RequestStateFr<List<_i13.TvSeries>>>.empty(),
-      ) as _i10.Stream<_i5.RequestStateFr<List<_i13.TvSeries>>>);
+            _i5.Stream<_i2.RequestStateFr<List<_i10.TvSeries>>>.empty(),
+      ) as _i5.Stream<_i2.RequestStateFr<List<_i10.TvSeries>>>);
 
   @override
   bool get isClosed => (super.noSuchMethod(
@@ -575,8 +841,8 @@ class MockTvSeriesListTopRatedBloc extends _i1.Mock
       ) as bool);
 
   @override
-  _i10.Future<void> fetchTopRated(
-          {required _i14.Emitter<_i5.RequestStateFr<List<_i13.TvSeries>>>?
+  _i5.Future<void> fetchTopRated(
+          {required _i6.Emitter<_i2.RequestStateFr<List<_i10.TvSeries>>>?
               emit}) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -584,12 +850,12 @@ class MockTvSeriesListTopRatedBloc extends _i1.Mock
           [],
           {#emit: emit},
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  void add(_i16.TvSeriesListTopRatedEvent? event) => super.noSuchMethod(
+  void add(_i12.TvSeriesListTopRatedEvent? event) => super.noSuchMethod(
         Invocation.method(
           #add,
           [event],
@@ -598,7 +864,7 @@ class MockTvSeriesListTopRatedBloc extends _i1.Mock
       );
 
   @override
-  void onEvent(_i16.TvSeriesListTopRatedEvent? event) => super.noSuchMethod(
+  void onEvent(_i12.TvSeriesListTopRatedEvent? event) => super.noSuchMethod(
         Invocation.method(
           #onEvent,
           [event],
@@ -607,7 +873,7 @@ class MockTvSeriesListTopRatedBloc extends _i1.Mock
       );
 
   @override
-  void emit(_i5.RequestStateFr<List<_i13.TvSeries>>? state) =>
+  void emit(_i2.RequestStateFr<List<_i10.TvSeries>>? state) =>
       super.noSuchMethod(
         Invocation.method(
           #emit,
@@ -617,9 +883,9 @@ class MockTvSeriesListTopRatedBloc extends _i1.Mock
       );
 
   @override
-  void on<E extends _i16.TvSeriesListTopRatedEvent>(
-    _i14.EventHandler<E, _i5.RequestStateFr<List<_i13.TvSeries>>>? handler, {
-    _i14.EventTransformer<E>? transformer,
+  void on<E extends _i12.TvSeriesListTopRatedEvent>(
+    _i6.EventHandler<E, _i2.RequestStateFr<List<_i10.TvSeries>>>? handler, {
+    _i6.EventTransformer<E>? transformer,
   }) =>
       super.noSuchMethod(
         Invocation.method(
@@ -632,8 +898,8 @@ class MockTvSeriesListTopRatedBloc extends _i1.Mock
 
   @override
   void onTransition(
-          _i14.Transition<_i16.TvSeriesListTopRatedEvent,
-                  _i5.RequestStateFr<List<_i13.TvSeries>>>?
+          _i6.Transition<_i12.TvSeriesListTopRatedEvent,
+                  _i2.RequestStateFr<List<_i10.TvSeries>>>?
               transition) =>
       super.noSuchMethod(
         Invocation.method(
@@ -644,17 +910,17 @@ class MockTvSeriesListTopRatedBloc extends _i1.Mock
       );
 
   @override
-  _i10.Future<void> close() => (super.noSuchMethod(
+  _i5.Future<void> close() => (super.noSuchMethod(
         Invocation.method(
           #close,
           [],
         ),
-        returnValue: _i10.Future<void>.value(),
-        returnValueForMissingStub: _i10.Future<void>.value(),
-      ) as _i10.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  void onChange(_i14.Change<_i5.RequestStateFr<List<_i13.TvSeries>>>? change) =>
+  void onChange(_i6.Change<_i2.RequestStateFr<List<_i10.TvSeries>>>? change) =>
       super.noSuchMethod(
         Invocation.method(
           #onChange,
