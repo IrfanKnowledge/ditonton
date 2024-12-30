@@ -26,12 +26,7 @@ import 'package:ditonton/presentation/pages/tv_series/search_tv_series_page.dart
 import 'package:ditonton/presentation/pages/tv_series/top_rated_tv_series_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
 import 'package:ditonton/presentation/pages/tv_series/watchlist_tv_series_page.dart';
-import 'package:ditonton/presentation/provider/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_movie_notifier.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,8 +34,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:provider/provider.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'common/firebase_analytics_helper.dart';
 import 'presentation/bloc/movies/movies_detail_add_watchlist_bloc/movies_detail_add_watchlist_bloc.dart';
@@ -88,198 +81,175 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        // movie
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
+        // movies
+        BlocProvider<MoviesListNowPlayingBloc>(
+          create: (context) => di.locator<MoviesListNowPlayingBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
+        BlocProvider<MoviesListPopularBloc>(
+          create: (context) => di.locator<MoviesListPopularBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
+        BlocProvider<MoviesListTopRatedBloc>(
+          create: (context) => di.locator<MoviesListTopRatedBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
+
+        BlocProvider(
+          create: (context) => di.locator<MoviesDetailBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
+        BlocProvider(
+          create: (context) => di.locator<MoviesDetailRecommendationBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
+        BlocProvider(
+          create: (context) =>
+              di.locator<MoviesDetailLoadWatchlistStatusBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<MoviesDetailAddWatchlistBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<MoviesDetailRemoveWatchlistBloc>(),
+        ),
+
+        BlocProvider(
+          create: (context) => di.locator<MoviesSearchBloc>(),
+        ),
+
+        BlocProvider<MoviesPopularBloc>(
+          create: (context) => di.locator<MoviesPopularBloc>(),
+        ),
+        BlocProvider<MoviesTopRatedBloc>(
+          create: (context) => di.locator<MoviesTopRatedBloc>(),
+        ),
+
+        BlocProvider<WatchlistMoviesBloc>(
+          create: (context) => di.locator<WatchlistMoviesBloc>(),
+        ),
+
+        // tv series
+        BlocProvider<TvSeriesListAiringTodayBloc>(
+          create: (context) => di.locator<TvSeriesListAiringTodayBloc>(),
+        ),
+        BlocProvider<TvSeriesListPopularBloc>(
+          create: (context) => di.locator<TvSeriesListPopularBloc>(),
+        ),
+        BlocProvider<TvSeriesListTopRatedBloc>(
+          create: (context) => di.locator<TvSeriesListTopRatedBloc>(),
+        ),
+
+        BlocProvider(
+          create: (context) => di.locator<TvSeriesDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<TvSeriesDetailRecommendationBloc>(),
+        ),
+        BlocProvider(
+          create: (context) =>
+              di.locator<TvSeriesDetailLoadWatchlistStatusBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<TvSeriesDetailAddWatchlistBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => di.locator<TvSeriesDetailRemoveWatchlistBloc>(),
+        ),
+
+        BlocProvider(
+          create: (context) => di.locator<TvSeriesSearchBloc>(),
+        ),
+
+        BlocProvider<TvSeriesAiringTodayBloc>(
+          create: (context) => di.locator<TvSeriesAiringTodayBloc>(),
+        ),
+        BlocProvider<TvSeriesPopularBloc>(
+          create: (context) => di.locator<TvSeriesPopularBloc>(),
+        ),
+        BlocProvider<TvSeriesTopRatedBloc>(
+          create: (context) => di.locator<TvSeriesTopRatedBloc>(),
+        ),
+
+        BlocProvider<WatchlistTvSeriesBloc>(
+          create: (context) => di.locator<WatchlistTvSeriesBloc>(),
         ),
       ],
-      child: MultiBlocProvider(
-        providers: [
-          // movies
-          BlocProvider<MoviesListNowPlayingBloc>(
-            create: (context) => di.locator<MoviesListNowPlayingBloc>(),
-          ),
-          BlocProvider<MoviesListPopularBloc>(
-            create: (context) => di.locator<MoviesListPopularBloc>(),
-          ),
-          BlocProvider<MoviesListTopRatedBloc>(
-            create: (context) => di.locator<MoviesListTopRatedBloc>(),
-          ),
-
-          BlocProvider(
-            create: (context) => di.locator<MoviesDetailBloc>(),
-          ),
-          BlocProvider(
-            create: (context) => di.locator<MoviesDetailRecommendationBloc>(),
-          ),
-          BlocProvider(
-            create: (context) =>
-                di.locator<MoviesDetailLoadWatchlistStatusBloc>(),
-          ),
-          BlocProvider(
-            create: (context) => di.locator<MoviesDetailAddWatchlistBloc>(),
-          ),
-          BlocProvider(
-            create: (context) => di.locator<MoviesDetailRemoveWatchlistBloc>(),
-          ),
-
-          BlocProvider(
-            create: (context) => di.locator<MoviesSearchBloc>(),
-          ),
-
-          BlocProvider<MoviesPopularBloc>(
-            create: (context) => di.locator<MoviesPopularBloc>(),
-          ),
-          BlocProvider<MoviesTopRatedBloc>(
-            create: (context) => di.locator<MoviesTopRatedBloc>(),
-          ),
-
-          BlocProvider<WatchlistMoviesBloc>(
-            create: (context) => di.locator<WatchlistMoviesBloc>(),
-          ),
-
-          // tv series
-          BlocProvider<TvSeriesListAiringTodayBloc>(
-            create: (context) => di.locator<TvSeriesListAiringTodayBloc>(),
-          ),
-          BlocProvider<TvSeriesListPopularBloc>(
-            create: (context) => di.locator<TvSeriesListPopularBloc>(),
-          ),
-          BlocProvider<TvSeriesListTopRatedBloc>(
-            create: (context) => di.locator<TvSeriesListTopRatedBloc>(),
-          ),
-
-          BlocProvider(
-            create: (context) => di.locator<TvSeriesDetailBloc>(),
-          ),
-          BlocProvider(
-            create: (context) => di.locator<TvSeriesDetailRecommendationBloc>(),
-          ),
-          BlocProvider(
-            create: (context) =>
-                di.locator<TvSeriesDetailLoadWatchlistStatusBloc>(),
-          ),
-          BlocProvider(
-            create: (context) => di.locator<TvSeriesDetailAddWatchlistBloc>(),
-          ),
-          BlocProvider(
-            create: (context) =>
-                di.locator<TvSeriesDetailRemoveWatchlistBloc>(),
-          ),
-
-          BlocProvider(
-            create: (context) => di.locator<TvSeriesSearchBloc>(),
-          ),
-
-          BlocProvider<TvSeriesAiringTodayBloc>(
-            create: (context) => di.locator<TvSeriesAiringTodayBloc>(),
-          ),
-          BlocProvider<TvSeriesPopularBloc>(
-            create: (context) => di.locator<TvSeriesPopularBloc>(),
-          ),
-          BlocProvider<TvSeriesTopRatedBloc>(
-            create: (context) => di.locator<TvSeriesTopRatedBloc>(),
-          ),
-
-          BlocProvider<WatchlistTvSeriesBloc>(
-            create: (context) => di.locator<WatchlistTvSeriesBloc>(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData.dark().copyWith(
+          colorScheme: kColorScheme,
+          primaryColor: kRichBlack,
+          scaffoldBackgroundColor: kRichBlack,
+          textTheme: kTextTheme,
+        ),
+        home: const HomeMoviePage(),
+        navigatorObservers: [
+          routeObserver,
+          FirebaseAnalyticsObserver(
+            analytics: FirebaseAnalyticsHelper.instance.firebaseAnalytics,
           ),
         ],
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData.dark().copyWith(
-            colorScheme: kColorScheme,
-            primaryColor: kRichBlack,
-            scaffoldBackgroundColor: kRichBlack,
-            textTheme: kTextTheme,
-          ),
-          home: const HomeMoviePage(),
-          navigatorObservers: [
-            routeObserver,
-            FirebaseAnalyticsObserver(
-              analytics: FirebaseAnalyticsHelper.instance.firebaseAnalytics,
-            ),
-          ],
-          onGenerateRoute: (RouteSettings settings) {
-            switch (settings.name) {
-              case '/home':
-                return MaterialPageRoute(builder: (_) => const HomeMoviePage());
+        onGenerateRoute: (RouteSettings settings) {
+          switch (settings.name) {
+            case '/home':
+              return MaterialPageRoute(builder: (_) => const HomeMoviePage());
 
-              // movies
-              case kRouteNamePopularMovies:
-                return CupertinoPageRoute(
-                    builder: (_) => const PopularMoviesPage());
-              case kRouteNameTopRatedMovies:
-                return CupertinoPageRoute(
-                    builder: (_) => const TopRatedMoviesPage());
-              case kRouteNameMoviesDetail:
-                final id = settings.arguments as int;
-                return MaterialPageRoute(
-                  builder: (_) => MoviesDetailPage(id: id),
-                  settings: settings,
-                );
-              case kRouteNameSearchMovies:
-                return CupertinoPageRoute(builder: (_) => const SearchMoviesPage());
-              case kRouteNameWatchlistMovies:
-                return MaterialPageRoute(
-                    builder: (_) => const WatchlistMoviesPage());
+            // movies
+            case kRouteNamePopularMovies:
+              return CupertinoPageRoute(
+                  builder: (_) => const PopularMoviesPage());
+            case kRouteNameTopRatedMovies:
+              return CupertinoPageRoute(
+                  builder: (_) => const TopRatedMoviesPage());
+            case kRouteNameMoviesDetail:
+              final id = settings.arguments as int;
+              return MaterialPageRoute(
+                builder: (_) => MoviesDetailPage(id: id),
+                settings: settings,
+              );
+            case kRouteNameSearchMovies:
+              return CupertinoPageRoute(
+                  builder: (_) => const SearchMoviesPage());
+            case kRouteNameWatchlistMovies:
+              return MaterialPageRoute(
+                  builder: (_) => const WatchlistMoviesPage());
 
-              // tv series
-              case kRouteNameAiringTodayTvSeries:
-                return CupertinoPageRoute(
-                  builder: (_) => const AiringTodayTvSeriesPage(),
-                );
-              case kRouteNamePopularTvSeries:
-                return CupertinoPageRoute(
-                    builder: (_) => const PopularTvSeriesPage());
-              case kRouteNameTopRatedTvSeries:
-                return CupertinoPageRoute(
-                    builder: (_) => const TopRatedTvSeriesPage());
-              case kRouteNameTvSeriesDetail:
-                final id = settings.arguments as int;
-                return MaterialPageRoute(
-                  builder: (_) => TvSeriesDetailPage(id: id),
-                  settings: settings,
-                );
-              case kRouteNameSearchTvSeries:
-                return CupertinoPageRoute(
-                    builder: (_) => const SearchTvSeriesPage());
-              case kRouteNameWatchlistTvSeries:
-                return MaterialPageRoute(
-                    builder: (_) => const WatchlistTvSeriesPage());
+            // tv series
+            case kRouteNameAiringTodayTvSeries:
+              return CupertinoPageRoute(
+                builder: (_) => const AiringTodayTvSeriesPage(),
+              );
+            case kRouteNamePopularTvSeries:
+              return CupertinoPageRoute(
+                  builder: (_) => const PopularTvSeriesPage());
+            case kRouteNameTopRatedTvSeries:
+              return CupertinoPageRoute(
+                  builder: (_) => const TopRatedTvSeriesPage());
+            case kRouteNameTvSeriesDetail:
+              final id = settings.arguments as int;
+              return MaterialPageRoute(
+                builder: (_) => TvSeriesDetailPage(id: id),
+                settings: settings,
+              );
+            case kRouteNameSearchTvSeries:
+              return CupertinoPageRoute(
+                  builder: (_) => const SearchTvSeriesPage());
+            case kRouteNameWatchlistTvSeries:
+              return MaterialPageRoute(
+                  builder: (_) => const WatchlistTvSeriesPage());
 
-              case AboutPage.routeName:
-                return MaterialPageRoute(builder: (_) => const AboutPage());
-              default:
-                return MaterialPageRoute(
-                  builder: (_) {
-                    return const Scaffold(
-                      body: Center(
-                        child: Text('Page not found :('),
-                      ),
-                    );
-                  },
-                );
-            }
-          },
-        ),
+            case AboutPage.routeName:
+              return MaterialPageRoute(builder: (_) => const AboutPage());
+            default:
+              return MaterialPageRoute(
+                builder: (_) {
+                  return const Scaffold(
+                    body: Center(
+                      child: Text('Page not found :('),
+                    ),
+                  );
+                },
+              );
+          }
+        },
       ),
     );
   }
