@@ -29,7 +29,7 @@ void main() {
   }
 
   testWidgets(
-      'Watchlist button should display add icon when movie not added to watchlist',
+      'Watchlist button should display add icon when movies not added to watchlist',
       (WidgetTester tester) async {
     when(mockNotifier.movieState).thenReturn(RequestState.loaded);
     when(mockNotifier.movie).thenReturn(testMovieDetail);
@@ -45,7 +45,7 @@ void main() {
   });
 
   testWidgets(
-      'Watchlist button should dispay check icon when movie is added to wathclist',
+      'Watchlist button should dispay check icon when movies is added to wathclist',
       (WidgetTester tester) async {
     when(mockNotifier.movieState).thenReturn(RequestState.loaded);
     when(mockNotifier.movie).thenReturn(testMovieDetail);

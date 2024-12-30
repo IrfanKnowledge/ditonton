@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
-  static const routeName = '/top-rated-movie';
+  static const routeName = '/top-rated-movies';
 
   const TopRatedMoviesPage({super.key});
 

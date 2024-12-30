@@ -18,7 +18,7 @@ void main() {
   const tId = 1;
   final tMovies = <Movie>[];
 
-  test('should get list of movie recommendations from the repository',
+  test('should get list of movies recommendations from the repository',
       () async {
     // arrange
     when(mockMovieRepository.getMovieRecommendations(tId))

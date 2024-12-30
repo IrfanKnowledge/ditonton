@@ -111,7 +111,7 @@ void main() {
   });
 
   group('Popular Movies', () {
-    test('should return movie list when call to data source is success',
+    test('should return movies list when call to data source is success',
         () async {
       // arrange
       when(mockRemoteDataSource.getPopularMovies())
@@ -151,7 +151,7 @@ void main() {
   });
 
   group('Top Rated Movies', () {
-    test('should return movie list when call to data source is successful',
+    test('should return movies list when call to data source is successful',
         () async {
       // arrange
       when(mockRemoteDataSource.getTopRatedMovies())
@@ -260,7 +260,7 @@ void main() {
     final tMovieList = <MovieModel>[];
     const tId = 1;
 
-    test('should return data (movie list) when the call is successful',
+    test('should return data (movies list) when the call is successful',
         () async {
       // arrange
       when(mockRemoteDataSource.getMovieRecommendations(tId))
@@ -305,7 +305,7 @@ void main() {
   group('Seach Movies', () {
     const tQuery = 'spiderman';
 
-    test('should return movie list when call to data source is successful',
+    test('should return movies list when call to data source is successful',
         () async {
       // arrange
       when(mockRemoteDataSource.searchMovies(tQuery))
