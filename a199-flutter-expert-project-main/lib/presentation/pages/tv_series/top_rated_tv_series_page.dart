@@ -1,9 +1,9 @@
-
-import 'package:ditonton/presentation/provider/tv_series_top_rated_notifier.dart';
+import 'package:ditonton/presentation/bloc/tv_series_top_rated_bloc/tv_series_top_rated_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../common/state_enum.dart';
+import '../../../common/state_freezed.dart';
+import '../../../domain/entities/tv_series.dart';
 import '../../widgets/tv_series_card_list.dart';
 
 class TopRatedTvSeriesPage extends StatefulWidget {
@@ -14,15 +14,16 @@ class TopRatedTvSeriesPage extends StatefulWidget {
 }
 
 class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
-
   @override
   void initState() {
     super.initState();
-    final provider = Provider.of<TvSeriesTopRatedNotifier>(
+
+    final bloc = BlocProvider.of<TvSeriesTopRatedBloc>(
       context,
       listen: false,
     );
-    Future.microtask(() => provider.fetchTopRated());
+
+    Future.microtask(() => bloc.add(const TvSeriesTopRatedEvent.started()));
   }
 
   @override
@@ -33,26 +34,38 @@ class _TopRatedTvSeriesPageState extends State<TopRatedTvSeriesPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<TvSeriesTopRatedNotifier>(
-          builder: (context, data, child) {
-            if (data.topRatedState == RequestState.Loading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else if (data.topRatedState == RequestState.Loaded) {
-              return ListView.builder(
-                itemBuilder: (context, index) {
-                  final tvSeries = data.tvSeriesList[index];
-                  return TvSeriesCardList(tvSeries: tvSeries);
-                },
-                itemCount: data.tvSeriesList.length,
-              );
-            } else {
-              return Center(
-                key: const Key('error_message'),
-                child: Text(data.message),
-              );
-            }
+        child:
+            BlocBuilder<TvSeriesTopRatedBloc, RequestStateFr<List<TvSeries>>>(
+          builder: (context, state) {
+            return state.map(
+              initial: (_) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+              loading: (_) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+              loaded: (value) {
+                final List<TvSeries> data = value.data;
+
+                return ListView.builder(
+                  itemBuilder: (context, index) {
+                    final tvSeries = data[index];
+                    return TvSeriesCardList(tvSeries: tvSeries);
+                  },
+                  itemCount: data.length,
+                );
+              },
+              error: (value) {
+                return Center(
+                  key: const Key('error_message'),
+                  child: Text(value.message),
+                );
+              },
+            );
           },
         ),
       ),

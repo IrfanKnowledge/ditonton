@@ -46,7 +46,8 @@ class TvSeriesLocalDataSourceImpl implements TvSeriesLocalDataSource {
   @override
   Future<String> removeWatchlist(RemoveWatchlistTvSeriesParams params) async {
     try {
-      await databaseHelper.removeWatchlist(params.toTable());
+      final tvSeriesTable = TvSeriesTable.fromEntity(params.tvSeriesDetail);
+      await databaseHelper.removeWatchlist(tvSeriesTable);
       return 'Removed from Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());
@@ -56,7 +57,8 @@ class TvSeriesLocalDataSourceImpl implements TvSeriesLocalDataSource {
   @override
   Future<String> saveWatchlist(SaveWatchlistTvSeriesParams params) async {
     try {
-      await databaseHelper.insertWatchlist(params.toTable());
+      final tvSeriesTable = TvSeriesTable.fromEntity(params.tvSeriesDetail);
+      await databaseHelper.insertWatchlist(tvSeriesTable);
       return 'Added to Watchlist';
     } catch (e) {
       throw DatabaseException(e.toString());

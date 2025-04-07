@@ -1,12 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/route_name.dart';
 import 'package:ditonton/domain/entities/tv_series.dart';
-import 'package:ditonton/presentation/provider/tv_series_list_notifier.dart';
+import 'package:ditonton/presentation/bloc/tv_series_list_airing_today_bloc/tv_series_list_airing_today_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_list_popular_bloc/tv_series_list_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_list_top_rated_bloc/tv_series_list_top_rated_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/constants.dart';
-import '../../common/state_enum.dart';
+import '../../common/state_freezed.dart';
 
 AppBar appBarTvSeriesList(BuildContext context) {
   return AppBar(
@@ -34,31 +36,49 @@ class BodyTvSeriesList extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Airing Today',
-              style: kHeading6,
+            _buildSubHeading(
+              title: 'Airing Today',
+              onTap: () => Navigator.pushNamed(
+                context,
+                kRouteNameAiringTodayTvSeries,
+              ),
             ),
-            Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-              final state = data.airingTodayState;
-              if (state == RequestState.Loading) {
-                return const Center(
-                  key: Key('center_loading_airing_today'),
-                  child: CircularProgressIndicator(
-                    key: Key('loading_airing_today'),
-                  ),
+            BlocBuilder<TvSeriesListAiringTodayBloc,
+                RequestStateFr<List<TvSeries>>>(
+              builder: (context, state) {
+                return state.map(
+                  initial: (value) {
+                    return const Center(
+                      key: Key('center_loading_airing_today'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_airing_today'),
+                      ),
+                    );
+                  },
+                  loading: (value) {
+                    return const Center(
+                      key: Key('center_loading_airing_today'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_airing_today'),
+                      ),
+                    );
+                  },
+                  loaded: (value) {
+                    final List<TvSeries> data = value.data;
+                    return _TvSeriesList(
+                      key: const Key('list_view_tv_series_airing_today'),
+                      data,
+                    );
+                  },
+                  error: (value) {
+                    return const Text(
+                      key: Key('list_tv_series_airing_today_failed'),
+                      'Failed',
+                    );
+                  },
                 );
-              } else if (state == RequestState.Loaded) {
-                return _TvSeriesList(
-                  key: const Key('list_view_tv_series_airing_today'),
-                  data.tvSeriesAiringTodayList,
-                );
-              } else {
-                return const Text(
-                  key: Key('list_tv_series_airing_today_failed'),
-                  'Failed',
-                );
-              }
-            }),
+              },
+            ),
             _buildSubHeading(
               title: 'Popular',
               onTap: () => Navigator.pushNamed(
@@ -66,39 +86,54 @@ class BodyTvSeriesList extends StatelessWidget {
                 kRouteNamePopularTvSeries,
               ),
             ),
-            Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-              final state = data.popularState;
-              if (state == RequestState.Loading) {
-                return const Center(
-                  key: Key('center_loading_popular'),
-                  child: CircularProgressIndicator(
-                    key: Key('loading_popular'),
-                  ),
-                );
-              } else if (state == RequestState.Loaded) {
-                List<Key>? listKey = [];
+            BlocBuilder<TvSeriesListPopularBloc,
+                RequestStateFr<List<TvSeries>>>(
+              builder: (context, state) {
+                return state.map(
+                  initial: (value) {
+                    return const Center(
+                      key: Key('center_loading_popular'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_popular'),
+                      ),
+                    );
+                  },
+                  loading: (value) {
+                    return const Center(
+                      key: Key('center_loading_popular'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_popular'),
+                      ),
+                    );
+                  },
+                  loaded: (value) {
+                    final List<TvSeries> data = value.data;
+                    List<Key>? listKey = [];
 
-                for (int i=0; i<data.tvSeriesPopularList.length; i++) {
-                  final key = "tv_series_popular_$i";
-                  listKey.add(Key(key));
-                }
+                    for (int i = 0; i < data.length; i++) {
+                      final key = "tv_series_popular_$i";
+                      listKey.add(Key(key));
+                    }
 
-                if (listKey.isEmpty) {
-                  listKey = null;
-                }
+                    if (listKey.isEmpty) {
+                      listKey = null;
+                    }
 
-                return _TvSeriesList(
-                  key: const Key('list_view_tv_series_popular'),
-                  keyInkWellList: listKey,
-                  data.tvSeriesPopularList,
+                    return _TvSeriesList(
+                      key: const Key('list_view_tv_series_popular'),
+                      keyInkWellList: listKey,
+                      data,
+                    );
+                  },
+                  error: (value) {
+                    return const Text(
+                      key: Key('list_tv_series_popular_failed'),
+                      'Failed',
+                    );
+                  },
                 );
-              } else {
-                return const Text(
-                  key: Key('list_tv_series_popular_failed'),
-                  'Failed',
-                );
-              }
-            }),
+              },
+            ),
             _buildSubHeading(
               title: 'Top Rated',
               onTap: () => Navigator.pushNamed(
@@ -106,27 +141,42 @@ class BodyTvSeriesList extends StatelessWidget {
                 kRouteNameTopRatedTvSeries,
               ),
             ),
-            Consumer<TvSeriesListNotifier>(builder: (context, data, child) {
-              final state = data.topRatedState;
-              if (state == RequestState.Loading) {
-                return const Center(
-                  key: Key('center_loading_top_rated'),
-                  child: CircularProgressIndicator(
-                    key: Key('loading_top_rated'),
-                  ),
+            BlocBuilder<TvSeriesListTopRatedBloc,
+                RequestStateFr<List<TvSeries>>>(
+              builder: (context, state) {
+                return state.map(
+                  initial: (value) {
+                    return const Center(
+                      key: Key('center_loading_top_rated'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_top_rated'),
+                      ),
+                    );
+                  },
+                  loading: (value) {
+                    return const Center(
+                      key: Key('center_loading_top_rated'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_top_rated'),
+                      ),
+                    );
+                  },
+                  loaded: (value) {
+                    final List<TvSeries> data = value.data;
+                    return _TvSeriesList(
+                      key: const Key('list_view_tv_series_top_rated'),
+                      data,
+                    );
+                  },
+                  error: (value) {
+                    return const Text(
+                      key: Key('list_tv_series_top_rated_failed'),
+                      'Failed',
+                    );
+                  },
                 );
-              } else if (state == RequestState.Loaded) {
-                return _TvSeriesList(
-                  key: const Key('list_view_tv_series_top_rated'),
-                  data.tvSeriesTopRatedList,
-                );
-              } else {
-                return const Text(
-                  key: Key('list_tv_series_top_rated_failed'),
-                  'Failed',
-                );
-              }
-            }),
+              },
+            ),
           ],
         ),
       ),

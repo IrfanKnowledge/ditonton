@@ -8,14 +8,14 @@ class TvSeriesSeason extends Equatable with _$TvSeriesSeason {
   TvSeriesSeason._();
 
   factory TvSeriesSeason({
-    required DateTime? airDate,
-    required int? episodeCount,
-    required int? id,
-    required String? name,
-    required String? overview,
-    required String? posterPath,
-    required int? seasonNumber,
-    required int? voteAverage,
+    required final DateTime? airDate,
+    required final int? episodeCount,
+    required final int? id,
+    required final String? name,
+    required final String? overview,
+    required final String? posterPath,
+    required final int? seasonNumber,
+    required final int? voteAverage,
   }) = _TvSeriesSeason;
 
   @override

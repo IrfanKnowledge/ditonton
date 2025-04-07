@@ -3,15 +3,14 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
-import 'dart:ui' as _i7;
+import 'dart:async' as _i5;
 
-import 'package:ditonton/common/state_enum.dart' as _i4;
-import 'package:ditonton/domain/entities/tv_series.dart' as _i3;
-import 'package:ditonton/presentation/provider/watchlist_tv_series_notifier.dart'
-    as _i2;
+import 'package:ditonton/common/state_freezed.dart' as _i2;
+import 'package:ditonton/domain/entities/tv_series.dart' as _i4;
+import 'package:ditonton/presentation/bloc/watchlist_tv_series_bloc/watchlist_tv_series_bloc.dart'
+    as _i3;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i5;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -26,84 +25,165 @@ import 'package:mockito/src/dummies.dart' as _i5;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-/// A class which mocks [WatchlistTvSeriesNotifier].
+class _FakeRequestStateFr_0<T> extends _i1.SmartFake
+    implements _i2.RequestStateFr<T> {
+  _FakeRequestStateFr_0(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+/// A class which mocks [WatchlistTvSeriesBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockWatchlistTvSeriesNotifier extends _i1.Mock
-    implements _i2.WatchlistTvSeriesNotifier {
-  MockWatchlistTvSeriesNotifier() {
+class MockWatchlistTvSeriesBloc extends _i1.Mock
+    implements _i3.WatchlistTvSeriesBloc {
+  MockWatchlistTvSeriesBloc() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  List<_i3.TvSeries> get watchlistTvSeries => (super.noSuchMethod(
-        Invocation.getter(#watchlistTvSeries),
-        returnValue: <_i3.TvSeries>[],
-      ) as List<_i3.TvSeries>);
-
-  @override
-  _i4.RequestState get watchlistState => (super.noSuchMethod(
-        Invocation.getter(#watchlistState),
-        returnValue: _i4.RequestState.Empty,
-      ) as _i4.RequestState);
-
-  @override
-  String get message => (super.noSuchMethod(
-        Invocation.getter(#message),
-        returnValue: _i5.dummyValue<String>(
+  _i2.RequestStateFr<List<_i4.TvSeries>> get state => (super.noSuchMethod(
+        Invocation.getter(#state),
+        returnValue: _FakeRequestStateFr_0<List<_i4.TvSeries>>(
           this,
-          Invocation.getter(#message),
+          Invocation.getter(#state),
         ),
-      ) as String);
+      ) as _i2.RequestStateFr<List<_i4.TvSeries>>);
 
   @override
-  bool get hasListeners => (super.noSuchMethod(
-        Invocation.getter(#hasListeners),
+  _i5.Stream<_i2.RequestStateFr<List<_i4.TvSeries>>> get stream =>
+      (super.noSuchMethod(
+        Invocation.getter(#stream),
+        returnValue: _i5.Stream<_i2.RequestStateFr<List<_i4.TvSeries>>>.empty(),
+      ) as _i5.Stream<_i2.RequestStateFr<List<_i4.TvSeries>>>);
+
+  @override
+  bool get isClosed => (super.noSuchMethod(
+        Invocation.getter(#isClosed),
         returnValue: false,
       ) as bool);
 
   @override
-  _i6.Future<void> fetchWatchlistTvSeries() => (super.noSuchMethod(
+  _i5.Future<void> fetchWatchlistTvSeries(
+          {required _i6.Emitter<_i2.RequestStateFr<List<_i4.TvSeries>>>?
+              emit}) =>
+      (super.noSuchMethod(
         Invocation.method(
           #fetchWatchlistTvSeries,
           [],
+          {#emit: emit},
         ),
-        returnValue: _i6.Future<void>.value(),
-        returnValueForMissingStub: _i6.Future<void>.value(),
-      ) as _i6.Future<void>);
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
 
   @override
-  void addListener(_i7.VoidCallback? listener) => super.noSuchMethod(
+  void add(_i3.WatchlistTvSeriesEvent? event) => super.noSuchMethod(
         Invocation.method(
-          #addListener,
-          [listener],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void removeListener(_i7.VoidCallback? listener) => super.noSuchMethod(
-        Invocation.method(
-          #removeListener,
-          [listener],
+          #add,
+          [event],
         ),
         returnValueForMissingStub: null,
       );
 
   @override
-  void dispose() => super.noSuchMethod(
+  void onEvent(_i3.WatchlistTvSeriesEvent? event) => super.noSuchMethod(
         Invocation.method(
-          #dispose,
+          #onEvent,
+          [event],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void emit(_i2.RequestStateFr<List<_i4.TvSeries>>? state) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #emit,
+          [state],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void on<E extends _i3.WatchlistTvSeriesEvent>(
+    _i6.EventHandler<E, _i2.RequestStateFr<List<_i4.TvSeries>>>? handler, {
+    _i6.EventTransformer<E>? transformer,
+  }) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #on,
+          [handler],
+          {#transformer: transformer},
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onTransition(
+          _i6.Transition<_i3.WatchlistTvSeriesEvent,
+                  _i2.RequestStateFr<List<_i4.TvSeries>>>?
+              transition) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onTransition,
+          [transition],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i5.Future<void> close() => (super.noSuchMethod(
+        Invocation.method(
+          #close,
           [],
         ),
+        returnValue: _i5.Future<void>.value(),
+        returnValueForMissingStub: _i5.Future<void>.value(),
+      ) as _i5.Future<void>);
+
+  @override
+  void onChange(_i6.Change<_i2.RequestStateFr<List<_i4.TvSeries>>>? change) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onChange,
+          [change],
+        ),
         returnValueForMissingStub: null,
       );
 
   @override
-  void notifyListeners() => super.noSuchMethod(
+  void addError(
+    Object? error, [
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
         Invocation.method(
-          #notifyListeners,
-          [],
+          #addError,
+          [
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    Object? error,
+    StackTrace? stackTrace,
+  ) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onError,
+          [
+            error,
+            stackTrace,
+          ],
         ),
         returnValueForMissingStub: null,
       );

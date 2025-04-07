@@ -1,35 +1,102 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv_series.dart';
+import 'package:ditonton/common/state_freezed.dart';
+import 'package:ditonton/presentation/bloc/tv_series_detail_add_watchlist_bloc/tv_series_detail_add_watchlist_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_detail_bloc/tv_series_detail_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_detail_load_watchlist_status_bloc/tv_series_detail_load_watchlist_status_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_detail_recommendation_bloc/tv_series_detail_recommendation_bloc.dart';
+import 'package:ditonton/presentation/bloc/tv_series_detail_remove_watchlist_bloc/tv_series_detail_remove_watchlist_bloc.dart';
 import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
-import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
 
 import '../../../dummy_data/dummy_objects.dart';
 import 'tv_series_detail_page_test.mocks.dart';
 
 ///
 /// Page [TvSeriesDetailPage],
-/// bergantung pada provider [TvSeriesDetailNotifier]
+/// bergantung pada:
+///  - Bloc [TvSeriesDetailBloc]
+///  - Bloc [TvSeriesDetailRecommendationBloc]
+///  - Bloc [TvSeriesDetailLoadWatchlistStatusBloc]
+///  - Bloc [TvSeriesDetailAddWatchlistBloc]
+///  - Bloc [TvSeriesDetailRemoveWatchlistBloc]
 ///
 @GenerateMocks([
-  TvSeriesDetailNotifier,
+  TvSeriesDetailBloc,
+  TvSeriesDetailRecommendationBloc,
+  TvSeriesDetailLoadWatchlistStatusBloc,
+  TvSeriesDetailAddWatchlistBloc,
+  TvSeriesDetailRemoveWatchlistBloc,
 ])
 void main() {
-  late MockTvSeriesDetailNotifier mockTvSeriesDetailNotifier;
+  late MockTvSeriesDetailBloc mockTvSeriesDetail;
+  late MockTvSeriesDetailRecommendationBloc mockTvSeriesDetailRecommendation;
+  late MockTvSeriesDetailLoadWatchlistStatusBloc
+      mockTvSeriesDetailLoadWatchlistStatus;
+  late MockTvSeriesDetailAddWatchlistBloc mockTvSeriesDetailAddWatchlist;
+  late MockTvSeriesDetailRemoveWatchlistBloc mockTvSeriesDetailRemoveWatchlist;
+
+  void arrangeStreamDetailAndRecommendations() {
+    when(mockTvSeriesDetail.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const RequestStateFr.initial(),
+        const RequestStateFr.loading(),
+        RequestStateFr.loaded(tTvSeriesDetail),
+      ]),
+    );
+    when(mockTvSeriesDetailRecommendation.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const RequestStateFr.initial(),
+        const RequestStateFr.loading(),
+        RequestStateFr.loaded(tTvSeriesDetailRecommendationList),
+      ]),
+    );
+  }
+
+  void arrangeStateDetailAndRecommendations() {
+    when(mockTvSeriesDetail.state)
+        .thenReturn(RequestStateFr.loaded(tTvSeriesDetail));
+
+    when(mockTvSeriesDetailRecommendation.state)
+        .thenReturn(RequestStateFr.loaded(tTvSeriesDetailRecommendationList));
+  }
 
   setUp(
     () {
-      mockTvSeriesDetailNotifier = MockTvSeriesDetailNotifier();
+      mockTvSeriesDetail = MockTvSeriesDetailBloc();
+      mockTvSeriesDetailRecommendation = MockTvSeriesDetailRecommendationBloc();
+      mockTvSeriesDetailLoadWatchlistStatus =
+          MockTvSeriesDetailLoadWatchlistStatusBloc();
+      mockTvSeriesDetailAddWatchlist = MockTvSeriesDetailAddWatchlistBloc();
+      mockTvSeriesDetailRemoveWatchlist =
+          MockTvSeriesDetailRemoveWatchlistBloc();
+
+      arrangeStreamDetailAndRecommendations();
+      arrangeStateDetailAndRecommendations();
     },
   );
 
   Widget makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TvSeriesDetailNotifier>.value(
-      value: mockTvSeriesDetailNotifier,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TvSeriesDetailBloc>.value(
+          value: mockTvSeriesDetail,
+        ),
+        BlocProvider<TvSeriesDetailRecommendationBloc>.value(
+          value: mockTvSeriesDetailRecommendation,
+        ),
+        BlocProvider<TvSeriesDetailLoadWatchlistStatusBloc>.value(
+          value: mockTvSeriesDetailLoadWatchlistStatus,
+        ),
+        BlocProvider<TvSeriesDetailAddWatchlistBloc>.value(
+          value: mockTvSeriesDetailAddWatchlist,
+        ),
+        BlocProvider<TvSeriesDetailRemoveWatchlistBloc>.value(
+          value: mockTvSeriesDetailRemoveWatchlist,
+        ),
+      ],
       child: MaterialApp(
         home: body,
       ),
@@ -39,14 +106,43 @@ void main() {
   testWidgets(
       'Watchlist button should display add icon when tv series not added to watchlist',
       (WidgetTester tester) async {
-    when(mockTvSeriesDetailNotifier.tvSeriesState)
-        .thenReturn(RequestState.Loaded);
-    when(mockTvSeriesDetailNotifier.tvSeriesDetail).thenReturn(tTvSeriesDetail);
-    when(mockTvSeriesDetailNotifier.recommendationState)
-        .thenReturn(RequestState.Loaded);
-    when(mockTvSeriesDetailNotifier.tvSeriesRecommendations)
-        .thenReturn(<TvSeries>[]);
-    when(mockTvSeriesDetailNotifier.isAddedToWatchlist).thenReturn(false);
+    when(mockTvSeriesDetailLoadWatchlistStatus.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailLoadWatchlistStatusState(isAddedToWatchList: false),
+      ]),
+    );
+
+    when(mockTvSeriesDetailAddWatchlist.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailAddWatchlistState(
+            watchlistMessage:
+                TvSeriesDetailAddWatchlistBloc.watchlistAddResetMessage),
+      ]),
+    );
+
+    when(mockTvSeriesDetailRemoveWatchlist.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailRemoveWatchlistState(
+          watchlistMessage:
+              TvSeriesDetailRemoveWatchlistBloc.watchlistRemoveResetMessage,
+        ),
+      ]),
+    );
+
+    when(mockTvSeriesDetailLoadWatchlistStatus.state).thenReturn(
+      const TvSeriesDetailLoadWatchlistStatusState(isAddedToWatchList: false),
+    );
+
+    when(mockTvSeriesDetailAddWatchlist.state).thenReturn(
+      const TvSeriesDetailAddWatchlistState(
+          watchlistMessage:
+              TvSeriesDetailAddWatchlistBloc.watchlistAddResetMessage),
+    );
+    when(mockTvSeriesDetailRemoveWatchlist.state).thenReturn(
+      const TvSeriesDetailRemoveWatchlistState(
+          watchlistMessage:
+              TvSeriesDetailRemoveWatchlistBloc.watchlistRemoveResetMessage),
+    );
 
     final watchlistButtonIcon = find.byIcon(Icons.add);
 
@@ -59,18 +155,48 @@ void main() {
   testWidgets(
       'Watchlist button should dispay check icon when tv series is added to wathclist',
       (WidgetTester tester) async {
-    when(mockTvSeriesDetailNotifier.tvSeriesState)
-        .thenReturn(RequestState.Loaded);
-    when(mockTvSeriesDetailNotifier.tvSeriesDetail).thenReturn(tTvSeriesDetail);
-    when(mockTvSeriesDetailNotifier.recommendationState)
-        .thenReturn(RequestState.Loaded);
-    when(mockTvSeriesDetailNotifier.tvSeriesRecommendations)
-        .thenReturn(<TvSeries>[]);
-    when(mockTvSeriesDetailNotifier.isAddedToWatchlist).thenReturn(true);
+    when(mockTvSeriesDetailLoadWatchlistStatus.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailLoadWatchlistStatusState(isAddedToWatchList: true),
+      ]),
+    );
+
+    when(mockTvSeriesDetailAddWatchlist.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailAddWatchlistState(
+            watchlistMessage:
+                TvSeriesDetailAddWatchlistBloc.watchlistAddResetMessage),
+      ]),
+    );
+
+    when(mockTvSeriesDetailRemoveWatchlist.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailRemoveWatchlistState(
+          watchlistMessage:
+              TvSeriesDetailRemoveWatchlistBloc.watchlistRemoveResetMessage,
+        ),
+      ]),
+    );
+
+    when(mockTvSeriesDetailLoadWatchlistStatus.state).thenReturn(
+      const TvSeriesDetailLoadWatchlistStatusState(isAddedToWatchList: true),
+    );
+
+    when(mockTvSeriesDetailAddWatchlist.state).thenReturn(
+      const TvSeriesDetailAddWatchlistState(
+          watchlistMessage:
+              TvSeriesDetailAddWatchlistBloc.watchlistAddResetMessage),
+    );
+    when(mockTvSeriesDetailRemoveWatchlist.state).thenReturn(
+      const TvSeriesDetailRemoveWatchlistState(
+          watchlistMessage:
+              TvSeriesDetailRemoveWatchlistBloc.watchlistRemoveResetMessage),
+    );
 
     final watchlistButtonIcon = find.byIcon(Icons.check);
 
-    await tester.pumpWidget(makeTestableWidget(TvSeriesDetailPage(id: 1)));
+    await tester
+        .pumpWidget(makeTestableWidget(const TvSeriesDetailPage(id: 1)));
 
     expect(watchlistButtonIcon, findsOneWidget);
   });
@@ -78,16 +204,41 @@ void main() {
   testWidgets(
       'Watchlist button should display Snackbar when added to watchlist',
       (WidgetTester tester) async {
-    when(mockTvSeriesDetailNotifier.tvSeriesState)
-        .thenReturn(RequestState.Loaded);
-    when(mockTvSeriesDetailNotifier.tvSeriesDetail).thenReturn(tTvSeriesDetail);
-    when(mockTvSeriesDetailNotifier.recommendationState)
-        .thenReturn(RequestState.Loaded);
-    when(mockTvSeriesDetailNotifier.tvSeriesRecommendations)
-        .thenReturn(<TvSeries>[]);
-    when(mockTvSeriesDetailNotifier.isAddedToWatchlist).thenReturn(false);
-    when(mockTvSeriesDetailNotifier.watchlistMessage)
-        .thenReturn('Added to Watchlist');
+    when(mockTvSeriesDetailLoadWatchlistStatus.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailLoadWatchlistStatusState(isAddedToWatchList: false),
+      ]),
+    );
+
+    when(mockTvSeriesDetailAddWatchlist.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailAddWatchlistState(
+            watchlistMessage: 'Added to Watchlist'),
+      ]),
+    );
+
+    when(mockTvSeriesDetailRemoveWatchlist.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailRemoveWatchlistState(
+          watchlistMessage:
+              TvSeriesDetailRemoveWatchlistBloc.watchlistRemoveResetMessage,
+        ),
+      ]),
+    );
+
+    when(mockTvSeriesDetailLoadWatchlistStatus.state).thenReturn(
+      const TvSeriesDetailLoadWatchlistStatusState(isAddedToWatchList: false),
+    );
+
+    when(mockTvSeriesDetailAddWatchlist.state).thenReturn(
+      const TvSeriesDetailAddWatchlistState(
+          watchlistMessage: 'Added to Watchlist'),
+    );
+    when(mockTvSeriesDetailRemoveWatchlist.state).thenReturn(
+      const TvSeriesDetailRemoveWatchlistState(
+          watchlistMessage:
+              TvSeriesDetailRemoveWatchlistBloc.watchlistRemoveResetMessage),
+    );
 
     final watchlistButton = find.byType(ElevatedButton);
 
@@ -106,17 +257,41 @@ void main() {
   testWidgets(
       'Watchlist button should display AlertDialog when add to watchlist failed',
       (WidgetTester tester) async {
-    when(mockTvSeriesDetailNotifier.tvSeriesState)
-        .thenReturn(RequestState.Loaded);
-    when(mockTvSeriesDetailNotifier.tvSeriesDetail).thenReturn(tTvSeriesDetail);
-    when(mockTvSeriesDetailNotifier.recommendationState)
-        .thenReturn(RequestState.Loaded);
-    when(mockTvSeriesDetailNotifier.tvSeriesRecommendations)
-        .thenReturn(<TvSeries>[]);
-    when(mockTvSeriesDetailNotifier.isAddedToWatchlist).thenReturn(false);
-    when(mockTvSeriesDetailNotifier.watchlistMessage).thenReturn('Failed');
+    when(mockTvSeriesDetailLoadWatchlistStatus.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailLoadWatchlistStatusState(isAddedToWatchList: false),
+      ]),
+    );
 
-    final watchlistButton = find.byType(ElevatedButton);
+    when(mockTvSeriesDetailAddWatchlist.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailAddWatchlistState(watchlistMessage: 'Failed'),
+      ]),
+    );
+
+    when(mockTvSeriesDetailRemoveWatchlist.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const TvSeriesDetailRemoveWatchlistState(
+          watchlistMessage:
+              TvSeriesDetailRemoveWatchlistBloc.watchlistRemoveResetMessage,
+        ),
+      ]),
+    );
+
+    when(mockTvSeriesDetailLoadWatchlistStatus.state).thenReturn(
+      const TvSeriesDetailLoadWatchlistStatusState(isAddedToWatchList: false),
+    );
+    when(mockTvSeriesDetailAddWatchlist.state).thenReturn(
+      const TvSeriesDetailAddWatchlistState(watchlistMessage: 'Failed'),
+    );
+    when(mockTvSeriesDetailRemoveWatchlist.state).thenReturn(
+      const TvSeriesDetailRemoveWatchlistState(
+          watchlistMessage:
+              TvSeriesDetailRemoveWatchlistBloc.watchlistRemoveResetMessage),
+    );
+
+    // final watchlistButton = find.byType(ElevatedButton);
+    final watchlistButton = find.widgetWithText(InkWell, 'Watchlist');
 
     await tester
         .pumpWidget(makeTestableWidget(const TvSeriesDetailPage(id: 1)));

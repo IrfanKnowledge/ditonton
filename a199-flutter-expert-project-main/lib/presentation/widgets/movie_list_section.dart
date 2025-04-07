@@ -1,15 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton/common/route_name.dart';
+import 'package:ditonton/common/state_freezed.dart';
+import 'package:ditonton/presentation/bloc/movies/movies_list_now_playing_bloc/movies_list_now_playing_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies/movies_list_popular_bloc/movies_list_popular_bloc.dart';
+import 'package:ditonton/presentation/bloc/movies/movies_list_top_rated_bloc/movies_list_top_rated_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/constants.dart';
-import '../../common/state_enum.dart';
 import '../../domain/entities/movie.dart';
-import '../pages/movie_detail_page.dart';
-import '../pages/popular_movies_page.dart';
-import '../pages/search_page.dart';
-import '../pages/top_rated_movies_page.dart';
-import '../provider/movie_list_notifier.dart';
 
 AppBar appBarMovieList(BuildContext context) {
   return AppBar(
@@ -18,7 +17,7 @@ AppBar appBarMovieList(BuildContext context) {
     actions: [
       IconButton(
         onPressed: () {
-          Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+          Navigator.pushNamed(context, kRouteNameSearchMovies);
         },
         icon: const Icon(Icons.search),
       )
@@ -41,93 +40,137 @@ class BodyMovieList extends StatelessWidget {
               'Now Playing',
               style: kHeading6,
             ),
-            Consumer<MovieListNotifier>(builder: (context, data, child) {
-              final state = data.nowPlayingState;
-              if (state == RequestState.Loading) {
-                return const Center(
-                  key: Key('center_loading_now_playing'),
-                  child: CircularProgressIndicator(
-                    key: Key('loading_now_playing'),
-                  ),
+            BlocBuilder<MoviesListNowPlayingBloc, RequestStateFr<List<Movie>>>(
+              builder: (context, state) {
+                return state.map(
+                  initial: (value) {
+                    return const Center(
+                      key: Key('center_loading_now_playing'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_now_playing'),
+                      ),
+                    );
+                  },
+                  loading: (value) {
+                    return const Center(
+                      key: Key('center_loading_now_playing'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_now_playing'),
+                      ),
+                    );
+                  },
+                  loaded: (value) {
+                    final List<Movie> data = value.data;
+
+                    return _MovieList(
+                      key: const Key('list_view_movies_now_playing'),
+                      data,
+                    );
+                  },
+                  error: (value) {
+                    return const Text(
+                      key: Key('list_movies_now_playing_failed'),
+                      'Failed',
+                    );
+                  },
                 );
-              } else if (state == RequestState.Loaded) {
-                return _MovieList(
-                  key: const Key('list_view_movies_now_playing'),
-                  data.nowPlayingMovies,
-                );
-              } else {
-                return const Text(
-                  key: Key('list_movies_now_playing_failed'),
-                  'Failed',
-                );
-              }
-            }),
+              },
+            ),
             _buildSubHeading(
               title: 'Popular',
               onTap: () => Navigator.pushNamed(
                 context,
-                PopularMoviesPage.ROUTE_NAME,
+                kRouteNamePopularMovies,
               ),
             ),
-            Consumer<MovieListNotifier>(builder: (context, data, child) {
-              final state = data.popularMoviesState;
-              if (state == RequestState.Loading) {
-                return const Center(
-                  key: Key('center_loading_popular'),
-                  child: CircularProgressIndicator(
-                    key: Key('loading_popular'),
-                  ),
-                );
-              } else if (state == RequestState.Loaded) {
-                List<Key>? keyList = [];
+            BlocBuilder<MoviesListPopularBloc, RequestStateFr<List<Movie>>>(
+              builder: (context, state) {
+                return state.map(
+                  initial: (value) {
+                    return const Center(
+                      key: Key('center_loading_popular'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_popular'),
+                      ),
+                    );
+                  },
+                  loading: (value) {
+                    return const Center(
+                      key: Key('center_loading_popular'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_popular'),
+                      ),
+                    );
+                  },
+                  loaded: (value) {
+                    final List<Movie> data = value.data;
+                    List<Key>? keyList = [];
 
-                for (int i = 0; i < data.popularMovies.length; i++) {
-                  final key = "movie_popular_$i";
-                  keyList.add(Key(key));
-                }
+                    for (int i = 0; i < data.length; i++) {
+                      final key = "movie_popular_$i";
+                      keyList.add(Key(key));
+                    }
 
-                if (keyList.isEmpty) {
-                  keyList = null;
-                }
+                    if (keyList.isEmpty) {
+                      keyList = null;
+                    }
 
-                return _MovieList(
-                  key: const Key('list_view_movies_popular'),
-                  keyInkWellList: keyList,
-                  data.popularMovies,
+                    return _MovieList(
+                      key: const Key('list_view_movies_popular'),
+                      keyInkWellList: keyList,
+                      data,
+                    );
+                  },
+                  error: (value) {
+                    return const Text(
+                      key: Key('list_movies_popular_failed'),
+                      'Failed',
+                    );
+                  },
                 );
-              } else {
-                return const Text(
-                  key: Key('list_movies_popular_failed'),
-                  'Failed',
-                );
-              }
-            }),
+              },
+            ),
             _buildSubHeading(
               title: 'Top Rated',
               onTap: () =>
-                  Navigator.pushNamed(context, TopRatedMoviesPage.ROUTE_NAME),
+                  Navigator.pushNamed(context, kRouteNameTopRatedMovies),
             ),
-            Consumer<MovieListNotifier>(builder: (context, data, child) {
-              final state = data.topRatedMoviesState;
-              if (state == RequestState.Loading) {
-                return const Center(
-                  key: Key('center_loading_top_rated'),
-                  child: CircularProgressIndicator(
-                    key: Key('loading_top_rated'),
-                  ),
+            BlocBuilder<MoviesListTopRatedBloc, RequestStateFr<List<Movie>>>(
+              builder: (context, state) {
+                return state.map(
+                  initial: (value) {
+                    return const Center(
+                      key: Key('center_loading_top_rated'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_top_rated'),
+                      ),
+                    );
+                  },
+                  loading: (value) {
+                    return const Center(
+                      key: Key('center_loading_top_rated'),
+                      child: CircularProgressIndicator(
+                        key: Key('loading_top_rated'),
+                      ),
+                    );
+                  },
+                  loaded: (value) {
+                    final List<Movie> data = value.data;
+
+                    return _MovieList(
+                      key: const Key('list_view_movies_top_rated'),
+                      data,
+                    );
+                  },
+                  error: (value) {
+                    return const Text(
+                      key: Key('list_movies_top_rated_failed'),
+                      'Failed',
+                    );
+                  },
                 );
-              } else if (state == RequestState.Loaded) {
-                return _MovieList(
-                  key: const Key('list_view_movies_top_rated'),
-                  data.topRatedMovies,
-                );
-              } else {
-                return const Text(
-                  key: Key('list_movies_top_rated_failed'),
-                  'Failed',
-                );
-              }
-            }),
+              },
+            ),
           ],
         ),
       ),
@@ -182,7 +225,7 @@ class _MovieList extends StatelessWidget {
               onTap: () {
                 Navigator.pushNamed(
                   context,
-                  MovieDetailPage.ROUTE_NAME,
+                  kRouteNameMoviesDetail,
                   arguments: movie.id,
                 );
               },

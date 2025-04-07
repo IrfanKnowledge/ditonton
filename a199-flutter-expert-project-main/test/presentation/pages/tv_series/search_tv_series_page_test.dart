@@ -1,36 +1,34 @@
-import 'package:ditonton/common/state_enum.dart';
-import 'package:ditonton/domain/entities/tv_series.dart';
+import 'package:ditonton/common/state_freezed.dart';
+import 'package:ditonton/presentation/bloc/tv_series_search_bloc/tv_series_search_bloc.dart';
 import 'package:ditonton/presentation/pages/tv_series/search_tv_series_page.dart';
-import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
-import 'package:ditonton/presentation/provider/tv_series_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series_search_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
 
+import '../../../dummy_data/dummy_objects.dart';
 import 'search_tv_series_page_test.mocks.dart';
 
 ///
 /// Page [SearchTvSeriesPage],
-/// bergantung pada provider [TvSeriesSearchNotifier]
+/// bergantung pada provider [TvSeriesSearchBloc]
 ///
 @GenerateMocks([
-  TvSeriesSearchNotifier,
+  TvSeriesSearchBloc,
 ])
 void main() {
-  late MockTvSeriesSearchNotifier mockTvSeriesSearchNotifier;
+  late MockTvSeriesSearchBloc mockTvSeriesSearch;
 
   setUp(
     () {
-      mockTvSeriesSearchNotifier = MockTvSeriesSearchNotifier();
+      mockTvSeriesSearch = MockTvSeriesSearchBloc();
     },
   );
 
   Widget makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TvSeriesSearchNotifier>.value(
-      value: mockTvSeriesSearchNotifier,
+    return BlocProvider<TvSeriesSearchBloc>.value(
+      value: mockTvSeriesSearch,
       child: MaterialApp(
         home: body,
       ),
@@ -40,7 +38,14 @@ void main() {
   testWidgets(
     'Page should display center progress bar when loading',
     (tester) async {
-      when(mockTvSeriesSearchNotifier.state).thenReturn(RequestState.Loading);
+      when(mockTvSeriesSearch.stream).thenAnswer(
+        (_) => Stream.fromIterable([
+          const RequestStateFr.initial(),
+          const RequestStateFr.loading(),
+        ]),
+      );
+
+      when(mockTvSeriesSearch.state).thenReturn(const RequestStateFr.loading());
 
       final centerFinder = find.byKey(const Key('center_loading'));
       final progressBarFinder = find.byKey(const Key('loading'));
@@ -54,8 +59,17 @@ void main() {
 
   testWidgets('Page should display ListView when data is loaded',
       (tester) async {
-    when(mockTvSeriesSearchNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockTvSeriesSearchNotifier.searchResult).thenReturn(<TvSeries>[]);
+    when(mockTvSeriesSearch.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const RequestStateFr.initial(),
+        const RequestStateFr.loading(),
+        RequestStateFr.loaded(tTvSeriesSearchedList),
+      ]),
+    );
+
+    when(mockTvSeriesSearch.state).thenReturn(
+      RequestStateFr.loaded(tTvSeriesSearchedList),
+    );
 
     final listViewFinder = find.byType(ListView);
 
@@ -66,8 +80,16 @@ void main() {
 
   testWidgets('Page should display Empty Container when Error',
       (WidgetTester tester) async {
-    when(mockTvSeriesSearchNotifier.state).thenReturn(RequestState.Error);
-    when(mockTvSeriesSearchNotifier.message).thenReturn('Error message');
+    when(mockTvSeriesSearch.stream).thenAnswer(
+      (_) => Stream.fromIterable([
+        const RequestStateFr.initial(),
+        const RequestStateFr.loading(),
+        const RequestStateFr.error('Server Failure'),
+      ]),
+    );
+
+    when(mockTvSeriesSearch.state)
+        .thenReturn(const RequestStateFr.error('Server Failure'));
 
     final containerFinder = find.byKey(const Key('container_empty'));
 

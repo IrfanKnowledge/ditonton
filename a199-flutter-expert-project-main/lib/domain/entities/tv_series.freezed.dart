@@ -17,35 +17,20 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$TvSeries {
   bool? get adult => throw _privateConstructorUsedError;
-  set adult(bool? value) => throw _privateConstructorUsedError;
   String? get backdropPath => throw _privateConstructorUsedError;
-  set backdropPath(String? value) => throw _privateConstructorUsedError;
   List<int>? get genreIds => throw _privateConstructorUsedError;
-  set genreIds(List<int>? value) => throw _privateConstructorUsedError;
   int? get id => throw _privateConstructorUsedError;
-  set id(int? value) => throw _privateConstructorUsedError;
   List<String>? get originCountry => throw _privateConstructorUsedError;
-  set originCountry(List<String>? value) => throw _privateConstructorUsedError;
   String? get originalLanguage => throw _privateConstructorUsedError;
-  set originalLanguage(String? value) => throw _privateConstructorUsedError;
   String? get originalName => throw _privateConstructorUsedError;
-  set originalName(String? value) => throw _privateConstructorUsedError;
   String? get overview => throw _privateConstructorUsedError;
-  set overview(String? value) => throw _privateConstructorUsedError;
   num? get popularity => throw _privateConstructorUsedError;
-  set popularity(num? value) => throw _privateConstructorUsedError;
   String? get posterPath => throw _privateConstructorUsedError;
-  set posterPath(String? value) => throw _privateConstructorUsedError;
   DateTime? get firstAirDate => throw _privateConstructorUsedError;
-  set firstAirDate(DateTime? value) => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
-  set name(String? value) => throw _privateConstructorUsedError;
   num? get voteAverage => throw _privateConstructorUsedError;
-  set voteAverage(num? value) => throw _privateConstructorUsedError;
   int? get voteCount => throw _privateConstructorUsedError;
-  set voteCount(int? value) => throw _privateConstructorUsedError;
   String? get mediaType => throw _privateConstructorUsedError;
-  set mediaType(String? value) => throw _privateConstructorUsedError;
 
   /// Create a copy of TvSeries
   /// with the given fields replaced by the non-null parameter values.
@@ -315,35 +300,35 @@ class _$TvSeriesImpl extends _TvSeries {
       : super._();
 
   @override
-  bool? adult;
+  final bool? adult;
   @override
-  String? backdropPath;
+  final String? backdropPath;
   @override
-  List<int>? genreIds;
+  final List<int>? genreIds;
   @override
-  int? id;
+  final int? id;
   @override
-  List<String>? originCountry;
+  final List<String>? originCountry;
   @override
-  String? originalLanguage;
+  final String? originalLanguage;
   @override
-  String? originalName;
+  final String? originalName;
   @override
-  String? overview;
+  final String? overview;
   @override
-  num? popularity;
+  final num? popularity;
   @override
-  String? posterPath;
+  final String? posterPath;
   @override
-  DateTime? firstAirDate;
+  final DateTime? firstAirDate;
   @override
-  String? name;
+  final String? name;
   @override
-  num? voteAverage;
+  final num? voteAverage;
   @override
-  int? voteCount;
+  final int? voteCount;
   @override
-  String? mediaType;
+  final String? mediaType;
 
   /// Create a copy of TvSeries
   /// with the given fields replaced by the non-null parameter values.
@@ -356,68 +341,53 @@ class _$TvSeriesImpl extends _TvSeries {
 
 abstract class _TvSeries extends TvSeries {
   factory _TvSeries(
-      {bool? adult,
-      String? backdropPath,
-      List<int>? genreIds,
-      int? id,
-      List<String>? originCountry,
-      String? originalLanguage,
-      String? originalName,
-      String? overview,
-      num? popularity,
-      String? posterPath,
-      DateTime? firstAirDate,
-      String? name,
-      num? voteAverage,
-      int? voteCount,
-      String? mediaType}) = _$TvSeriesImpl;
+      {final bool? adult,
+      final String? backdropPath,
+      final List<int>? genreIds,
+      final int? id,
+      final List<String>? originCountry,
+      final String? originalLanguage,
+      final String? originalName,
+      final String? overview,
+      final num? popularity,
+      final String? posterPath,
+      final DateTime? firstAirDate,
+      final String? name,
+      final num? voteAverage,
+      final int? voteCount,
+      final String? mediaType}) = _$TvSeriesImpl;
   _TvSeries._() : super._();
 
   @override
   bool? get adult;
-  set adult(bool? value);
   @override
   String? get backdropPath;
-  set backdropPath(String? value);
   @override
   List<int>? get genreIds;
-  set genreIds(List<int>? value);
   @override
   int? get id;
-  set id(int? value);
   @override
   List<String>? get originCountry;
-  set originCountry(List<String>? value);
   @override
   String? get originalLanguage;
-  set originalLanguage(String? value);
   @override
   String? get originalName;
-  set originalName(String? value);
   @override
   String? get overview;
-  set overview(String? value);
   @override
   num? get popularity;
-  set popularity(num? value);
   @override
   String? get posterPath;
-  set posterPath(String? value);
   @override
   DateTime? get firstAirDate;
-  set firstAirDate(DateTime? value);
   @override
   String? get name;
-  set name(String? value);
   @override
   num? get voteAverage;
-  set voteAverage(num? value);
   @override
   int? get voteCount;
-  set voteCount(int? value);
   @override
   String? get mediaType;
-  set mediaType(String? value);
 
   /// Create a copy of TvSeries
   /// with the given fields replaced by the non-null parameter values.
